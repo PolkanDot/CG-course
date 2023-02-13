@@ -1,28 +1,42 @@
+.container 
+{
+	width: 100%;
+	height: 100%;
+	background-color: #f1ebeb;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
 .arts
 {
-    width: 630px;
-    margin: 200px auto;
+    width: 100%;
+	height: 60%;
+	background-color: #ddacac;
+	display: flex;
+	justify-content: space-evenly;
 }
 
 .art
 {
-	background-color: #919191;
+	background-color: #4da378;
+	margin: 60px,  auto;
 }
 
-#Kyle
+#Miftakhov
 {
-    width: 148px;
-	   height: 190px;	   
+    width: 350px;
+	height: 100%;	   
 }
 
-#Eric
+#Insar
 {
-    width: 202px;
-	   height: 190px;	
+    width: 300px;
+	   height: 100%;	
 }
 
-#Kenny
+#Mansurovich
 {
-	   width: 140px;
-	   height: 190px;
+	   width: 350px;
+	   height: 100%;
 }
