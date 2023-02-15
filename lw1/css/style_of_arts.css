@@ -1,8 +1,12 @@
-.container 
-{
+html,
+body {
+	margin: 0;
+	height: 100%;
+}
+
+.column {
 	width: 100%;
 	height: 100%;
-	background-color: #f1ebeb;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -10,20 +14,14 @@
 
 .arts
 {
+	height: 100%;
     width: 100%;
-	height: 80%;
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: center;
 }
 
-.art
+#letters
 {
-	width: 100%;
+	width: 80%;
+	height: 100%;
 }
-
-#Miftakhov
-{
-    width: 1000px;
-	height: 100%;	   
-}
-
