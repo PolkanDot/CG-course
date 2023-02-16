@@ -56,8 +56,6 @@ window.onload = () => {
   function firstMAnimation(x) {
     t1 += 1;
     y1 = 100 - 5 * t1 + (0.5 * t1 * t1) / 2;
-    console.log("first");
-
     if (y1 > 100) {
       t1 = 0;
     }
@@ -67,7 +65,6 @@ window.onload = () => {
   function iAnimation(x) {
     t2 += 1;
     y2 = 100 - 5 * t2 + (0.5 * t2 * t2) / 2;
-    console.log("second");
     if (y2 > 100) {
       t2 = 0;
     }
@@ -77,14 +74,13 @@ window.onload = () => {
   function secondMAnimation(x) {
     t3 += 1;
     y3 = 100 - 5 * t3 + (0.5 * t3 * t3) / 2;
-    console.log("second");
     if (y3 > 100) {
       t3 = 0;
     }
     letterMDrowing(x, y3, "#0000FF");
   }
 
-  function pictureAnimation() {
+  function pictureDrowing() {
     m1.clearRect(0, 0, 1300, 400);
     console.log("clear");
     tGlob += 1;
@@ -99,5 +95,5 @@ window.onload = () => {
     }
   }
 
-  setInterval(pictureAnimation, 25);
+  setInterval(pictureDrowing, 25);
 } 
