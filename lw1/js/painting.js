@@ -9,7 +9,7 @@ window.onload = () => {
   y2 = 0;
   y3 = 0;
 
-  function letterMDrowing(x, y, color) {
+  function letterMDrawing(x, y, color) {
     m1.beginPath();
     m1.lineWidth = 2;
     m1.strokeStyle = '#00000';
@@ -32,7 +32,7 @@ window.onload = () => {
     m1.stroke();
   }
 
-  function letterIDrowing(x, y) {
+  function letterIDrawing(x, y) {
     m1.beginPath();
     m1.lineWidth = 2;
     m1.strokeStyle = '#00000';
@@ -59,7 +59,7 @@ window.onload = () => {
     if (y1 > 100) {
       t1 = 0;
     }
-    letterMDrowing(x, y1, "#FF0000");   
+    letterMDrawing(x, y1, "#FF0000");   
   }
 
   function iAnimation(x) {
@@ -68,7 +68,7 @@ window.onload = () => {
     if (y2 > 100) {
       t2 = 0;
     }
-    letterIDrowing(x, y2);
+    letterIDrawing(x, y2);
   }
 
   function secondMAnimation(x) {
@@ -77,10 +77,10 @@ window.onload = () => {
     if (y3 > 100) {
       t3 = 0;
     }
-    letterMDrowing(x, y3, "#0000FF");
+    letterMDrawing(x, y3, "#0000FF");
   }
 
-  function pictureDrowing() {
+  function pictureAnimation() {
     m1.clearRect(0, 0, 1300, 400);
     console.log("clear");
     tGlob += 1;
@@ -95,5 +95,5 @@ window.onload = () => {
     }
   }
 
-  setInterval(pictureDrowing, 25);
+  setInterval(pictureAnimation, 25);
 } 
