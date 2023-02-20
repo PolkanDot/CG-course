@@ -2,6 +2,115 @@ window.onload = () => {
 	 const canvas = document.getElementById('Stan');
 	 const ct1 = canvas.getContext('2d');
 
+	// Pants
+	ct1.fillStyle = '#4279C6';
+	ct1.fillRect(25, 160, 80, 30);
+
+
+	//Bots
+	ct1.beginPath();
+	ct1.lineWidth = 0.5;
+	ct1.strokeStyle = '#000';
+	ct1.moveTo(20, 190);
+	ct1.bezierCurveTo(30, 185, 60, 185, 70, 190);
+	ct1.lineTo(20, 190)
+	ct1.fillStyle = '#000';
+	ct1.stroke();
+	ct1.fill();
+
+	ct1.beginPath();
+	ct1.strokeStyle = '#000';
+	ct1.moveTo(65, 189);
+	ct1.bezierCurveTo(70, 184, 110, 186, 115, 191);
+	ct1.lineTo(65, 189)
+	ct1.fillStyle = '#000';
+	ct1.stroke();
+	ct1.fill();
+
+	// Jacket
+	ct1.beginPath();
+	ct1.strokeStyle = '#CF6D5F';
+	ct1.moveTo(10, 160);
+	ct1.bezierCurveTo(20, 80, 110, 80, 120, 160);
+	ct1.lineTo(110, 160);
+	ct1.lineTo(110, 170);
+	ct1.bezierCurveTo(90, 180, 40, 180, 20, 170);
+	ct1.lineTo(20, 160);
+	ct1.lineTo(10, 160);
+	ct1.fillStyle = '#CF6D5F';
+	ct1.stroke();
+	ct1.fill();
+
+	ct1.beginPath();
+	ct1.strokeStyle = '#000';
+	ct1.moveTo(23, 160);
+	ct1.lineTo(30, 140);
+	ct1.moveTo(107, 160);
+	ct1.lineTo(100, 140);
+	ct1.stroke();
+	
+	ct1.beginPath();
+	ct1.lineWidth = 1;
+	ct1.moveTo(65, 177);
+	ct1.lineTo(68, 120);
+	ct1.stroke();
+
+	ct1.beginPath();
+	ct1.strokeStyle = '#313031';
+	ct1.arc(60, 145, 1.5, 0 * Math.PI, 2 * Math.PI);
+	ct1.fillStyle = '#313031';
+	ct1.fill();
+	ct1.stroke();
+
+	ct1.beginPath();
+	ct1.arc(59, 157, 1.5, 0 * Math.PI, 2 * Math.PI);
+	ct1.fill();
+	ct1.stroke();
+
+	ct1.beginPath();
+	ct1.arc(58, 169, 1.5, 0 * Math.PI, 2 * Math.PI);
+	ct1.fill();
+	ct1.stroke();
+
+	ct1.strokeStyle = '#FF2042';
+	ct1.fillStyle = '#FF2042';
+	
+	ct1.beginPath();
+	ct1.moveTo(25, 115);
+	ct1.bezierCurveTo(20, 125, 70, 150, 65, 135);
+	ct1.lineTo(25, 115);
+	ct1.fill();
+	ct1.stroke();
+
+	ct1.beginPath();
+	ct1.moveTo(105, 120);
+	ct1.bezierCurveTo(108, 130, 65, 150, 70, 135);
+	ct1.lineTo(95, 115);
+	ct1.fill();
+	ct1.stroke();
+
+	ct1.strokeStyle = '#000';
+	ct1.lineWidth = 0.3;
+
+	ct1.beginPath();
+	ct1.arc(112, 162, 10, 0 * Math.PI, 2 * Math.PI);
+	ct1.fill();
+
+	ct1.beginPath();
+	ct1.arc(105, 159, 5, 0 * Math.PI, 2 * Math.PI);
+	ct1.fill();
+	ct1.stroke();
+
+	ct1.beginPath();
+	ct1.arc(18, 158, 10, 0 * Math.PI, 2 * Math.PI);
+	ct1.fill();
+
+	ct1.beginPath();
+	ct1.arc(25, 156, 5, 0 * Math.PI, 2 * Math.PI);
+	ct1.fill();
+	ct1.stroke();
+
+	// Head
 	ct1.beginPath();
 	ct1.lineWidth = 1;
 	ct1.strokeStyle = '#FFECC0';
@@ -138,27 +247,5 @@ window.onload = () => {
 	ct1.lineTo(77, 109);
 	ct1.fill();
 
-	// Pants
-	ct1.fillStyle = '#4279C6';
-	ct1.fillRect(25, 160, 80, 30);
-
-
-	//Bots
-	ct1.beginPath();
-	ct1.strokeStyle = '#000';
-	ct1.moveTo(20, 190);
-	ct1.bezierCurveTo(30, 185, 60, 185, 70, 190);
-	ct1.lineTo(20, 190)
-	ct1.fillStyle = '#000';
-	ct1.stroke();
-	ct1.fill();
-
-	ct1.beginPath();
-	ct1.strokeStyle = '#000';
-	ct1.moveTo(65, 189);
-	ct1.bezierCurveTo(70, 184, 110, 186, 115, 191);
-	ct1.lineTo(65, 189)
-	ct1.fillStyle = '#000';
-	ct1.stroke();
-	ct1.fill();
+	
 } 
