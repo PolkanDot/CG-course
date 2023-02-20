@@ -138,4 +138,27 @@ window.onload = () => {
 	ct1.lineTo(77, 109);
 	ct1.fill();
 
+	// Pants
+	ct1.fillStyle = '#4279C6';
+	ct1.fillRect(25, 160, 80, 30);
+
+
+	//Bots
+	ct1.beginPath();
+	ct1.strokeStyle = '#000';
+	ct1.moveTo(20, 190);
+	ct1.bezierCurveTo(30, 185, 60, 185, 70, 190);
+	ct1.lineTo(20, 190)
+	ct1.fillStyle = '#000';
+	ct1.stroke();
+	ct1.fill();
+
+	ct1.beginPath();
+	ct1.strokeStyle = '#000';
+	ct1.moveTo(65, 189);
+	ct1.bezierCurveTo(70, 184, 110, 186, 115, 191);
+	ct1.lineTo(65, 189)
+	ct1.fillStyle = '#000';
+	ct1.stroke();
+	ct1.fill();
 } 
