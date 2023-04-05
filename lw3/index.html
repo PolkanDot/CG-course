@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>  
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paint</title>
+<link href="style.css" rel="stylesheet">
+<script src="script.js" defer></script>
+</head>
+
+<body>
+    <button id="test">File</button>
+    <ul id="menu">
+        <li><button>New</button></li>
+        <li><button><label for="files">Open</label></button></li>
+        <li><input type="button" value="Download result image" onclick="DownloadCanvasAsImage()" /></li>
+    </ul>
+
+    <input type=file id="files" onchange="CreateImage()">
+    <button type=button onclick='DrowImage()'>Insert an image</button>
+    <input type="color" id="color" value="#1E1E1E" onchange="ChangeDrawingColor(value)">
+    <button><label for="color">Choose a drawing color</label></button>
+    <canvas id="canvas"></canvas>
+</body>
+
+</html>
