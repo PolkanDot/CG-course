@@ -2,12 +2,11 @@ var canv = document.getElementById('canvas');
 var ctx = canv.getContext('2d');
 var isMouseDown = false;
 var lineWidth = 10;
-
+// глобальные переменные!
 canv.width = window.innerWidth * 0.95;
 canv.height = window.innerHeight * 0.75;
-var offsetY = 147;
+var offsetY = 155;
 var offsetX = 38;
-var color = "";
 ctx.lineWidth = lineWidth;
 
 canv.addEventListener('mousedown', function () {
@@ -30,12 +29,12 @@ canv.addEventListener('mousemove', function (e) {
         ctx.moveTo(e.clientX - offsetX, e.clientY - offsetY);
     }
 });
-
+// после смены цвета первая точка предыдущего цвета
 function ChangeDrawingColor(color) {
     ctx.strokeStyle = color;
     ctx.fillStyle = color;
 }
-
+// нужно, чтбобы без картинки фон был полупразрвчным
 function FillCanvas() {
     color = ctx.fillStyle;
     ctx.fillStyle = "#FFFFFF";

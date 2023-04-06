@@ -6,8 +6,7 @@ imageWidth = 0;
 function DownloadCanvasAsImage() {
     let downloadLink = document.createElement('a');
     downloadLink.setAttribute('download', 'CanvasAsImage.jpeg');
-    let canvas = document.getElementById('canvas');
-    canvas.toBlob(function (blob) {
+    canv.toBlob(function (blob) {
         let url = URL.createObjectURL(blob);
         downloadLink.setAttribute('href', url);
         downloadLink.click();
