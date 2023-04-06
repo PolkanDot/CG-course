@@ -12,13 +12,10 @@ img
 #files {
     display: none;
 }
-#color {
-    display: none;
-}
 
 #canvas
 {
-    display: block;
+    display: none;
     border: 4px outset black;
     margin-top: 10px;
     margin-left: auto;
