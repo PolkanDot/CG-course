@@ -261,3 +261,5 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
+/lw3.2/OpenGL_Lab/OpenGL_Lab.vcxproj.filters
+/lw3.2/OpenGL_Lab/OpenGL_Lab.vcxproj
