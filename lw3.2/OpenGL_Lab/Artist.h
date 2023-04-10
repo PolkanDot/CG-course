@@ -12,10 +12,19 @@ public:
 		m_window_height = h;
 	}
 
-	void Draw(int width, int height) const;
+	void Draw() const;
 
 private:
 	int m_window_width = 0;
 	int m_window_height = 0;
-	void DrawCircle(float cx, float cy, float r, int num_segments) const;
+	float m_rgb_gray = 0.70588235294f;
+	float m_rgb_black = 0;
+	float m_rgb_white= 1;
+	void DrawCircle(float cx, float cy, float r, int num_segments, float color) const;
+	void DrawHalfCircle(float cx, float cy, float r, float delta, int num_segments, float color) const;
+	void DrawQuarterCircle(float cx, float cy, float r, float delta, int num_segments, float color) const;
+	void DrawLine(float x1, float y1, float x2, float y2, float color) const;
+	void DrawCrankcase(float centerCoordX, float centerCoordY) const;
+	void DrawCrankShaft(float centerCoordX, float centerCoordY) const;
+	//void DrawCircumference(float cx, float cy, float r, int num_segments, float color) const;
 };
