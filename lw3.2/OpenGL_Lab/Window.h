@@ -1,13 +1,12 @@
-#include "glew.h"
-#include "glfw3.h"
-#include <stdexcept>
+#include "Artist.h"
 
 class Window
 {
 public:
 	Window(int w, int h, const char* title)
-		: m_window{ CreateWindow(w, h, title) }
+		: m_width(w), m_height(h), m_artist(w, h)
 	{
+		m_window = glfwCreateWindow(w, h, title, NULL, NULL);
 		if (!m_window)
 		{
 			throw std::runtime_error("Failed to create window");
@@ -28,18 +27,15 @@ public:
 		{
 			int w, h;
 			glfwGetFramebufferSize(m_window, &w, &h);
-			Draw(w, h);
+			m_artist.Draw(w, h);
 			glfwSwapBuffers(m_window);
 			glfwPollEvents();
 		}
 	}
 
 private:
-	void Draw(int width, int height) const;
-
-	static GLFWwindow* CreateWindow(int w, int h, const char* title)
-	{
-		return glfwCreateWindow(w, h, title, nullptr, nullptr);
-	}
+	int m_width;
+	int m_height;
 	GLFWwindow* m_window;
+	Artist m_artist;
 };

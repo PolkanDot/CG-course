@@ -4,6 +4,6 @@
 int main()
 {
 	GLFWInitializer initGLFW;
-	Window window{ 800, 600, "Hello, triangle" };
+	Window window{ 1000, 950, "Hello, triangle" };
 	window.Run();
 }
