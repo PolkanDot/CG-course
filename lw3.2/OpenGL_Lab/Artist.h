@@ -24,7 +24,8 @@ private:
 	void DrawHalfCircle(float cx, float cy, float r, float delta, int num_segments, float color) const;
 	void DrawQuarterCircle(float cx, float cy, float r, float delta, int num_segments, float color) const;
 	void DrawLine(float x1, float y1, float x2, float y2, float color) const;
-	void DrawCrankcase(float centerCoordX, float centerCoordY) const;
+	void DrawBody(float centerCoordX, float centerCoordY) const;
 	void DrawCrankShaft(float centerCoordX, float centerCoordY) const;
+	void DrawRectangle(float x1, float y1, float x2, float y2, float color) const;
 	//void DrawCircumference(float cx, float cy, float r, int num_segments, float color) const;
 };

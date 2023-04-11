@@ -2,14 +2,20 @@
 
 void Artist::Draw() const
 {
+	DrawRectangle(-0.2, -0.18, 0.199, 0.4, m_rgb_black);
+	
 	DrawCrankcase(0, -0.4);
+	
 	DrawCrankShaft(0, -0.4);
+	DrawRectangle(-0.13, -0.16, 0.129, 0.4, m_rgb_black);
+	DrawRectangle(-0.127, -0.16, 0.127, 0.4, m_rgb_white);
 }
 
 void Artist::DrawCrankcase(float centerCoordX, float centerCoordY) const
 {
 	DrawCircle(centerCoordX, centerCoordY, 0.303, 40, m_rgb_black);
 	DrawCircle(centerCoordX, centerCoordY, 0.3, 40, m_rgb_gray);
+	DrawRectangle(centerCoordX - 0.197, centerCoordY + 0.23, 0.197, 0.403, m_rgb_gray);
 	DrawCircle(centerCoordX, centerCoordY, 0.273, 40, m_rgb_black);
 	DrawCircle(centerCoordX, centerCoordY, 0.27, 40, m_rgb_white);
 }
@@ -68,6 +74,16 @@ void Artist::DrawLine(float x1, float y1, float x2, float y2, float color) const
 	glBegin(GL_LINES);
 	glColor3f(color, color, color);
 	glVertex2f(x1, y1);
+	glVertex2f(x2, y2);
+	glEnd();
+}
+
+void Artist::DrawRectangle(float x1, float y1, float x2, float y2, float color) const {
+	glBegin(GL_TRIANGLE_STRIP);
+	glColor3f(color, color, color);
+	glVertex2f(x1, y1);
+	glVertex2f(x2, y1);
+	glVertex2f(x1, y2);
 	glVertex2f(x2, y2);
 	glEnd();
 }
