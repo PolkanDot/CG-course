@@ -20,6 +20,8 @@ void Artist::DrawCrankShaft(float centerCoordX, float centerCoordY) const
 	DrawQuarterCircle(centerCoordX - 0.238, centerCoordY + 0.278, 0.24, M_PI * -0.45, 40, m_rgb_black);
 	DrawQuarterCircle(centerCoordX - 0.238, centerCoordY - 0.275, 0.24, M_PI * 0.05, 40, m_rgb_black);
 	DrawLine(centerCoordX - 0.2, -0.36, centerCoordX - 0.2, -0.44, m_rgb_black);
+	DrawCircle(centerCoordX, centerCoordY, 0.043, 40, m_rgb_black);
+	DrawCircle(centerCoordX, centerCoordY, 0.04, 40, m_rgb_gray);
 }
 
 void Artist::DrawCircle(float cx, float cy, float r, int num_segments, float color) const{
