@@ -71,10 +71,10 @@ void Artist::DrawCrankShaft(float centerCoordX, float centerCoordY) const
 void Artist::DrawBody(float centerCoordX, float centerCoordY) const
 {
 	DrawRectangle(centerCoordX - 0.2, centerCoordY + 0.22, centerCoordX + 0.199, centerCoordY + 0.8, m_rgb_black);
-	DrawCircle(centerCoordX, centerCoordY, 0.303, 40, m_rgb_black);
+	DrawCircle(centerCoordX, centerCoordY, 0.302, 40, m_rgb_black);
 	DrawCircle(centerCoordX, centerCoordY, 0.3, 40, m_rgb_gray);
 	DrawRectangle(centerCoordX - 0.197, centerCoordY + 0.23, 0.197, 0.403, m_rgb_gray);
-	DrawCircle(centerCoordX, centerCoordY, 0.273, 40, m_rgb_black);
+	DrawCircle(centerCoordX, centerCoordY, 0.272, 40, m_rgb_black);
 	DrawCircle(centerCoordX, centerCoordY, 0.27, 40, m_rgb_white);
 	DrawRectangle(centerCoordX - 0.13, centerCoordY + 0.24, centerCoordX + 0.129, centerCoordY + 0.8, m_rgb_black);
 	DrawRectangle(centerCoordX - 0.127, centerCoordY + 0.24, centerCoordX + 0.127, centerCoordY + 0.8, m_rgb_white);
