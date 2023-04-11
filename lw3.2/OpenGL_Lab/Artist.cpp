@@ -91,23 +91,23 @@ void Artist::DrawBody(float centerCoordX, float centerCoordY) const
 	DrawRectangle(centerCoordX - 0.127, centerCoordY + 0.24, centerCoordX + 0.127, centerCoordY + 0.8, m_rgb_white);
 }
 
-void Artist::DrawConnectingRod() const
+void Artist::DrawConnectingRod(float coordX, float coordY) const
 {
-	DrawRotatedRectangle(-0.179, -0.39, -0.122, -0.415, -0.028, 0.112, 0.03, 0.09, m_rgb_white);
-	DrawHalfCircle(-0.15, -0.4, 0.03, M_PI * 0.87, 40, m_rgb_black);
-	DrawCircle(-0.15, -0.4, 0.025, 40, m_rgb_gray);
-	DrawCircle(0, 0.1, 0.02, 40, m_rgb_gray);
-	DrawHalfCircle(0, 0.1, 0.03, M_PI * -0.13, 40, m_rgb_black);
-	DrawLine(-0.179, -0.39, -0.028, 0.112, m_rgb_black);
-	DrawLine(-0.122, -0.415, 0.03, 0.09, m_rgb_black);
-	
+	DrawRotatedRectangle(coordX - 0.029, coordY + 0.01, coordX + 0.028, coordY - 0.015,
+		coordX + 0.122, coordY + 0.512, coordX + 0.18, coordY + 0.49, m_rgb_white);
+	DrawHalfCircle(coordX, coordY, 0.03, M_PI * 0.87, 40, m_rgb_black);
+	DrawCircle(coordX, coordY, 0.025, 40, m_rgb_gray);
+	DrawCircle(coordX + 0.15, coordY + 0.5, 0.02, 40, m_rgb_gray);
+	DrawHalfCircle(coordX + 0.15, coordY + 0.5, 0.03, M_PI * -0.13, 40, m_rgb_black);
+	DrawLine(coordX - 0.029, coordY + 0.01, coordX + 0.122, coordY + 0.512, m_rgb_black);
+	DrawLine(coordX + 0.028, coordY - 0.015, coordX + 0.18, coordY + 0.49, m_rgb_black);
 }
 
 void Artist::Draw() const
 {
 	DrawBody(0, -0.4);
 	DrawCrankShaft(0, -0.4);
-	DrawConnectingRod();
+	DrawConnectingRod(-0.15, -0.4);
 }
 /*void Artist::DrawCircumference(float cx, float cy, float r, int num_segments, float color) const {
 	glBegin(GL_LINE_LOOP);
