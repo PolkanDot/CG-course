@@ -1,36 +1,6 @@
 #include "Artist.h";
 
-void Artist::Draw() const
-{
-	DrawRectangle(-0.2, -0.18, 0.199, 0.4, m_rgb_black);
-	
-	DrawCrankcase(0, -0.4);
-	
-	DrawCrankShaft(0, -0.4);
-	DrawRectangle(-0.13, -0.16, 0.129, 0.4, m_rgb_black);
-	DrawRectangle(-0.127, -0.16, 0.127, 0.4, m_rgb_white);
-}
-
-void Artist::DrawCrankcase(float centerCoordX, float centerCoordY) const
-{
-	DrawCircle(centerCoordX, centerCoordY, 0.303, 40, m_rgb_black);
-	DrawCircle(centerCoordX, centerCoordY, 0.3, 40, m_rgb_gray);
-	DrawRectangle(centerCoordX - 0.197, centerCoordY + 0.23, 0.197, 0.403, m_rgb_gray);
-	DrawCircle(centerCoordX, centerCoordY, 0.273, 40, m_rgb_black);
-	DrawCircle(centerCoordX, centerCoordY, 0.27, 40, m_rgb_white);
-}
-
-void Artist::DrawCrankShaft(float centerCoordX, float centerCoordY) const
-{
-	DrawHalfCircle(centerCoordX, centerCoordY, 0.24, M_PI * -0.5, 40, m_rgb_black);
-	DrawQuarterCircle(centerCoordX - 0.238, centerCoordY + 0.278, 0.24, M_PI * -0.45, 40, m_rgb_black);
-	DrawQuarterCircle(centerCoordX - 0.238, centerCoordY - 0.275, 0.24, M_PI * 0.05, 40, m_rgb_black);
-	DrawLine(centerCoordX - 0.2, -0.36, centerCoordX - 0.2, -0.44, m_rgb_black);
-	DrawCircle(centerCoordX, centerCoordY, 0.043, 40, m_rgb_black);
-	DrawCircle(centerCoordX, centerCoordY, 0.04, 40, m_rgb_gray);
-}
-
-void Artist::DrawCircle(float cx, float cy, float r, int num_segments, float color) const{
+void Artist::DrawCircle(float cx, float cy, float r, int num_segments, float color) const {
 	glBegin(GL_TRIANGLE_FAN);
 	glColor3f(color, color, color);
 
@@ -88,6 +58,37 @@ void Artist::DrawRectangle(float x1, float y1, float x2, float y2, float color) 
 	glEnd();
 }
 
+void Artist::DrawCrankShaft(float centerCoordX, float centerCoordY) const
+{
+	DrawHalfCircle(centerCoordX, centerCoordY, 0.24, M_PI * -0.5, 40, m_rgb_black);
+	DrawQuarterCircle(centerCoordX - 0.238, centerCoordY + 0.278, 0.24, M_PI * -0.45, 40, m_rgb_black);
+	DrawQuarterCircle(centerCoordX - 0.238, centerCoordY - 0.275, 0.24, M_PI * 0.05, 40, m_rgb_black);
+	DrawLine(centerCoordX - 0.2, -0.36, centerCoordX - 0.2, -0.44, m_rgb_black);
+	DrawCircle(centerCoordX, centerCoordY, 0.043, 40, m_rgb_black);
+	DrawCircle(centerCoordX, centerCoordY, 0.04, 40, m_rgb_gray);
+}
+
+void Artist::DrawBody(float centerCoordX, float centerCoordY) const
+{
+	DrawRectangle(centerCoordX - 0.2, centerCoordY + 0.22, centerCoordX + 0.199, centerCoordY + 0.8, m_rgb_black);
+	DrawCircle(centerCoordX, centerCoordY, 0.303, 40, m_rgb_black);
+	DrawCircle(centerCoordX, centerCoordY, 0.3, 40, m_rgb_gray);
+	DrawRectangle(centerCoordX - 0.197, centerCoordY + 0.23, 0.197, 0.403, m_rgb_gray);
+	DrawCircle(centerCoordX, centerCoordY, 0.273, 40, m_rgb_black);
+	DrawCircle(centerCoordX, centerCoordY, 0.27, 40, m_rgb_white);
+	DrawRectangle(centerCoordX - 0.13, centerCoordY + 0.24, centerCoordX + 0.129, centerCoordY + 0.8, m_rgb_black);
+	DrawRectangle(centerCoordX - 0.127, centerCoordY + 0.24, centerCoordX + 0.127, centerCoordY + 0.8, m_rgb_white);
+}
+
+void Artist::Draw() const
+{
+	
+
+	DrawBody(0, -0.4);
+
+	DrawCrankShaft(0, -0.4);
+	
+}
 /*void Artist::DrawCircumference(float cx, float cy, float r, int num_segments, float color) const {
 	glBegin(GL_LINE_LOOP);
 	glColor3f(color, color, color);
