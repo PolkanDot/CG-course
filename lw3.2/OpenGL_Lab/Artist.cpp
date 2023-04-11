@@ -58,6 +58,17 @@ void Artist::DrawRectangle(float x1, float y1, float x2, float y2, float color) 
 	glEnd();
 }
 
+void Artist::DrawRotatedRectangle(float x1, float y1, float x2, float y2,
+	float x3, float y3, float x4, float y4, float color) const {
+	glBegin(GL_TRIANGLE_STRIP);
+	glColor3f(color, color, color);
+	glVertex2f(x1, y1);
+	glVertex2f(x2, y2);
+	glVertex2f(x3, y3);
+	glVertex2f(x4, y4);
+	glEnd();
+}
+
 void Artist::DrawCrankShaft(float centerCoordX, float centerCoordY) const
 {
 	DrawHalfCircle(centerCoordX, centerCoordY, 0.24, M_PI * -0.5, 40, m_rgb_black);
@@ -80,14 +91,23 @@ void Artist::DrawBody(float centerCoordX, float centerCoordY) const
 	DrawRectangle(centerCoordX - 0.127, centerCoordY + 0.24, centerCoordX + 0.127, centerCoordY + 0.8, m_rgb_white);
 }
 
+void Artist::DrawConnectingRod() const
+{
+	DrawRotatedRectangle(-0.179, -0.39, -0.122, -0.415, -0.028, 0.112, 0.03, 0.09, m_rgb_white);
+	DrawHalfCircle(-0.15, -0.4, 0.03, M_PI * 0.87, 40, m_rgb_black);
+	DrawCircle(-0.15, -0.4, 0.025, 40, m_rgb_gray);
+	DrawCircle(0, 0.1, 0.02, 40, m_rgb_gray);
+	DrawHalfCircle(0, 0.1, 0.03, M_PI * -0.13, 40, m_rgb_black);
+	DrawLine(-0.179, -0.39, -0.028, 0.112, m_rgb_black);
+	DrawLine(-0.122, -0.415, 0.03, 0.09, m_rgb_black);
+	
+}
+
 void Artist::Draw() const
 {
-	
-
 	DrawBody(0, -0.4);
-
 	DrawCrankShaft(0, -0.4);
-	
+	DrawConnectingRod();
 }
 /*void Artist::DrawCircumference(float cx, float cy, float r, int num_segments, float color) const {
 	glBegin(GL_LINE_LOOP);
