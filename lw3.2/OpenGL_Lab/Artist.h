@@ -25,7 +25,7 @@ private:
 		float x2, float y2, float color) const;
 	void DrawGradientRectangle(float x1, float y1, float x2,
 		float y2, float color1, float color2) const;
-	void DrawRotatedRectangle(float x1, float y1, float x2, float y2,
+	void DrawQuadrilateral(float x1, float y1, float x2, float y2,
 		float x3, float y3, float x4, float y4, float color) const;
 	void DrawCircle(float cx, float cy, float r, int num_segments, float color) const;
 	void DrawHalfCircle(float cx, float cy, float r, float delta, int num_segments, float color) const;
@@ -37,5 +37,6 @@ private:
 	void DrawPiston(float x1, float y1, float x2, float y2, float color) const;
 	void DrawCoolingFin(float x1, float y1, float x2, float y2, float color) const;
 	void DrawCoolingFins(float centerCoordX, float centerCoordY, float color) const;
+	void DrawUpPart(float coordX, float coordY) const;
 	//void DrawCircumference(float cx, float cy, float r, int num_segments, float color) const;
 };

@@ -79,7 +79,7 @@ void Artist::DrawGradientRectangle(float x1, float y1, float x2, float y2, float
 	glEnd();
 }
 
-void Artist::DrawRotatedRectangle(float x1, float y1, float x2, float y2,
+void Artist::DrawQuadrilateral(float x1, float y1, float x2, float y2,
 	float x3, float y3, float x4, float y4, float color) const {
 	glBegin(GL_TRIANGLE_STRIP);
 	glColor3f(color, color, color);
@@ -102,10 +102,10 @@ void Artist::DrawCrankShaft(float centerCoordX, float centerCoordY) const
 
 void Artist::DrawBody(float centerCoordX, float centerCoordY) const
 {
-	DrawRectangle(centerCoordX - 0.2, centerCoordY + 0.22, centerCoordX + 0.199, centerCoordY + 0.8, m_rgb_black);
+	DrawRectangle(centerCoordX - 0.2, centerCoordY + 0.22, centerCoordX + 0.199, centerCoordY + 0.9, m_rgb_black);
 	DrawCircle(centerCoordX, centerCoordY, 0.302, 40, m_rgb_black);
 	DrawCircle(centerCoordX, centerCoordY, 0.3, 40, m_rgb_gray);
-	DrawRectangle(centerCoordX - 0.197, centerCoordY + 0.23, 0.197, 0.403, m_rgb_gray);
+	DrawRectangle(centerCoordX - 0.197, centerCoordY + 0.23, centerCoordX + 0.197, centerCoordY + 0.903, m_rgb_gray);
 	DrawCircle(centerCoordX, centerCoordY, 0.272, 40, m_rgb_black);
 	DrawCircle(centerCoordX, centerCoordY, 0.27, 40, m_rgb_white);
 	DrawRectangle(centerCoordX - 0.13, centerCoordY + 0.24, centerCoordX + 0.129, centerCoordY + 0.8, m_rgb_black);
@@ -114,7 +114,7 @@ void Artist::DrawBody(float centerCoordX, float centerCoordY) const
 
 void Artist::DrawConnectingRod(float coordX, float coordY) const
 {
-	DrawRotatedRectangle(coordX - 0.029, coordY + 0.01, coordX + 0.028, coordY - 0.015,
+	DrawQuadrilateral(coordX - 0.029, coordY + 0.01, coordX + 0.028, coordY - 0.015,
 		coordX + 0.122, coordY + 0.512, coordX + 0.18, coordY + 0.49, m_rgb_white);
 	DrawHalfCircle(coordX, coordY, 0.03, M_PI * 0.87, 40, m_rgb_black);
 	DrawCircle(coordX, coordY, 0.025, 40, m_rgb_gray);
@@ -150,6 +150,17 @@ void Artist::DrawCoolingFins(float centerCoordX, float centerCoordY, float color
 	DrawCoolingFin(centerCoordX - 0.197, centerCoordY + 0.65, centerCoordX - 0.27, centerCoordY + 0.67, color);
 }
 
+void Artist::DrawUpPart(float coordX, float coordY) const
+{
+	DrawRectangle(coordX, coordY, coordX + 0.8, coordY + 0.12, m_rgb_black);
+	DrawRectangle(coordX + 0.002, coordY + 0.02, coordX + 0.3, coordY + 0.1, m_rgb_white);
+	DrawRectangle(coordX + 0.798, coordY + 0.02, coordX + 0.5, coordY + 0.1, m_rgb_white);
+	DrawRectangle(coordX + 0.002, coordY + 0.003, coordX + 0.203, coordY + 0.018, m_rgb_gray);
+	DrawRectangle(coordX + 0.798, coordY + 0.003, coordX + 0.597, coordY + 0.018, m_rgb_gray);
+	DrawQuadrilateral(coordX + 0.205, coordY + 0.018, coordX + 0.3, coordY + 0.1,
+		coordX + 0.21, coordY + 0.01, coordX + 0.305, coordY + 0.083, m_rgb_white);
+}
+
 void Artist::Draw() const
 {
 	DrawBody(0, -0.4);
@@ -157,6 +168,7 @@ void Artist::Draw() const
 	DrawConnectingRod(-0.15, -0.4);
 	DrawPiston(-0.125, 0, 0.125, 0.2, m_rgb_gray);
 	DrawCoolingFins(0, -0.4, m_rgb_gray);
+	DrawUpPart(-0.4, 0.45);
 }
 /*void Artist::DrawCircumference(float cx, float cy, float r, int num_segments, float color) const {
 	glBegin(GL_LINE_LOOP);
