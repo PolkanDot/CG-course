@@ -23,15 +23,15 @@ public:
 	void Run()
 	{
 		glfwMakeContextCurrent(m_window);
-		glViewport(0, 0, m_width, m_height);
+		m_artist.OnRunStart();
 
 		while (!glfwWindowShouldClose(m_window))
 		{
-			glClearColor(1.0, 1.0, 1.0, 0.5);
-			glClear(GL_COLOR_BUFFER_BIT);
+			int w, h;
 			glEnable(GL_BLEND);
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-			m_artist.Draw();
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);		
+			glfwGetFramebufferSize(m_window, &w, &h);
+			m_artist.Draw(m_artist.m_startTime, w, h);
 			glfwSwapBuffers(m_window);
 			glfwPollEvents();
 		}

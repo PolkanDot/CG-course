@@ -1,5 +1,34 @@
 #include "Artist.h";
 
+void Artist::OnRunStart() 
+{
+	this->m_startTime = std::chrono::steady_clock::now();
+}
+
+void Artist::SetupProjectionMatrix(int width, int height)
+{
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	const double aspectRatio = double(width) / double(height);
+	double viewWidth = 2.0;
+	double viewHeight = viewWidth;
+	if (aspectRatio > 1.0)
+	{
+		viewWidth = viewHeight * aspectRatio;
+	}
+	else
+	{
+		viewHeight = viewWidth / aspectRatio;
+	}
+	glOrtho(-viewWidth * 0.5, viewWidth * 0.5, -viewHeight * 0.5, viewHeight * 0.5, -1.0, 1.0);
+}
+
+void Artist::SetupModelViewMatrix(double phase)
+{
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+}
+
 void Artist::DrawCircle(float cx, float cy, float r, int num_segments, float color) const {
 	glBegin(GL_TRIANGLE_FAN);
 	glColor3f(color, color, color);
@@ -90,6 +119,23 @@ void Artist::DrawQuadrilateral(float x1, float y1, float x2, float y2,
 	glEnd();
 }
 
+/*void Artist::DrowEllipse(float centerCoordX, float centerCoordY, float rx, float ry, int pointCount, float color) const
+{
+	const float step = float(2 * M_PI) / pointCount;
+	glColor3f(color, color, color);
+	glBegin(GL_TRIANGLE_FAN);
+	glVertex2f(centerCoordX, centerCoordY);
+	glRotatef(-90, 0, 0, 1);
+	for (float angle = float(M_PI * -0.3); angle <= float(2 * M_PI); angle += step)
+	{
+		float a = (fabsf(angle - float(2 * M_PI)) < 0.00001f) ? 0.f : angle;
+		const float dx = rx * cosf(a);
+		const float dy = ry * sinf(a);
+		glVertex2f(dx + centerCoordX, dy + centerCoordY);
+	}
+	glEnd();
+}*/
+
 void Artist::DrawCrankShaft(float centerCoordX, float centerCoordY) const
 {
 	DrawHalfCircle(centerCoordX, centerCoordY, 0.24, M_PI * -0.5, 40, m_rgb_black);
@@ -150,6 +196,20 @@ void Artist::DrawCoolingFins(float centerCoordX, float centerCoordY, float color
 	DrawCoolingFin(centerCoordX - 0.197, centerCoordY + 0.65, centerCoordX - 0.27, centerCoordY + 0.67, color);
 }
 
+void Artist::DrawValve(float coordX, float coordY, float color) const
+{	
+	//Left
+	DrawQuadrilateral(coordX + 0.215, coordY + 0.17, coordX + 0.29, coordY - 0.03,
+		coordX + 0.225, coordY + 0.17, coordX + 0.3, coordY - 0.03, color);
+	DrawQuadrilateral(coordX + 0.252, coordY - 0.039, coordX + 0.34, coordY - 0.014,
+		coordX + 0.254, coordY - 0.047, coordX + 0.344, coordY - 0.022, color);
+	//Right
+	DrawQuadrilateral(coordX + 0.585, coordY + 0.17, coordX + 0.51, coordY - 0.03,
+		coordX + 0.575, coordY + 0.17, coordX + 0.5, coordY - 0.03, color);
+	DrawQuadrilateral(coordX + 0.548, coordY - 0.039, coordX + 0.46, coordY - 0.014,
+		coordX + 0.546, coordY - 0.047, coordX + 0.456, coordY - 0.022, color);
+}
+
 void Artist::DrawUpPart(float coordX, float coordY) const
 {
 	DrawRectangle(coordX, coordY, coordX + 0.8, coordY + 0.12, m_rgb_black);
@@ -163,14 +223,26 @@ void Artist::DrawUpPart(float coordX, float coordY) const
 		coordX + 0.53, coordY - 0.1, coordX + 0.43, coordY - 0.1, m_rgb_white);
 }
 
-void Artist::Draw() const
+void Artist::Draw(std::chrono::steady_clock::time_point m_startTime, int width, int height) const
 {
+	using namespace std::chrono;
+	const auto currentTime = steady_clock::now();
+	const auto timeSinceStart = currentTime - m_startTime;
+	const auto phase = duration_cast<duration<double>>(timeSinceStart % ANIMATION_PERIOD) / ANIMATION_PERIOD;
+
+	glClearColor(1.0, 1.0, 1.0, 0.5);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glViewport(0, 0, width, height);
+	SetupProjectionMatrix(width, height);
+	SetupModelViewMatrix(phase);
 	DrawBody(0, -0.4);
 	DrawCrankShaft(0, -0.4);
 	DrawConnectingRod(-0.15, -0.4);
-	DrawPiston(-0.155, 0, 0.155, 0.2, m_rgb_gray);
+	DrawPiston(-0.155, 0, 0.155, 0.2, m_rgb_gray);	
 	DrawCoolingFins(0, -0.4, m_rgb_gray);
 	DrawUpPart(-0.4, 0.45);
+	DrawValve(-0.4, 0.45, m_rgb_black);
+	
 }
 /*void Artist::DrawCircumference(float cx, float cy, float r, int num_segments, float color) const {
 	glBegin(GL_LINE_LOOP);
