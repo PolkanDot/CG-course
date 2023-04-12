@@ -36,5 +36,6 @@ private:
 	void DrawConnectingRod(float centerCoordX, float centerCoordY) const;
 	void DrawPiston(float x1, float y1, float x2, float y2, float color) const;
 	void DrawCoolingFin(float x1, float y1, float x2, float y2, float color) const;
+	void DrawCoolingFins(float centerCoordX, float centerCoordY, float color) const;
 	//void DrawCircumference(float cx, float cy, float r, int num_segments, float color) const;
 };

@@ -138,13 +138,25 @@ void Artist::DrawCoolingFin(float x1, float y1, float x2, float y2, float color)
 	DrawLine(x2, y2, x1, y2, m_rgb_black);
 }
 
+void Artist::DrawCoolingFins(float centerCoordX, float centerCoordY, float color) const
+{
+	DrawCoolingFin(centerCoordX + 0.197, centerCoordY + 0.75, centerCoordX + 0.27, centerCoordY + 0.77, color);
+	DrawCoolingFin(centerCoordX - 0.197, centerCoordY + 0.75, centerCoordX - 0.27, centerCoordY + 0.77, color);
+
+	DrawCoolingFin(centerCoordX + 0.197, centerCoordY + 0.7, centerCoordX + 0.27, centerCoordY + 0.72, color);
+	DrawCoolingFin(centerCoordX - 0.197, centerCoordY + 0.7, centerCoordX - 0.27, centerCoordY + 0.72, color);
+
+	DrawCoolingFin(centerCoordX + 0.197, centerCoordY + 0.65, centerCoordX + 0.27, centerCoordY + 0.67, color);
+	DrawCoolingFin(centerCoordX - 0.197, centerCoordY + 0.65, centerCoordX - 0.27, centerCoordY + 0.67, color);
+}
+
 void Artist::Draw() const
 {
 	DrawBody(0, -0.4);
 	DrawCrankShaft(0, -0.4);
 	DrawConnectingRod(-0.15, -0.4);
 	DrawPiston(-0.125, 0, 0.125, 0.2, m_rgb_gray);
-	DrawCoolingFin(0.197, 0.3, 0.25, 0.33, m_rgb_gray);
+	DrawCoolingFins(0, -0.4, m_rgb_gray);
 }
 /*void Artist::DrawCircumference(float cx, float cy, float r, int num_segments, float color) const {
 	glBegin(GL_LINE_LOOP);
