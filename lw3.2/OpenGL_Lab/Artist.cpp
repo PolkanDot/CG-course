@@ -108,8 +108,8 @@ void Artist::DrawBody(float centerCoordX, float centerCoordY) const
 	DrawRectangle(centerCoordX - 0.197, centerCoordY + 0.23, centerCoordX + 0.197, centerCoordY + 0.903, m_rgb_gray);
 	DrawCircle(centerCoordX, centerCoordY, 0.272, 40, m_rgb_black);
 	DrawCircle(centerCoordX, centerCoordY, 0.27, 40, m_rgb_white);
-	DrawRectangle(centerCoordX - 0.13, centerCoordY + 0.24, centerCoordX + 0.129, centerCoordY + 0.8, m_rgb_black);
-	DrawRectangle(centerCoordX - 0.127, centerCoordY + 0.24, centerCoordX + 0.127, centerCoordY + 0.8, m_rgb_white);
+	DrawRectangle(centerCoordX - 0.162, centerCoordY + 0.22, centerCoordX + 0.162, centerCoordY + 0.8, m_rgb_black);
+	DrawRectangle(centerCoordX - 0.16, centerCoordY + 0.2, centerCoordX + 0.16, centerCoordY + 0.8, m_rgb_white);
 }
 
 void Artist::DrawConnectingRod(float coordX, float coordY) const
@@ -126,8 +126,8 @@ void Artist::DrawConnectingRod(float coordX, float coordY) const
 
 void Artist::DrawPiston(float x1, float y1, float x2, float y2, float color) const
 {
-	DrawEmptyRectangle(x1, y1, x2, y2, color);
 	DrawGradientRectangle(x1, y1, x2, y2, m_rgb_white, color);
+	DrawEmptyRectangle(x1, y1, x2, y2, color);
 }
 
 void Artist::DrawCoolingFin(float x1, float y1, float x2, float y2, float color) const
@@ -157,8 +157,10 @@ void Artist::DrawUpPart(float coordX, float coordY) const
 	DrawRectangle(coordX + 0.798, coordY + 0.02, coordX + 0.5, coordY + 0.1, m_rgb_white);
 	DrawRectangle(coordX + 0.002, coordY + 0.003, coordX + 0.203, coordY + 0.018, m_rgb_gray);
 	DrawRectangle(coordX + 0.798, coordY + 0.003, coordX + 0.597, coordY + 0.018, m_rgb_gray);
-	DrawQuadrilateral(coordX + 0.205, coordY + 0.018, coordX + 0.3, coordY + 0.1,
-		coordX + 0.21, coordY + 0.01, coordX + 0.305, coordY + 0.083, m_rgb_white);
+	DrawQuadrilateral(coordX + 0.23, coordY + 0.018, coordX + 0.3, coordY + 0.1,
+		coordX + 0.27, coordY - 0.1, coordX + 0.37, coordY - 0.1, m_rgb_white);
+	DrawQuadrilateral(coordX + 0.57, coordY + 0.018, coordX + 0.5, coordY + 0.1,
+		coordX + 0.53, coordY - 0.1, coordX + 0.43, coordY - 0.1, m_rgb_white);
 }
 
 void Artist::Draw() const
@@ -166,7 +168,7 @@ void Artist::Draw() const
 	DrawBody(0, -0.4);
 	DrawCrankShaft(0, -0.4);
 	DrawConnectingRod(-0.15, -0.4);
-	DrawPiston(-0.125, 0, 0.125, 0.2, m_rgb_gray);
+	DrawPiston(-0.155, 0, 0.155, 0.2, m_rgb_gray);
 	DrawCoolingFins(0, -0.4, m_rgb_gray);
 	DrawUpPart(-0.4, 0.45);
 }
