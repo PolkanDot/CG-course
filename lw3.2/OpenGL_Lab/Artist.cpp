@@ -58,6 +58,27 @@ void Artist::DrawRectangle(float x1, float y1, float x2, float y2, float color) 
 	glEnd();
 }
 
+void Artist::DrawEmptyRectangle(float x1, float y1, float x2, float y2, float color) const {
+	glBegin(GL_LINE_LOOP);
+	glColor3f(color, color, color);
+	glVertex2f(x1, y1);
+	glVertex2f(x1, y2);
+	glVertex2f(x2, y2);
+	glVertex2f(x2, y1);
+	glEnd();
+}
+
+void Artist::DrawGradientRectangle(float x1, float y1, float x2, float y2, float color1, float color2) const {
+	glBegin(GL_TRIANGLE_STRIP);
+	glColor4f(color1, color1, color1, 0.9);
+	glVertex2f(x1, y1);
+	glVertex2f(x1, y2);
+	glColor4f(color2, color2, color2, 0.9);
+	glVertex2f(x2, y1);
+	glVertex2f(x2, y2);
+	glEnd();
+}
+
 void Artist::DrawRotatedRectangle(float x1, float y1, float x2, float y2,
 	float x3, float y3, float x4, float y4, float color) const {
 	glBegin(GL_TRIANGLE_STRIP);
@@ -103,11 +124,18 @@ void Artist::DrawConnectingRod(float coordX, float coordY) const
 	DrawLine(coordX + 0.028, coordY - 0.015, coordX + 0.18, coordY + 0.49, m_rgb_black);
 }
 
+void Artist::DrawPiston(float x1, float y1, float x2, float y2, float color) const
+{
+	DrawEmptyRectangle(x1, y1, x2, y2, color);
+	DrawGradientRectangle(x1, y1, x2, y2, m_rgb_white, color);
+}
+
 void Artist::Draw() const
 {
 	DrawBody(0, -0.4);
 	DrawCrankShaft(0, -0.4);
 	DrawConnectingRod(-0.15, -0.4);
+	DrawPiston(-0.125, 0, 0.125, 0.2, m_rgb_gray);
 }
 /*void Artist::DrawCircumference(float cx, float cy, float r, int num_segments, float color) const {
 	glBegin(GL_LINE_LOOP);

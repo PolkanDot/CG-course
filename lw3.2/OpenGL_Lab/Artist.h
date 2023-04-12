@@ -21,6 +21,10 @@ private:
 	float m_rgb_black = 0;
 	float m_rgb_white= 1;
 	void DrawRectangle(float x1, float y1, float x2, float y2, float color) const;
+	void DrawEmptyRectangle(float x1, float y1,
+		float x2, float y2, float color) const;
+	void DrawGradientRectangle(float x1, float y1, float x2,
+		float y2, float color1, float color2) const;
 	void DrawRotatedRectangle(float x1, float y1, float x2, float y2,
 		float x3, float y3, float x4, float y4, float color) const;
 	void DrawCircle(float cx, float cy, float r, int num_segments, float color) const;
@@ -30,5 +34,6 @@ private:
 	void DrawBody(float centerCoordX, float centerCoordY) const;
 	void DrawCrankShaft(float centerCoordX, float centerCoordY) const;
 	void DrawConnectingRod(float centerCoordX, float centerCoordY) const;
+	void DrawPiston(float x1, float y1, float x2, float y2, float color) const;
 	//void DrawCircumference(float cx, float cy, float r, int num_segments, float color) const;
 };
