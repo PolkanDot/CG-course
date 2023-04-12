@@ -130,12 +130,21 @@ void Artist::DrawPiston(float x1, float y1, float x2, float y2, float color) con
 	DrawGradientRectangle(x1, y1, x2, y2, m_rgb_white, color);
 }
 
+void Artist::DrawCoolingFin(float x1, float y1, float x2, float y2, float color) const
+{
+	DrawRectangle(x1, y1, x2, y2, color);
+	DrawLine(x1, y1, x2, y1, m_rgb_black);
+	DrawLine(x2, y1, x2, y2, m_rgb_black);
+	DrawLine(x2, y2, x1, y2, m_rgb_black);
+}
+
 void Artist::Draw() const
 {
 	DrawBody(0, -0.4);
 	DrawCrankShaft(0, -0.4);
 	DrawConnectingRod(-0.15, -0.4);
 	DrawPiston(-0.125, 0, 0.125, 0.2, m_rgb_gray);
+	DrawCoolingFin(0.197, 0.3, 0.25, 0.33, m_rgb_gray);
 }
 /*void Artist::DrawCircumference(float cx, float cy, float r, int num_segments, float color) const {
 	glBegin(GL_LINE_LOOP);
