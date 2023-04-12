@@ -213,10 +213,17 @@ void Artist::DrawValve(float coordX, float coordY, float color) const
 void Artist::DrawUpPart(float coordX, float coordY) const
 {
 	DrawRectangle(coordX, coordY, coordX + 0.8, coordY + 0.12, m_rgb_black);
+	DrawRectangle(coordX + 0.002, coordY + 0.102, coordX + 0.798, coordY + 0.118, m_rgb_gray);
+
 	DrawRectangle(coordX + 0.002, coordY + 0.02, coordX + 0.3, coordY + 0.1, m_rgb_white);
 	DrawRectangle(coordX + 0.798, coordY + 0.02, coordX + 0.5, coordY + 0.1, m_rgb_white);
-	DrawRectangle(coordX + 0.002, coordY + 0.003, coordX + 0.203, coordY + 0.018, m_rgb_gray);
-	DrawRectangle(coordX + 0.798, coordY + 0.003, coordX + 0.597, coordY + 0.018, m_rgb_gray);
+
+	DrawRectangle(coordX + 0.002, coordY + 0.003, coordX + 0.25, coordY + 0.018, m_rgb_gray);
+	DrawRectangle(coordX + 0.798, coordY + 0.003, coordX + 0.55, coordY + 0.018, m_rgb_gray);	
+
+	DrawRectangle(coordX + 0.2, coordY, coordX + 0.25, coordY + 0.018, m_rgb_gray);
+	DrawRectangle(coordX + 0.6, coordY, coordX + 0.55, coordY + 0.018, m_rgb_gray);
+
 	DrawQuadrilateral(coordX + 0.23, coordY + 0.018, coordX + 0.3, coordY + 0.1,
 		coordX + 0.27, coordY - 0.1, coordX + 0.37, coordY - 0.1, m_rgb_white);
 	DrawQuadrilateral(coordX + 0.57, coordY + 0.018, coordX + 0.5, coordY + 0.1,
