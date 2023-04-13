@@ -1,6 +1,6 @@
 #include "Artist.h";
 
-void Artist::OnRunStart() 
+void Artist::OnRunStart()
 {
 	this->m_startTime = std::chrono::steady_clock::now();
 }
@@ -74,6 +74,15 @@ void Artist::DrawLine(float x1, float y1, float x2, float y2, float color) const
 	glColor3f(color, color, color);
 	glVertex2f(x1, y1);
 	glVertex2f(x2, y2);
+	glEnd();
+}
+
+void Artist::DrawTriangle(float x1, float y1, float x2, float y2, float x3, float y3, float color) const {
+	glBegin(GL_TRIANGLES);
+	glColor3f(color, color, color);
+	glVertex2f(x1, y1);
+	glVertex2f(x2, y2);
+	glVertex2f(x3, y3);
 	glEnd();
 }
 
@@ -155,7 +164,7 @@ void Artist::DrawBody(float centerCoordX, float centerCoordY) const
 	DrawCircle(centerCoordX, centerCoordY, 0.272, 40, m_rgb_black);
 	DrawCircle(centerCoordX, centerCoordY, 0.27, 40, m_rgb_white);
 	DrawRectangle(centerCoordX - 0.162, centerCoordY + 0.22, centerCoordX + 0.162, centerCoordY + 0.8, m_rgb_black);
-	DrawRectangle(centerCoordX - 0.16, centerCoordY + 0.2, centerCoordX + 0.16, centerCoordY + 0.8, m_rgb_white);
+	DrawRectangle(centerCoordX - 0.16, centerCoordY + 0.2, centerCoordX + 0.16, centerCoordY + 0.798, m_rgb_white);
 }
 
 void Artist::DrawConnectingRod(float coordX, float coordY) const
@@ -197,7 +206,7 @@ void Artist::DrawCoolingFins(float centerCoordX, float centerCoordY, float color
 }
 
 void Artist::DrawValve(float coordX, float coordY, float color) const
-{	
+{
 	//Left
 	DrawQuadrilateral(coordX + 0.215, coordY + 0.17, coordX + 0.29, coordY - 0.03,
 		coordX + 0.225, coordY + 0.17, coordX + 0.3, coordY - 0.03, color);
@@ -212,22 +221,40 @@ void Artist::DrawValve(float coordX, float coordY, float color) const
 
 void Artist::DrawUpPart(float coordX, float coordY) const
 {
-	DrawRectangle(coordX, coordY, coordX + 0.8, coordY + 0.12, m_rgb_black);
-	DrawRectangle(coordX + 0.002, coordY + 0.102, coordX + 0.798, coordY + 0.118, m_rgb_gray);
+	DrawRectangle(coordX + 0.3, coordY - 0.05, coordX + 0.5, coordY + 0.05, m_rgb_black);
 
-	DrawRectangle(coordX + 0.002, coordY + 0.02, coordX + 0.3, coordY + 0.1, m_rgb_white);
-	DrawRectangle(coordX + 0.798, coordY + 0.02, coordX + 0.5, coordY + 0.1, m_rgb_white);
+	DrawRectangle(coordX, coordY, coordX + 0.8, coordY + 0.1, m_rgb_black);
+	DrawRectangle(coordX + 0.002, coordY + 0.082, coordX + 0.798, coordY + 0.098, m_rgb_gray);
+
+	DrawRectangle(coordX + 0.002, coordY + 0.02, coordX + 0.306, coordY + 0.08, m_rgb_white);
+	DrawRectangle(coordX + 0.798, coordY + 0.02, coordX + 0.494, coordY + 0.08, m_rgb_white);
 
 	DrawRectangle(coordX + 0.002, coordY + 0.003, coordX + 0.25, coordY + 0.018, m_rgb_gray);
-	DrawRectangle(coordX + 0.798, coordY + 0.003, coordX + 0.55, coordY + 0.018, m_rgb_gray);	
+	DrawRectangle(coordX + 0.798, coordY + 0.003, coordX + 0.55, coordY + 0.018, m_rgb_gray);
 
 	DrawRectangle(coordX + 0.2, coordY, coordX + 0.25, coordY + 0.018, m_rgb_gray);
 	DrawRectangle(coordX + 0.6, coordY, coordX + 0.55, coordY + 0.018, m_rgb_gray);
 
-	DrawQuadrilateral(coordX + 0.23, coordY + 0.018, coordX + 0.3, coordY + 0.1,
+	DrawQuadrilateral(coordX + 0.23, coordY + 0.018, coordX + 0.306, coordY + 0.08,
 		coordX + 0.27, coordY - 0.1, coordX + 0.37, coordY - 0.1, m_rgb_white);
-	DrawQuadrilateral(coordX + 0.57, coordY + 0.018, coordX + 0.5, coordY + 0.1,
+	DrawQuadrilateral(coordX + 0.57, coordY + 0.018, coordX + 0.494, coordY + 0.08,
 		coordX + 0.53, coordY - 0.1, coordX + 0.43, coordY - 0.1, m_rgb_white);
+
+	DrawLine(coordX + 0.231, coordY + 0.018, coordX + 0.252, coordY - 0.049, m_rgb_black);
+	DrawLine(coordX + 0.569, coordY + 0.018, coordX + 0.548, coordY - 0.049, m_rgb_black);
+
+	DrawRectangle(coordX + 0.255, coordY - 0.06, coordX + 0.54, coordY - 0.025, m_rgb_white);
+
+	DrawLine(coordX + 0.345, coordY - 0.025, coordX + 0.455, coordY - 0.025, m_rgb_black);
+
+	DrawQuadrilateral(coordX + 0.295, coordY + 0.12, coordX + 0.346, coordY - 0.025,
+		coordX + 0.505, coordY + 0.12, coordX + 0.454, coordY - 0.025, m_rgb_gray);
+	//Left
+	DrawTriangle(coordX + 0.238, coordY + 0.09, coordX + 0.295, coordY + 0.12, coordX + 0.31, coordY + 0.09, m_rgb_gray);
+	DrawLine(coordX + 0.255, coordY + 0.1, coordX + 0.295, coordY + 0.12, m_rgb_black);
+	//Right
+	DrawTriangle(coordX + 0.562, coordY + 0.09, coordX + 0.505, coordY + 0.12, coordX + 0.49, coordY + 0.09, m_rgb_gray);
+	DrawLine(coordX + 0.545, coordY + 0.1, coordX + 0.505, coordY + 0.12, m_rgb_black);
 }
 
 void Artist::Draw(std::chrono::steady_clock::time_point m_startTime, int width, int height) const
@@ -245,11 +272,10 @@ void Artist::Draw(std::chrono::steady_clock::time_point m_startTime, int width, 
 	DrawBody(0, -0.4);
 	DrawCrankShaft(0, -0.4);
 	DrawConnectingRod(-0.15, -0.4);
-	DrawPiston(-0.155, 0, 0.155, 0.2, m_rgb_gray);	
+	DrawPiston(-0.155, 0, 0.155, 0.2, m_rgb_gray);
 	DrawCoolingFins(0, -0.4, m_rgb_gray);
 	DrawUpPart(-0.4, 0.45);
-	DrawValve(-0.4, 0.45, m_rgb_black);
-	
+	//DrawValve(-0.4, 0.45, m_rgb_black);
 }
 /*void Artist::DrawCircumference(float cx, float cy, float r, int num_segments, float color) const {
 	glBegin(GL_LINE_LOOP);

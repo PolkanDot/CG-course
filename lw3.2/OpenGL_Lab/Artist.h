@@ -25,10 +25,12 @@ private:
 	float m_rgb_gray = 0.70588235294f;
 	float m_rgb_black = 0;
 	float m_rgb_white= 1;
+	float m_rgb_light_gray = 0.86274509804;
 
 	static void SetupProjectionMatrix(int width, int height);
 	static void SetupModelViewMatrix(double phase);
 
+	void DrawTriangle(float x1, float y1, float x2, float y2, float x3, float y3, float color) const;
 	void DrawRectangle(float x1, float y1, float x2, float y2, float color) const;
 	void DrawEmptyRectangle(float x1, float y1,
 		float x2, float y2, float color) const;
