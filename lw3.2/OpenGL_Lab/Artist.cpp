@@ -245,16 +245,40 @@ void Artist::DrawUpPart(float coordX, float coordY) const
 
 	DrawRectangle(coordX + 0.255, coordY - 0.06, coordX + 0.54, coordY - 0.025, m_rgb_white);
 
-	DrawLine(coordX + 0.345, coordY - 0.025, coordX + 0.455, coordY - 0.025, m_rgb_black);
+	DrawLine(coordX + 0.345, coordY - 0.026, coordX + 0.455, coordY - 0.026, m_rgb_black);
 
 	DrawQuadrilateral(coordX + 0.295, coordY + 0.12, coordX + 0.346, coordY - 0.025,
 		coordX + 0.505, coordY + 0.12, coordX + 0.454, coordY - 0.025, m_rgb_gray);
 	//Left
-	DrawTriangle(coordX + 0.238, coordY + 0.09, coordX + 0.295, coordY + 0.12, coordX + 0.31, coordY + 0.09, m_rgb_gray);
-	DrawLine(coordX + 0.255, coordY + 0.1, coordX + 0.295, coordY + 0.12, m_rgb_black);
+	DrawTriangle(coordX + 0.218, coordY + 0.09, coordX + 0.295, coordY + 0.12, coordX + 0.31, coordY + 0.09, m_rgb_gray);
+	DrawLine(coordX + 0.241, coordY + 0.1, coordX + 0.295, coordY + 0.12, m_rgb_black);
 	//Right
-	DrawTriangle(coordX + 0.562, coordY + 0.09, coordX + 0.505, coordY + 0.12, coordX + 0.49, coordY + 0.09, m_rgb_gray);
-	DrawLine(coordX + 0.545, coordY + 0.1, coordX + 0.505, coordY + 0.12, m_rgb_black);
+	DrawTriangle(coordX + 0.582, coordY + 0.09, coordX + 0.505, coordY + 0.12, coordX + 0.49, coordY + 0.09, m_rgb_gray);
+	DrawLine(coordX + 0.559, coordY + 0.1, coordX + 0.505, coordY + 0.12, m_rgb_black);
+	//injector part
+	DrawRectangle(coordX + 0.37, coordY - 0.025, coordX + 0.43, coordY + 0.05, m_rgb_black);
+	DrawRectangle(coordX + 0.372, coordY - 0.024, coordX + 0.428, coordY + 0.048, m_rgb_light_gray);
+
+	DrawLine(coordX + 0.38, coordY - 0.015, coordX + 0.42, coordY - 0.005, m_rgb_gray);
+	DrawLine(coordX + 0.38, coordY - 0.005, coordX + 0.42, coordY + 0.005, m_rgb_gray);
+	DrawLine(coordX + 0.38, coordY + 0.005, coordX + 0.42, coordY + 0.015, m_rgb_gray);
+	DrawLine(coordX + 0.38, coordY + 0.015, coordX + 0.42, coordY + 0.025, m_rgb_gray);
+	DrawLine(coordX + 0.38, coordY + 0.025, coordX + 0.42, coordY + 0.035, m_rgb_gray);
+
+	DrawRectangle(coordX + 0.34, coordY + 0.05, coordX + 0.46, coordY + 0.1, m_rgb_black);
+	DrawQuadrilateral(coordX + 0.295, coordY + 0.12, coordX + 0.505, coordY + 0.12,
+		coordX + 0.3, coordY + 0.1, coordX + 0.5, coordY + 0.1, m_rgb_black);
+	DrawRectangle(coordX + 0.342, coordY + 0.054, coordX + 0.456, coordY + 0.11, m_rgb_white);
+	DrawQuadrilateral(coordX + 0.297, coordY + 0.12, coordX + 0.503, coordY + 0.12,
+		coordX + 0.302, coordY + 0.102, coordX + 0.498, coordY + 0.102, m_rgb_white);
+	//injector
+	DrawRectangle(coordX + 0.355, coordY + 0.05, coordX + 0.445, coordY + 0.11, m_rgb_black);
+	DrawRectangle(coordX + 0.357, coordY + 0.054, coordX + 0.443, coordY + 0.108, m_rgb_light_gray);
+
+	DrawCircle(coordX + 0.4, coordY + 0.13, 0.02, 40, m_rgb_black);
+	DrawRectangle(coordX + 0.38, coordY + 0.11, coordX + 0.422, coordY + 0.13, m_rgb_black);
+	DrawCircle(coordX + 0.4, coordY + 0.13, 0.018, 40, m_rgb_light_gray);
+	DrawRectangle(coordX + 0.382, coordY + 0.09, coordX + 0.42, coordY + 0.126, m_rgb_light_gray);
 }
 
 void Artist::Draw(std::chrono::steady_clock::time_point m_startTime, int width, int height) const
@@ -275,7 +299,7 @@ void Artist::Draw(std::chrono::steady_clock::time_point m_startTime, int width, 
 	DrawPiston(-0.155, 0, 0.155, 0.2, m_rgb_gray);
 	DrawCoolingFins(0, -0.4, m_rgb_gray);
 	DrawUpPart(-0.4, 0.45);
-	//DrawValve(-0.4, 0.45, m_rgb_black);
+	DrawValve(-0.4, 0.45, m_rgb_black);
 }
 /*void Artist::DrawCircumference(float cx, float cy, float r, int num_segments, float color) const {
 	glBegin(GL_LINE_LOOP);
