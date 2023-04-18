@@ -24,12 +24,12 @@ public:
 	{
 		glfwMakeContextCurrent(m_window);
 		m_artist.OnRunStart();
+		int w, h;
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		while (!glfwWindowShouldClose(m_window))
-		{
-			int w, h;
-			glEnable(GL_BLEND);
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);		
+		{					
 			glfwGetFramebufferSize(m_window, &w, &h);
 			m_artist.Draw(m_artist.m_startTime, w, h);
 			glfwSwapBuffers(m_window);

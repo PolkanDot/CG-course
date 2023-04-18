@@ -219,6 +219,17 @@ void Artist::DrawValve(float coordX, float coordY, float color) const
 		coordX + 0.546, coordY - 0.047, coordX + 0.456, coordY - 0.022, color);
 }
 
+void Artist::DrawInjector(float coordX, float coordY) const
+{
+	DrawRectangle(coordX + 0.355, coordY + 0.05, coordX + 0.445, coordY + 0.11, m_rgb_black);
+	DrawRectangle(coordX + 0.357, coordY + 0.054, coordX + 0.443, coordY + 0.108, m_rgb_light_gray);
+
+	DrawCircle(coordX + 0.4, coordY + 0.13, 0.02, 40, m_rgb_black);
+	DrawRectangle(coordX + 0.38, coordY + 0.11, coordX + 0.422, coordY + 0.13, m_rgb_black);
+	DrawCircle(coordX + 0.4, coordY + 0.13, 0.018, 40, m_rgb_light_gray);
+	DrawRectangle(coordX + 0.382, coordY + 0.09, coordX + 0.42, coordY + 0.126, m_rgb_light_gray);
+}
+
 void Artist::DrawUpPart(float coordX, float coordY) const
 {
 	DrawRectangle(coordX + 0.3, coordY - 0.05, coordX + 0.5, coordY + 0.05, m_rgb_black);
@@ -272,13 +283,7 @@ void Artist::DrawUpPart(float coordX, float coordY) const
 	DrawQuadrilateral(coordX + 0.297, coordY + 0.12, coordX + 0.503, coordY + 0.12,
 		coordX + 0.302, coordY + 0.102, coordX + 0.498, coordY + 0.102, m_rgb_white);
 	//injector
-	DrawRectangle(coordX + 0.355, coordY + 0.05, coordX + 0.445, coordY + 0.11, m_rgb_black);
-	DrawRectangle(coordX + 0.357, coordY + 0.054, coordX + 0.443, coordY + 0.108, m_rgb_light_gray);
-
-	DrawCircle(coordX + 0.4, coordY + 0.13, 0.02, 40, m_rgb_black);
-	DrawRectangle(coordX + 0.38, coordY + 0.11, coordX + 0.422, coordY + 0.13, m_rgb_black);
-	DrawCircle(coordX + 0.4, coordY + 0.13, 0.018, 40, m_rgb_light_gray);
-	DrawRectangle(coordX + 0.382, coordY + 0.09, coordX + 0.42, coordY + 0.126, m_rgb_light_gray);
+	
 }
 
 void Artist::Draw(std::chrono::steady_clock::time_point m_startTime, int width, int height) const
@@ -300,6 +305,7 @@ void Artist::Draw(std::chrono::steady_clock::time_point m_startTime, int width, 
 	DrawCoolingFins(0, -0.4, m_rgb_gray);
 	DrawUpPart(-0.4, 0.45);
 	DrawValve(-0.4, 0.45, m_rgb_black);
+	DrawInjector(-0.4, 0.45);
 }
 /*void Artist::DrawCircumference(float cx, float cy, float r, int num_segments, float color) const {
 	glBegin(GL_LINE_LOOP);

@@ -1,9 +1,10 @@
+#pragma once
 #include "glew.h"
 #include "glfw3.h"
 #include <corecrt_math_defines.h>
-#include <stdexcept>
 #include <chrono>
-
+// Вынести код рисования двигателя в отдельный класс
+// Нарисовать еще двигатель поменьше
 class Artist
 {
 public:
@@ -51,6 +52,7 @@ private:
 	void DrawCoolingFin(float x1, float y1, float x2, float y2, float color) const;
 	void DrawCoolingFins(float centerCoordX, float centerCoordY, float color) const;
 	void DrawValve(float coordX, float coordY, float color) const;
+	void DrawInjector(float coordX, float coordY) const;
 	void DrawUpPart(float coordX, float coordY) const;
 
 	const std::chrono::milliseconds ANIMATION_PERIOD = std::chrono::milliseconds{ 8000 };
