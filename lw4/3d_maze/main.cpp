@@ -89,6 +89,10 @@ private:
 	glm::dvec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 	glm::dvec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
+	float yaw = -90.0f;	// yaw is initialized to -90.0 degrees since a 
+	//yaw of 0.0 results in a direction vector pointing to the right so we initially rotate a bit to the left.
+	float pitch = 0.0f;
+
 	double deltaTime = 0.0f;	// time between current frame and last frame
 	double lastFrame = 0.0f;
 
@@ -193,6 +197,8 @@ private:
 
 	void processInput(GLFWwindow* window)
 	{
+		glm::dvec3 front;
+
 		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 			glfwSetWindowShouldClose(window, true);
 
@@ -205,6 +211,24 @@ private:
 			cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
 		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 			cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+		if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
+		{
+			yaw -= 0.05;
+			front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+			front.y = sin(glm::radians(pitch));
+			front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+			cameraFront = glm::normalize(front);
+			cameraFront = glm::normalize(front);
+		}
+		if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
+		{
+			yaw += 0.05;
+			front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+			front.y = sin(glm::radians(pitch));
+			front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+			cameraFront = glm::normalize(front);
+			cameraFront = glm::normalize(front);
+		}
 	}
 
 };
