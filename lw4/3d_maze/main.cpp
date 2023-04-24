@@ -117,7 +117,7 @@ private:
 		//glEnable(GL_DEPTH_TEST);
 
 		// Рисуем красный квадрат в плоскости XOY
-		glColor3f(0, 0, 0);
+		glColor3f(0.99215686275, 0.91764705882, 0.85490196078);
 		glRectf(-1, 0, 1, 1);
 
 		// Рисуем синий квадрат в плоскости Z=0, предварительно задав для него
@@ -169,11 +169,6 @@ private:
 		}
 		glEnd();
 
-		glTranslatef(0, 0, 0.2f);
-		glRotatef(60, 0, 1, 0);
-
-		glColor3f(0, 0, 1);
-		glRectf(-0.5, -1.0, +0.5, +0.5);
 	}
 
 	static void SetupProjectionMatrix(int width, int height)
@@ -213,7 +208,7 @@ private:
 			cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
 		if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
 		{
-			yaw -= 0.05;
+			yaw -= 0.1;
 			front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
 			front.y = sin(glm::radians(pitch));
 			front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
@@ -222,7 +217,7 @@ private:
 		}
 		if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
 		{
-			yaw += 0.05;
+			yaw += 0.1;
 			front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
 			front.y = sin(glm::radians(pitch));
 			front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
