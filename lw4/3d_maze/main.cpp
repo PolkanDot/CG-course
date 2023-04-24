@@ -86,7 +86,7 @@ public:
 private:
 
 	glm::dvec3 cameraPos = glm::vec3(0.0f, 0.0f, 0.5f);
-	glm::dvec3 cameraFront = glm::vec3(1.0f, 1.0f, 0.0f);
+	glm::dvec3 cameraFront = glm::vec3(1.0f, 0.0f, 0.0f);
 	glm::dvec3 cameraUp = glm::vec3(0.0f, 0.0f, 1.0f);
 
 	float yaw = 0.0f;	// yaw is initialized to -90.0 degrees since a 
