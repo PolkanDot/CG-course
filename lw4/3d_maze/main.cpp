@@ -30,7 +30,7 @@ public:
 		SetSideColor(CubeSide::POSITIVE_Z, 255, 255, 255);
 	}
 	// Рисуем куб
-	void Draw() const
+	void Draw(int x, int y) const
 	{
 
 		/*
@@ -52,15 +52,15 @@ public:
 		4----5
 		*/
 		// Массив координат вершин
-		static constexpr float vertices[8][3] = {
-			{ 0, 0, 0 }, // 0
-			{ 1, 0, 0 }, // 1
-			{ 1, 1, 0 }, // 2
-			{ 0, 1, 0 }, // 3
-			{ 0, 0, 1 }, // 4
-			{ 1, 0, 1 }, // 5
-			{ 1, 1, 1 }, // 6
-			{ 0, 1, 1 }, // 7
+		float vertices[8][3] = {
+			{ 0 + x, 0 + y, 0 }, // 0
+			{ 1 + x, 0 + y, 0 }, // 1
+			{ 1 + x, 1 + y, 0 }, // 2
+			{ 0 + x, 1 + y, 0 }, // 3
+			{ 0 + x, 0 + y, 1 }, // 4
+			{ 1 + x, 0 + y, 1 }, // 5
+			{ 1 + x, 1 + y, 1 }, // 6
+			{ 0 + x, 1 + y, 1 }, // 7
 		};
 
 		// Массив координат граней (в порядке, совпадающем с
@@ -210,13 +210,13 @@ public:
 
 private:
 
-	glm::dvec3 cameraPos = glm::vec3(0.0f, 0.0f, 0.5f);
-	glm::dvec3 cameraFront = glm::vec3(1.0f, 0.0f, 0.0f);
+	glm::dvec3 cameraPos = glm::vec3(22.0f, 10.0f, 0.5f);
+	glm::dvec3 cameraFront = glm::vec3(-1.0f, 0.0f, 0.0f);
 	glm::dvec3 cameraUp = glm::vec3(0.0f, 0.0f, 1.0f);
 
-	float yaw = 0.0f;	// yaw is initialized to -90.0 degrees since a 
+	float yaw = -180.0f;	// yaw is initialized to -90.0 degrees since a 
 	//yaw of 0.0 results in a direction vector pointing to the right so we initially rotate a bit to the left.
-	float pitch = 0.0f;
+	//float pitch = 0.0f;
 
 	double deltaTime = 0.0f;	// time between current frame and last frame
 	double lastFrame = 0.0f;
@@ -262,7 +262,7 @@ private:
 		glTranslatef(0, 0, -1);
 
 		//римуем стены лабиринта
-		/*const int lines = 20;
+		const int lines = 20;
 		const int columns = 20;
 
 		int maze[lines][columns] = {
@@ -288,57 +288,14 @@ private:
 			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
 		};
 
-		*/
-		m_cube.Draw();
-		// Рисуем синий квадрат в плоскости Z=0, предварительно задав для него
-		// трансформацию повоота вокруг оси Y и а затем переноса на 0.2 вдоль оси Z
-		// Порядок умножения матриц - обратный
-		float m_size = 1;
-		float m_endSize = 0.1;
-		float arrowOffset = m_size * m_endSize;
-		float arrowOffset2 = arrowOffset * 0.5f;
-
-		glBegin(GL_LINES);
-		// Ось X
-		{
-			glColor3ub(255, 0, 0);
-
-			// Рисуем ось X
-			glVertex3f(0, 0, 0);
-			glVertex3f(m_size, 0, 0);
-			// Рисуем наконечник оси X
-			glVertex3f(m_size, 0, 0);
-			glVertex3f(m_size - arrowOffset, -arrowOffset2, 0);
-			glVertex3f(m_size, 0, 0);
-			glVertex3f(m_size - arrowOffset, +arrowOffset2, 0);
-		}
-		// Ось Y
-		{
-			glColor3ub(0, 255, 0);
-
-			// Рисуем ось Y
-			glVertex3f(0, 0, 0);
-			glVertex3f(0, m_size, 0);
-			// Рисуем наконечник оси Y
-			glVertex3f(0, m_size, 0);
-			glVertex3f(-arrowOffset2, m_size - arrowOffset, 0);
-			glVertex3f(0, m_size, 0);
-			glVertex3f(+arrowOffset2, m_size - arrowOffset, 0);
-		}
-		// Ось Z
-		{
-			glColor3ub(0, 0, 255);
-			// Рисуем ось Z
-			glVertex3f(0, 0, 0);
-			glVertex3f(0, 0, m_size);
-			// Рисуем наконечник оси Z
-			glVertex3f(0, 0, m_size);
-			glVertex3f(-arrowOffset2, 0, m_size - arrowOffset);
-			glVertex3f(0, 0, m_size);
-			glVertex3f(+arrowOffset2, 0, m_size - arrowOffset);
-		}
-		glEnd();
-
+		for (int y = lines; y >= 0; y--)
+			for (int x = columns; x >= 0; x--)
+			{
+				if (maze[x][y] == 0)
+				{
+					m_cube.Draw(x, y);
+				}
+			}
 	}
 
 	static void SetupProjectionMatrix(int width, int height)
@@ -349,7 +306,7 @@ private:
 		double aspect = double(width) / double(height);
 
 		glMatrixMode(GL_PROJECTION);
-		const auto projMat = glm::perspective(60.0 * M_PI / 180.0, aspect, 0.1, 10.0);
+		const auto projMat = glm::perspective(60.0 * M_PI / 180.0, aspect, 0.1, 20.0);
 		glLoadMatrixd(&projMat[0][0]);
 	}
 
@@ -378,19 +335,21 @@ private:
 			cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
 		if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
 		{
-			yaw += 0.07;
-			front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-			front.y = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-			front.z = sin(glm::radians(pitch));
+
+			yaw += 0.12;
+			front.x = cos(glm::radians(yaw));
+			front.y = sin(glm::radians(yaw));
+			front.z = 0.0f;
 			cameraFront = glm::normalize(front);
 			cameraFront = glm::normalize(front);
 		}
 		if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
 		{
-			yaw -= 0.07;
-			front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-			front.y = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-			front.z = sin(glm::radians(pitch));
+
+			yaw -= 0.12;
+			front.x = cos(glm::radians(yaw));
+			front.y = sin(glm::radians(yaw));
+			front.z = 0.0f;
 			cameraFront = glm::normalize(front);
 			cameraFront = glm::normalize(front);
 		}
