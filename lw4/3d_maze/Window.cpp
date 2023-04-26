@@ -124,7 +124,7 @@ void Window::SetupCameraMatrix(glm::dvec3 cameraPos, glm::dvec3 cameraFront, glm
 void Window::processInput(GLFWwindow* window, int(maze)[20][20])
 {
 	glm::dvec3 front;
-	glm::dvec3 futureCameraPos;
+	glm::dvec3 futureCameraPos = cameraPos;
 
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
@@ -191,7 +191,8 @@ bool Window::movementRestriction(glm::dvec3 futureCameraPos, int(maze)[20][20])
 	if ((futureCameraPos.x < 20) && (futureCameraPos.y < 20)
 		&& (futureCameraPos.x > 0) && (futureCameraPos.y > 0))
 	{
-		if (maze[(int)futureCameraPos.x][(int)futureCameraPos.y] == 0)
+		if ((maze[(int)(futureCameraPos.x + 0.2)][(int)(futureCameraPos.y + 0.2)] == 0) || (maze[(int)(futureCameraPos.x + 0.2)][(int)(futureCameraPos.y - 0.2)] == 0)
+			|| (maze[(int)(futureCameraPos.x - 0.2)][(int)(futureCameraPos.y + 0.2)] == 0) || (maze[(int)(futureCameraPos.x - 0.2)][(int)(futureCameraPos.y - 0.2)] == 0))
 		{
 			result = true;
 		}
