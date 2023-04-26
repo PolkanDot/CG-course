@@ -106,11 +106,12 @@ void Window::processInput(GLFWwindow* window, int(maze)[20][20])
 {
 	glm::dvec3 front;
 	glm::dvec3 futureCameraPos = cameraPos;
-
+	// Закрытие окна после нажатия Esc
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
 
 	double cameraSpeed = static_cast<double>(2.5 * deltaTime);
+	// Вперед - W
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 	{
 		futureCameraPos += cameraSpeed * cameraFront;
@@ -119,6 +120,7 @@ void Window::processInput(GLFWwindow* window, int(maze)[20][20])
 			cameraPos = futureCameraPos;
 		}
 	}
+	// Назад - S
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 	{
 		futureCameraPos -= cameraSpeed * cameraFront;
@@ -127,6 +129,7 @@ void Window::processInput(GLFWwindow* window, int(maze)[20][20])
 			cameraPos = futureCameraPos;
 		}
 	}
+	// Налево - A
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
 	{
 		futureCameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
@@ -135,6 +138,7 @@ void Window::processInput(GLFWwindow* window, int(maze)[20][20])
 			cameraPos = futureCameraPos;
 		}
 	}
+	// Направо - D
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 	{
 		futureCameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
@@ -143,7 +147,7 @@ void Window::processInput(GLFWwindow* window, int(maze)[20][20])
 			cameraPos = futureCameraPos;
 		}
 	}
-		
+	// Вращение налево - F	
 	if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
 	{
 
@@ -154,6 +158,7 @@ void Window::processInput(GLFWwindow* window, int(maze)[20][20])
 		cameraFront = glm::normalize(front);
 		cameraFront = glm::normalize(front);
 	}
+	// Вращение направо - G
 	if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
 	{
 
@@ -169,6 +174,7 @@ void Window::processInput(GLFWwindow* window, int(maze)[20][20])
 bool Window::movementRestriction(glm::dvec3 futureCameraPos, int(maze)[20][20])
 {
 	bool result = false;
+	// Проверка на прохождение стен внутри лабиринта
 	if ((futureCameraPos.x < 20) && (futureCameraPos.y < 20)
 		&& (futureCameraPos.x > 0) && (futureCameraPos.y > 0))
 	{
@@ -178,7 +184,7 @@ bool Window::movementRestriction(glm::dvec3 futureCameraPos, int(maze)[20][20])
 			result = true;
 		}
 	}
-	// можно объединить условия
+	// Проверка на прохождение стен снаружи лабиринта
 	if ((futureCameraPos.x > -0.2) && (futureCameraPos.x < 0.5) && (futureCameraPos.y > 0) && (futureCameraPos.y < 20)
 		&& (maze[(int)(futureCameraPos.x + 0.3)][(int)(futureCameraPos.y)] == 0))
 	{
