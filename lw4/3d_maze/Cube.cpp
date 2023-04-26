@@ -57,12 +57,6 @@ void Cube::Draw(int x, int y) const
 	};
 	static size_t const faceCount = sizeof(faces) / sizeof(*faces);
 
-	// Сохраняем текущую матрицу моделирования-вида в стеке матриц
-	// т.к. следующей строкой она будет модифицирована при помощи glScale
-	//glPushMatrix();
-	// Задаем масштабирование вершин граней
-	//glScalef(m_size * 0.5f, m_size * 0.5f, m_size * 0.5f);
-
 	glBegin(GL_QUADS);
 	{
 		for (size_t face = 0; face < faceCount; ++face)

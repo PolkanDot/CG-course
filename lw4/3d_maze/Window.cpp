@@ -178,6 +178,27 @@ bool Window::movementRestriction(glm::dvec3 futureCameraPos, int(maze)[20][20])
 			result = true;
 		}
 	}
+	// можно объединить условия
+	if ((futureCameraPos.x > -0.2) && (futureCameraPos.x < 0.5) && (futureCameraPos.y > 0) && (futureCameraPos.y < 20)
+		&& (maze[(int)(futureCameraPos.x + 0.3)][(int)(futureCameraPos.y)] == 0))
+	{
+		result = true;
+	}
+	if ((futureCameraPos.x < 20.2) && (futureCameraPos.x > 19.5) && (futureCameraPos.y > 0) && (futureCameraPos.y < 20)
+		&& (maze[(int)(futureCameraPos.x - 0.3)][(int)(futureCameraPos.y)] == 0))
+	{
+		result = true;
+	}
+	if ((futureCameraPos.y > -0.2) && (futureCameraPos.y < 0.5) && (futureCameraPos.x > 0) && (futureCameraPos.x < 20)
+		&& (maze[(int)(futureCameraPos.x)][(int)(futureCameraPos.y + 0.3)] == 0))
+	{
+		result = true;
+	}
+	if ((futureCameraPos.y < 20.2) && (futureCameraPos.y > 19.5) && (futureCameraPos.x > 0) && (futureCameraPos.x < 20)
+		&& (maze[(int)(futureCameraPos.x)][(int)(futureCameraPos.y - 0.3)] == 0))
+	{
+		result = true;
+	}
 	return result;
 }
 
