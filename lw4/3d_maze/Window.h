@@ -50,7 +50,10 @@ private:
 	void SetupCameraMatrix(glm::dvec3 cameraPos, glm::dvec3 cameraFront, glm::dvec3 cameraUp);
 
 	void processInput(GLFWwindow* window, int(maze)[20][20]);
+
 	bool movementRestriction(glm::dvec3 futureCameraPos, int(maze)[20][20]);
+
+	void readMazeFromFile(int(&maze)[20][20]);
 
 	static GLFWwindow* MakeWindow(int w, int h, const char* title);
 
