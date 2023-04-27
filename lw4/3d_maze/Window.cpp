@@ -1,5 +1,8 @@
 #include "Window.h"
-
+// Названия функций в одном стиле
+// Лабиринт в отдельный класс (считывание лабиринта каждый кадр)
+// Отдельные объекты на камеру 
+// Один стиль именования переменных
 GLFWwindow* Window::MakeWindow(int w, int h, const char* title)
 {
 	glfwWindowHint(GLFW_DEPTH_BITS, 24);
@@ -149,7 +152,7 @@ void Window::processInput(GLFWwindow* window, int(maze)[mazeSize][mazeSize])
 	if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
 	{
 
-		yaw += 0.3;
+		yaw += 0.4;
 		front.x = cos(glm::radians(yaw));
 		front.y = sin(glm::radians(yaw));
 		front.z = 0.0f;
@@ -160,7 +163,7 @@ void Window::processInput(GLFWwindow* window, int(maze)[mazeSize][mazeSize])
 	if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
 	{
 
-		yaw -= 0.3;
+		yaw -= 0.4;
 		front.x = cos(glm::radians(yaw));
 		front.y = sin(glm::radians(yaw));
 		front.z = 0.0f;
