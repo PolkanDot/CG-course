@@ -45,12 +45,10 @@ void Window::Draw(GLFWwindow* window, Cube m_cube, int width, int height)
 	double currentFrame = static_cast<double>(glfwGetTime());
 	deltaTime = currentFrame - lastFrame;
 	lastFrame = currentFrame;
-
+	//Читаем заданный массив их файла
 	const int lines = 20;
 	const int columns = 20;
-
 	int maze[lines][columns];
-
 	readMazeFromFile(maze);
 
 	processInput(window, maze);
@@ -60,12 +58,12 @@ void Window::Draw(GLFWwindow* window, Cube m_cube, int width, int height)
 	SetupProjectionMatrix(width, height);
 	SetupCameraMatrix(cameraPos, cameraFront, cameraUp);
 
-	// Рисуем верхний и нижний квадраты
+	// Рисуем верхний квадрат
 	glColor3f(0.99215686275, 0.91764705882, 0.85490196078);
 	glRectf(0, 0, 20, 20);
 
 	glTranslatef(0, 0, 1);
-
+	// Рисуем нижний квадрат
 	glColor3f(0.71764705882, 0.87058823529, 0.90980392157);
 	glRectf(0, 0, 20, 20);
 
@@ -101,7 +99,7 @@ void Window::SetupCameraMatrix(glm::dvec3 cameraPos, glm::dvec3 cameraFront, glm
 	const auto view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 	glLoadMatrixd(&view[0][0]);
 }
-
+// Определение обработки входящих "указаний"
 void Window::processInput(GLFWwindow* window, int(maze)[20][20])
 {
 	glm::dvec3 front;
