@@ -14,7 +14,7 @@ enum class CubeSide
 class Cube
 {
 public:
-	// Создаем куб с заданной длиной стороны
+	// Создаем куб
 	Cube();
 	// Рисуем куб
 	void Draw(int x, int y) const;

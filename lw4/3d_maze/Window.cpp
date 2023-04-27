@@ -46,8 +46,8 @@ void Window::Draw(GLFWwindow* window, Cube m_cube, int width, int height)
 	deltaTime = currentFrame - lastFrame;
 	lastFrame = currentFrame;
 	//Читаем заданный массив их файла
-	const int lines = 20;
-	const int columns = 20;
+	const int lines = mazeSize;
+	const int columns = mazeSize;
 	int maze[lines][columns];
 	readMazeFromFile(maze);
 
@@ -60,12 +60,12 @@ void Window::Draw(GLFWwindow* window, Cube m_cube, int width, int height)
 
 	// Рисуем верхний квадрат
 	glColor3f(0.99215686275, 0.91764705882, 0.85490196078);
-	glRectf(0, 0, 20, 20);
+	glRectf(0, 0, mazeSize, mazeSize);
 
 	glTranslatef(0, 0, 1);
 	// Рисуем нижний квадрат
 	glColor3f(0.71764705882, 0.87058823529, 0.90980392157);
-	glRectf(0, 0, 20, 20);
+	glRectf(0, 0, mazeSize, mazeSize);
 
 	glTranslatef(0, 0, -1);
 
@@ -100,7 +100,7 @@ void Window::SetupCameraMatrix(glm::dvec3 cameraPos, glm::dvec3 cameraFront, glm
 	glLoadMatrixd(&view[0][0]);
 }
 // Определение обработки входящих "указаний"
-void Window::processInput(GLFWwindow* window, int(maze)[20][20])
+void Window::processInput(GLFWwindow* window, int(maze)[mazeSize][mazeSize])
 {
 	glm::dvec3 front;
 	glm::dvec3 futureCameraPos = cameraPos;
@@ -149,7 +149,7 @@ void Window::processInput(GLFWwindow* window, int(maze)[20][20])
 	if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
 	{
 
-		yaw += 0.2;
+		yaw += 0.3;
 		front.x = cos(glm::radians(yaw));
 		front.y = sin(glm::radians(yaw));
 		front.z = 0.0f;
@@ -160,7 +160,7 @@ void Window::processInput(GLFWwindow* window, int(maze)[20][20])
 	if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
 	{
 
-		yaw -= 0.2;
+		yaw -= 0.3;
 		front.x = cos(glm::radians(yaw));
 		front.y = sin(glm::radians(yaw));
 		front.z = 0.0f;
@@ -169,11 +169,11 @@ void Window::processInput(GLFWwindow* window, int(maze)[20][20])
 	}
 }
 
-bool Window::movementRestriction(glm::dvec3 futureCameraPos, int(maze)[20][20])
+bool Window::movementRestriction(glm::dvec3 futureCameraPos, int(maze)[mazeSize][mazeSize])
 {
 	bool result = false;
 	// Проверка на прохождение стен внутри лабиринта
-	if ((futureCameraPos.x < 20) && (futureCameraPos.y < 20)
+	if ((futureCameraPos.x < mazeSize) && (futureCameraPos.y < mazeSize)
 		&& (futureCameraPos.x > 0) && (futureCameraPos.y > 0))
 	{
 		if ((maze[(int)(futureCameraPos.x + 0.2)][(int)(futureCameraPos.y + 0.2)] == 0) || (maze[(int)(futureCameraPos.x + 0.2)][(int)(futureCameraPos.y - 0.2)] == 0)
@@ -183,22 +183,22 @@ bool Window::movementRestriction(glm::dvec3 futureCameraPos, int(maze)[20][20])
 		}
 	}
 	// Проверка на прохождение стен снаружи лабиринта
-	if ((futureCameraPos.x > -0.2) && (futureCameraPos.x < 0.5) && (futureCameraPos.y > 0) && (futureCameraPos.y < 20)
+	if ((futureCameraPos.x > -0.2) && (futureCameraPos.x < 0.5) && (futureCameraPos.y > 0) && (futureCameraPos.y < mazeSize)
 		&& (maze[(int)(futureCameraPos.x + 0.3)][(int)(futureCameraPos.y)] == 0))
 	{
 		result = true;
 	}
-	if ((futureCameraPos.x < 20.2) && (futureCameraPos.x > 19.5) && (futureCameraPos.y > 0) && (futureCameraPos.y < 20)
+	if ((futureCameraPos.x < mazeSize + 0.2) && (futureCameraPos.x > mazeSize - 0.5) && (futureCameraPos.y > 0) && (futureCameraPos.y < mazeSize)
 		&& (maze[(int)(futureCameraPos.x - 0.3)][(int)(futureCameraPos.y)] == 0))
 	{
 		result = true;
 	}
-	if ((futureCameraPos.y > -0.2) && (futureCameraPos.y < 0.5) && (futureCameraPos.x > 0) && (futureCameraPos.x < 20)
+	if ((futureCameraPos.y > -0.2) && (futureCameraPos.y < 0.5) && (futureCameraPos.x > 0) && (futureCameraPos.x < mazeSize)
 		&& (maze[(int)(futureCameraPos.x)][(int)(futureCameraPos.y + 0.3)] == 0))
 	{
 		result = true;
 	}
-	if ((futureCameraPos.y < 20.2) && (futureCameraPos.y > 19.5) && (futureCameraPos.x > 0) && (futureCameraPos.x < 20)
+	if ((futureCameraPos.y < mazeSize + 0.2) && (futureCameraPos.y > mazeSize - 0.5) && (futureCameraPos.x > 0) && (futureCameraPos.x < mazeSize)
 		&& (maze[(int)(futureCameraPos.x)][(int)(futureCameraPos.y - 0.3)] == 0))
 	{
 		result = true;
@@ -206,14 +206,14 @@ bool Window::movementRestriction(glm::dvec3 futureCameraPos, int(maze)[20][20])
 	return result;
 }
 
-void Window::readMazeFromFile(int(&maze)[20][20])
+void Window::readMazeFromFile(int(&maze)[mazeSize][mazeSize])
 {
 	std::ifstream input("maze.txt");
 	if (input.is_open())
 	{
 		int x, y;
-		for (x = 0; x < 20; x++)
-			for (y = 0; y < 20; y++)
+		for (x = 0; x < mazeSize; x++)
+			for (y = 0; y < mazeSize; y++)
 			{
 				input >> maze[x][y];
 			}

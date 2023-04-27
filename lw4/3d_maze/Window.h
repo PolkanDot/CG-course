@@ -41,6 +41,8 @@ private:
 	double deltaTime = 0.0f;
 	double lastFrame = 0.0f;
 
+	const static int mazeSize = 20;
+
 	void OnRunStart();
 
 	void Draw(GLFWwindow* window, Cube m_cube, int width, int height);
@@ -49,11 +51,11 @@ private:
 
 	void SetupCameraMatrix(glm::dvec3 cameraPos, glm::dvec3 cameraFront, glm::dvec3 cameraUp);
 
-	void processInput(GLFWwindow* window, int(maze)[20][20]);
+	void processInput(GLFWwindow* window, int(maze)[mazeSize][mazeSize]);
 
-	bool movementRestriction(glm::dvec3 futureCameraPos, int(maze)[20][20]);
+	bool movementRestriction(glm::dvec3 futureCameraPos, int(maze)[mazeSize][mazeSize]);
 
-	void readMazeFromFile(int(&maze)[20][20]);
+	void readMazeFromFile(int(&maze)[mazeSize][mazeSize]);
 
 	static GLFWwindow* MakeWindow(int w, int h, const char* title);
 
