@@ -1,4 +1,6 @@
 #include "Window.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include "Includes/stb_image.h"
 // Названия функций в одном стиле
 // Лабиринт в отдельный класс (считывание лабиринта каждый кадр)
 // Отдельные объекты на камеру 
@@ -21,6 +23,7 @@ void Window::Run()
 		int w, h;
 		glfwGetFramebufferSize(m_window, &w, &h);
 		Draw(m_window, m_cube, w, h);
+		glFlush();
 		glFinish();
 		glfwSwapBuffers(m_window);
 		glfwPollEvents();
@@ -38,16 +41,8 @@ void Window::OnRunStart()
 	//glFrontFace(GL_CCW);
 	unsigned int texture;
 
-	int width, height;
-	width = 2;
-	height = 2;
-	struct { unsigned char r, g, b, a; } data[2][2];
-	memset(data, 0, sizeof(data));
-	data[0][0].r = 255;
-	data[1][0].g = 255;
-	data[1][1].b = 255;
-	data[0][1].r = 255;
-	data[0][1].g = 255;
+	int width, height, cnt;
+	unsigned char* data = stbi_load("01.png", &width, &height, &cnt, 0);
 
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
@@ -61,6 +56,7 @@ void Window::OnRunStart()
 
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, texture);
+	stbi_image_free(data);
 	glColor3f(1, 1, 1);
 	
 
@@ -72,11 +68,11 @@ void Window::OnRunStart()
 
 void Window::Draw(GLFWwindow* window, Cube m_cube, int width, int height)
 {
-	glColor3f(1, 1, 1);
+	//glColor3f(1, 1, 1);
 	float vertex[] = { -1,-1,0, 1,-1,0, 1,1,0, -1,1,0 };
 	float texCoord[] = { 0,0, 1,0, 1,1, 0,1 };
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	/*glPushMatrix();
+	glPushMatrix();
 		glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
@@ -86,20 +82,6 @@ void Window::Draw(GLFWwindow* window, Cube m_cube, int width, int height)
 
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-	glPopMatrix();*/
-	glPushMatrix();
-	glBegin(GL_QUADS);
-	{
-		glTexCoord2f(0, 0);
-		glVertex3f(-1, -1, 0);
-		glTexCoord2f(1, 0);
-		glVertex3f(1, -1, 0);
-		glTexCoord2f(1, 1);
-		glVertex3f(1, 1, 0);
-		glTexCoord2f(0, 1);
-		glVertex3f(-1, 1, 0);
-	}
-	glEnd;
 	glPopMatrix();
 }
 
