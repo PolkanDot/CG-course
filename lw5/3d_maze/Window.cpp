@@ -76,8 +76,8 @@ void Window::Draw(GLFWwindow* window, Cube m_cube, int width, int height)
 	float vertex[] = { -1,-1,0, 1,-1,0, 1,1,0, -1,1,0 };
 	float texCoord[] = { 0,0, 1,0, 1,1, 0,1 };
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glPushMatrix();
-	glEnableClientState(GL_VERTEX_ARRAY);
+	/*glPushMatrix();
+		glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	glVertexPointer(3, GL_FLOAT, 0, vertex);
@@ -86,6 +86,20 @@ void Window::Draw(GLFWwindow* window, Cube m_cube, int width, int height)
 
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	glPopMatrix();*/
+	glPushMatrix();
+	glBegin(GL_QUADS);
+	{
+		glTexCoord2f(0, 0);
+		glVertex3f(-1, -1, 0);
+		glTexCoord2f(1, 0);
+		glVertex3f(1, -1, 0);
+		glTexCoord2f(1, 1);
+		glVertex3f(1, 1, 0);
+		glTexCoord2f(0, 1);
+		glVertex3f(-1, 1, 0);
+	}
+	glEnd;
 	glPopMatrix();
 }
 
