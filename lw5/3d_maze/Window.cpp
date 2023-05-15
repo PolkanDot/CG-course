@@ -23,7 +23,6 @@ void Window::Run()
 		int w, h;
 		glfwGetFramebufferSize(m_window, &w, &h);
 		Draw(m_window, m_cube, w, h);
-		glFlush();
 		glFinish();
 		glfwSwapBuffers(m_window);
 		glfwPollEvents();
@@ -39,6 +38,7 @@ void Window::OnRunStart()
 	// Сторона примитива считается лицевой, если при ее рисовании
 	// обход верших осуществляется против часовой стрелки
 	//glFrontFace(GL_CCW);
+
 	unsigned int texture;
 
 	int width, height, cnt;
@@ -58,7 +58,6 @@ void Window::OnRunStart()
 	glBindTexture(GL_TEXTURE_2D, texture);
 	stbi_image_free(data);
 	glColor3f(1, 1, 1);
-	
 
 	// Включаем тест глубины для удаления невидимых линий и поверхностей
 	glEnable(GL_DEPTH_TEST);
@@ -68,21 +67,63 @@ void Window::OnRunStart()
 
 void Window::Draw(GLFWwindow* window, Cube m_cube, int width, int height)
 {
-	//glColor3f(1, 1, 1);
-	float vertex[] = { -1,-1,0, 1,-1,0, 1,1,0, -1,1,0 };
-	float texCoord[] = { 0,0, 1,0, 1,1, 0,1 };
+	double currentFrame = static_cast<double>(glfwGetTime());
+	deltaTime = currentFrame - lastFrame;
+	lastFrame = currentFrame;
+	//Читаем заданный массив их файла
+	const int lines = mazeSize;
+	const int columns = mazeSize;
+	int maze[lines][columns];
+	readMazeFromFile(maze);
+
+	processInput(window, maze);
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glPushMatrix();
-		glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-	glVertexPointer(3, GL_FLOAT, 0, vertex);
-	glTexCoordPointer(2, GL_FLOAT, 0, texCoord);
-	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+	SetupProjectionMatrix(width, height);
+	SetupCameraMatrix(cameraPos, cameraFront, cameraUp);
 
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-	glPopMatrix();
+	glBegin(GL_QUADS);
+	{
+		glTexCoord2f(0, 0);
+		glVertex3f(-1, -1, 0);
+		glTexCoord2f(1, 0);
+		glVertex3f(mazeSize, -1, 0);
+		glTexCoord2f(1, 1);
+		glVertex3f(mazeSize, mazeSize, 0);
+		glTexCoord2f(0, 1);
+		glVertex3f(-1, mazeSize, 0);
+	}
+	glEnd();
+	
+
+	glTranslatef(0, 0, 1);
+	
+	glBegin(GL_QUADS);
+	{
+		glTexCoord2f(0, 0);
+		glVertex3f(-1, -1, 0);
+		glTexCoord2f(1, 0);
+		glVertex3f(mazeSize, -1, 0);
+		glTexCoord2f(1, 1);
+		glVertex3f(mazeSize, mazeSize, 0);
+		glTexCoord2f(0, 1);
+		glVertex3f(-1, mazeSize, 0);
+	}
+	glEnd();
+
+	glTranslatef(0, 0, -1);
+
+	//римуем стены лабиринта
+
+	for (int y = lines - 1; y >= 0; y--)
+		for (int x = columns - 1; x >= 0; x--)
+		{
+			if (maze[x][y] == 0)
+			{
+				m_cube.Draw(x, y);
+			}
+		}
 }
 
 void Window::SetupProjectionMatrix(int width, int height)

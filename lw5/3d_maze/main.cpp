@@ -1,5 +1,5 @@
-﻿//#include "Includes.h"
-//#include "Cube.h"
+﻿#include "Includes.h"
+#include "Cube.h"
 #include "GLFWInitializer.h"
 #include "Window.h"
 
