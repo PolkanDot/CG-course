@@ -1,6 +1,8 @@
 #pragma once
 
 #define _USE_MATH_DEFINES
+#define STB_IMAGE_IMPLEMENTATION
+
 #include "glfw3.h"
 #include <chrono>
 #include <cmath>

@@ -1,5 +1,4 @@
 #include "Window.h"
-#define STB_IMAGE_IMPLEMENTATION
 #include "Includes/stb_image.h"
 // Названия функций в одном стиле
 // Лабиринт в отдельный класс (считывание лабиринта каждый кадр)
@@ -42,12 +41,12 @@ void Window::OnRunStart()
 	unsigned int texture;
 
 	int width, height, cnt;
-	unsigned char* data = stbi_load("01.png", &width, &height, &cnt, 0);
+	unsigned char* data = stbi_load("2.png", &width, &height, &cnt, 0);
 
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height,
@@ -57,7 +56,7 @@ void Window::OnRunStart()
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, texture);
 	stbi_image_free(data);
-	glColor3f(1, 1, 1);
+	
 
 	// Включаем тест глубины для удаления невидимых линий и поверхностей
 	glEnable(GL_DEPTH_TEST);
@@ -79,6 +78,7 @@ void Window::Draw(GLFWwindow* window, Cube m_cube, int width, int height)
 	processInput(window, maze);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glColor3f(1, 1, 1);
 
 	SetupProjectionMatrix(width, height);
 	SetupCameraMatrix(cameraPos, cameraFront, cameraUp);
@@ -86,13 +86,13 @@ void Window::Draw(GLFWwindow* window, Cube m_cube, int width, int height)
 	glBegin(GL_QUADS);
 	{
 		glTexCoord2f(0, 0);
-		glVertex3f(-1, -1, 0);
-		glTexCoord2f(1, 0);
-		glVertex3f(mazeSize, -1, 0);
-		glTexCoord2f(1, 1);
+		glVertex3f(0, 0, 0);
+		glTexCoord2f(20, 0);
+		glVertex3f(mazeSize, 0, 0);
+		glTexCoord2f(20, 20);
 		glVertex3f(mazeSize, mazeSize, 0);
-		glTexCoord2f(0, 1);
-		glVertex3f(-1, mazeSize, 0);
+		glTexCoord2f(0, 20);
+		glVertex3f(0, mazeSize, 0);
 	}
 	glEnd();
 	

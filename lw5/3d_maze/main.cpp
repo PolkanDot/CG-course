@@ -1,6 +1,4 @@
-﻿#include "Includes.h"
-#include "Cube.h"
-#include "GLFWInitializer.h"
+﻿#include "GLFWInitializer.h"
 #include "Window.h"
 
 int main()

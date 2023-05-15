@@ -1,5 +1,4 @@
 #pragma once
-#include "Includes.h"
 #include "Cube.h"
 
 class Window
