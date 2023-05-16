@@ -58,9 +58,9 @@ void Camera::ProcessInput(GLFWwindow* window, int(maze)[m_mazeSize][m_mazeSize])
 	if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
 	{
 
-		yaw += 0.4;
-		front.x = cos(glm::radians(yaw));
-		front.y = sin(glm::radians(yaw));
+		m_yaw += 0.4;
+		front.x = cos(glm::radians(m_yaw));
+		front.y = sin(glm::radians(m_yaw));
 		front.z = 0.0f;
 		m_cameraFront = glm::normalize(front);
 		m_cameraFront = glm::normalize(front);
@@ -69,9 +69,9 @@ void Camera::ProcessInput(GLFWwindow* window, int(maze)[m_mazeSize][m_mazeSize])
 	if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
 	{
 
-		yaw -= 0.4;
-		front.x = cos(glm::radians(yaw));
-		front.y = sin(glm::radians(yaw));
+		m_yaw -= 0.4;
+		front.x = cos(glm::radians(m_yaw));
+		front.y = sin(glm::radians(m_yaw));
 		front.z = 0.0f;
 		m_cameraFront = glm::normalize(front);
 		m_cameraFront = glm::normalize(front);

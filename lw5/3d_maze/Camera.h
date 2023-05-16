@@ -23,7 +23,7 @@ public:
 	void ProcessInput(GLFWwindow* window, int(maze)[m_mazeSize][m_mazeSize]);
 
 private:
-	float yaw = -180.0f;
+	float m_yaw = -180.0f;
 	
 
 	

@@ -36,12 +36,12 @@ void Window::Run()
 void Window::OnRunStart()
 {
 	// Включаем режим отбраковки граней
-	//glEnable(GL_CULL_FACE);
+	glEnable(GL_CULL_FACE);
 	// Отбраковываться будут нелицевые стороны граней
-	//glCullFace(GL_BACK);
+	glCullFace(GL_BACK);
 	// Сторона примитива считается лицевой, если при ее рисовании
 	// обход верших осуществляется против часовой стрелки
-	//glFrontFace(GL_CCW);
+	glFrontFace(GL_CCW);
 
 	unsigned int texture;
 
@@ -107,13 +107,13 @@ void Window::Draw(GLFWwindow* window, Cube m_cube, int width, int height)
 	glBegin(GL_QUADS);
 	{
 		glTexCoord2f(0, 0);
-		glVertex3f(-1, -1, 0);
+		glVertex3f(0, 0, 0);
 		glTexCoord2f(1, 0);
-		glVertex3f(mazeSize, -1, 0);
+		glVertex3f(0, mazeSize, 0);
 		glTexCoord2f(1, 1);
 		glVertex3f(mazeSize, mazeSize, 0);
 		glTexCoord2f(0, 1);
-		glVertex3f(-1, mazeSize, 0);
+		glVertex3f(mazeSize, 0, 0);
 	}
 	glEnd();
 
@@ -121,14 +121,14 @@ void Window::Draw(GLFWwindow* window, Cube m_cube, int width, int height)
 
 	//римуем стены лабиринта
 
-	for (int y = lines - 1; y >= 0; y--)
+	/*for (int y = lines - 1; y >= 0; y--)
 		for (int x = columns - 1; x >= 0; x--)
 		{
 			if (maze[x][y] == 0)
 			{
 				m_cube.Draw(x, y);
 			}
-		}
+		}*/
 }
 
 void Window::SetupProjectionMatrix(int width, int height)
