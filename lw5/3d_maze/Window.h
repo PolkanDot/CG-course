@@ -1,9 +1,12 @@
 #pragma once
 #include <stdexcept>
-#include "Cube.h"
-#include "Camera.h"
+#include "Constants.h"
 #include "Includes/glm/ext/matrix_clip_space.hpp"
 #include "Includes/glm/ext/matrix_transform.hpp"
+#include "Cube.h"
+#include "Camera.h"
+#include "Maze.h"
+
 class Window
 {
 public:
@@ -35,22 +38,19 @@ public:
 	void Run();
 
 private:
-	
-	const static int mazeSize = 20;
 
 	void OnRunStart();
 
-	void Draw(GLFWwindow* window, Cube m_cube, int width, int height);
+	void Draw(int width, int height);
 
 	static void SetupProjectionMatrix(int width, int height);
 
 	void SetupCameraMatrix(glm::dvec3 cameraPos, glm::dvec3 cameraFront, glm::dvec3 cameraUp);
-
-	void ReadMazeFromFile(int(&maze)[mazeSize][mazeSize]);
 
 	static GLFWwindow* MakeWindow(int w, int h, const char* title);
 
 	GLFWwindow* m_window;
 	Cube m_cube;
 	Camera m_camera;
+	Maze m_maze;
 };

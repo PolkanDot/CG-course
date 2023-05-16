@@ -9,7 +9,7 @@ Camera::Camera(float positionX, float positionY, float positionZ,
 	m_cameraUp = glm::vec3(upX, upY, upZ);
 }
 // Определение обработки входящих "указаний"
-void Camera::ProcessInput(GLFWwindow* window, int(maze)[m_mazeSize][m_mazeSize])
+void Camera::ProcessInput(GLFWwindow* window, int(maze)[mazeSize][mazeSize])
 {
 	glm::dvec3 front;
 	glm::dvec3 futureCameraPos = m_cameraPos;
@@ -58,7 +58,7 @@ void Camera::ProcessInput(GLFWwindow* window, int(maze)[m_mazeSize][m_mazeSize])
 	if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
 	{
 
-		m_yaw += 0.4;
+		m_yaw += 0.3;
 		front.x = cos(glm::radians(m_yaw));
 		front.y = sin(glm::radians(m_yaw));
 		front.z = 0.0f;
@@ -69,7 +69,7 @@ void Camera::ProcessInput(GLFWwindow* window, int(maze)[m_mazeSize][m_mazeSize])
 	if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
 	{
 
-		m_yaw -= 0.4;
+		m_yaw -= 0.3;
 		front.x = cos(glm::radians(m_yaw));
 		front.y = sin(glm::radians(m_yaw));
 		front.z = 0.0f;
@@ -80,11 +80,11 @@ void Camera::ProcessInput(GLFWwindow* window, int(maze)[m_mazeSize][m_mazeSize])
 
 }
 
-bool Camera::MovementRestriction(glm::dvec3 futureCameraPos, int(maze)[m_mazeSize][m_mazeSize])
+bool Camera::MovementRestriction(glm::dvec3 futureCameraPos, int(maze)[mazeSize][mazeSize])
 {
 	bool result = false;
 	// Проверка на прохождение стен внутри лабиринта
-	if ((futureCameraPos.x < m_mazeSize) && (futureCameraPos.y < m_mazeSize)
+	if ((futureCameraPos.x < mazeSize) && (futureCameraPos.y < mazeSize)
 		&& (futureCameraPos.x > 0) && (futureCameraPos.y > 0))
 	{
 		if ((maze[(int)(futureCameraPos.x + 0.2)][(int)(futureCameraPos.y + 0.2)] == 0) || (maze[(int)(futureCameraPos.x + 0.2)][(int)(futureCameraPos.y - 0.2)] == 0)
@@ -94,22 +94,22 @@ bool Camera::MovementRestriction(glm::dvec3 futureCameraPos, int(maze)[m_mazeSiz
 		}
 	}
 	// Проверка на прохождение стен снаружи лабиринта
-	if ((futureCameraPos.x > -0.2) && (futureCameraPos.x < 0.5) && (futureCameraPos.y > 0) && (futureCameraPos.y < m_mazeSize)
+	if ((futureCameraPos.x > -0.2) && (futureCameraPos.x < 0.5) && (futureCameraPos.y > 0) && (futureCameraPos.y < mazeSize)
 		&& (maze[(int)(futureCameraPos.x + 0.3)][(int)(futureCameraPos.y)] == 0))
 	{
 		result = true;
 	}
-	if ((futureCameraPos.x < m_mazeSize + 0.2) && (futureCameraPos.x > m_mazeSize - 0.5) && (futureCameraPos.y > 0) && (futureCameraPos.y < m_mazeSize)
+	if ((futureCameraPos.x < mazeSize + 0.2) && (futureCameraPos.x > mazeSize - 0.5) && (futureCameraPos.y > 0) && (futureCameraPos.y < mazeSize)
 		&& (maze[(int)(futureCameraPos.x - 0.3)][(int)(futureCameraPos.y)] == 0))
 	{
 		result = true;
 	}
-	if ((futureCameraPos.y > -0.2) && (futureCameraPos.y < 0.5) && (futureCameraPos.x > 0) && (futureCameraPos.x < m_mazeSize)
+	if ((futureCameraPos.y > -0.2) && (futureCameraPos.y < 0.5) && (futureCameraPos.x > 0) && (futureCameraPos.x < mazeSize)
 		&& (maze[(int)(futureCameraPos.x)][(int)(futureCameraPos.y + 0.3)] == 0))
 	{
 		result = true;
 	}
-	if ((futureCameraPos.y < m_mazeSize + 0.2) && (futureCameraPos.y > m_mazeSize - 0.5) && (futureCameraPos.x > 0) && (futureCameraPos.x < m_mazeSize)
+	if ((futureCameraPos.y < mazeSize + 0.2) && (futureCameraPos.y > mazeSize - 0.5) && (futureCameraPos.x > 0) && (futureCameraPos.x < mazeSize)
 		&& (maze[(int)(futureCameraPos.x)][(int)(futureCameraPos.y - 0.3)] == 0))
 	{
 		result = true;

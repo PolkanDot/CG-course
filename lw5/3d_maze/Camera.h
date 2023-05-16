@@ -2,6 +2,7 @@
 #include "glfw3.h"
 #include "Includes/glm/ext/matrix_clip_space.hpp"
 #include "Includes/glm/ext/matrix_transform.hpp"
+#include "Constants.h"
 class Camera
 {
 public:
@@ -11,8 +12,6 @@ public:
 	Camera(const Camera&) = delete;
 	Camera& operator=(const Camera&) = delete;
 
-	const static int m_mazeSize = 20;
-
 	double m_deltaTime = 0.0f;
 	double m_lastFrame = 0.0f;
 
@@ -20,12 +19,12 @@ public:
 	glm::dvec3 m_cameraFront;
 	glm::dvec3 m_cameraUp;
 
-	void ProcessInput(GLFWwindow* window, int(maze)[m_mazeSize][m_mazeSize]);
+	void ProcessInput(GLFWwindow* window, int(maze)[mazeSize][mazeSize]);
 
 private:
 	float m_yaw = -180.0f;
 	
 
 	
-	bool MovementRestriction(glm::dvec3 futureCameraPos, int(maze)[m_mazeSize][m_mazeSize]);
+	bool MovementRestriction(glm::dvec3 futureCameraPos, int(maze)[mazeSize][mazeSize]);
 };
