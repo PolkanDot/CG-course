@@ -4,54 +4,54 @@ Camera::Camera(float positionX, float positionY, float positionZ,
 	float frontX, float frontY, float frontZ,
 	float upX, float upY, float upZ)
 {
-	cameraPos = glm::vec3(positionX, positionY, positionZ);
-	cameraFront = glm::vec3(frontX, frontY, frontZ);
-	cameraUp = glm::vec3(upX, upY, upZ);
+	mCameraPos = glm::vec3(positionX, positionY, positionZ);
+	mCameraFront = glm::vec3(frontX, frontY, frontZ);
+	mCameraUp = glm::vec3(upX, upY, upZ);
 }
 // Определение обработки входящих "указаний"
 void Camera::ProcessInput(GLFWwindow* window, int(maze)[mMazeSize][mMazeSize])
 {
 	glm::dvec3 front;
-	glm::dvec3 futureCameraPos = cameraPos;
+	glm::dvec3 futureCameraPos = mCameraPos;
 	// Закрытие окна после нажатия Esc
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
 
-	double cameraSpeed = static_cast<double>(2.5 * deltaTime);
+	double cameraSpeed = static_cast<double>(2.5 * mDeltaTime);
 	// Вперед - W
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 	{
-		futureCameraPos += cameraSpeed * cameraFront;
+		futureCameraPos += cameraSpeed * mCameraFront;
 		if (!MovementRestriction(futureCameraPos, maze))
 		{
-			cameraPos = futureCameraPos;
+			mCameraPos = futureCameraPos;
 		}
 	}
 	// Назад - S
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 	{
-		futureCameraPos -= cameraSpeed * cameraFront;
+		futureCameraPos -= cameraSpeed * mCameraFront;
 		if (!MovementRestriction(futureCameraPos, maze))
 		{
-			cameraPos = futureCameraPos;
+			mCameraPos = futureCameraPos;
 		}
 	}
 	// Налево - A
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
 	{
-		futureCameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+		futureCameraPos -= glm::normalize(glm::cross(mCameraFront, mCameraUp)) * cameraSpeed;
 		if (!MovementRestriction(futureCameraPos, maze))
 		{
-			cameraPos = futureCameraPos;
+			mCameraPos = futureCameraPos;
 		}
 	}
 	// Направо - D
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 	{
-		futureCameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+		futureCameraPos += glm::normalize(glm::cross(mCameraFront, mCameraUp)) * cameraSpeed;
 		if (!MovementRestriction(futureCameraPos, maze))
 		{
-			cameraPos = futureCameraPos;
+			mCameraPos = futureCameraPos;
 		}
 	}
 	// Вращение налево - F	
@@ -62,8 +62,8 @@ void Camera::ProcessInput(GLFWwindow* window, int(maze)[mMazeSize][mMazeSize])
 		front.x = cos(glm::radians(yaw));
 		front.y = sin(glm::radians(yaw));
 		front.z = 0.0f;
-		cameraFront = glm::normalize(front);
-		cameraFront = glm::normalize(front);
+		mCameraFront = glm::normalize(front);
+		mCameraFront = glm::normalize(front);
 	}
 	// Вращение направо - G
 	if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
@@ -73,8 +73,8 @@ void Camera::ProcessInput(GLFWwindow* window, int(maze)[mMazeSize][mMazeSize])
 		front.x = cos(glm::radians(yaw));
 		front.y = sin(glm::radians(yaw));
 		front.z = 0.0f;
-		cameraFront = glm::normalize(front);
-		cameraFront = glm::normalize(front);
+		mCameraFront = glm::normalize(front);
+		mCameraFront = glm::normalize(front);
 	}
 
 

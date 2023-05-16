@@ -13,12 +13,12 @@ public:
 
 	const static int mMazeSize = 20;
 
-	double deltaTime = 0.0f;
-	double lastFrame = 0.0f;
+	double mDeltaTime = 0.0f;
+	double mLastFrame = 0.0f;
 
-	glm::dvec3 cameraPos;
-	glm::dvec3 cameraFront;
-	glm::dvec3 cameraUp;
+	glm::dvec3 mCameraPos;
+	glm::dvec3 mCameraFront;
+	glm::dvec3 mCameraUp;
 
 	void ProcessInput(GLFWwindow* window, int(maze)[mMazeSize][mMazeSize]);
 

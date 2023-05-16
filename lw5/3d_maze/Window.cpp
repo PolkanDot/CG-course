@@ -8,7 +8,6 @@
 #include <cmath>
 // Названия функций в одном стиле
 // Лабиринт в отдельный класс (считывание лабиринта каждый кадр)
-// Отдельные объекты на камеру 
 // Один стиль именования переменных
 GLFWwindow* Window::MakeWindow(int w, int h, const char* title)
 {
@@ -73,8 +72,8 @@ void Window::OnRunStart()
 void Window::Draw(GLFWwindow* window, Cube m_cube, int width, int height)
 {
 	double currentFrame = static_cast<double>(glfwGetTime());
-	m_camera.deltaTime = currentFrame - m_camera.lastFrame;
-	m_camera.lastFrame = currentFrame;
+	m_camera.mDeltaTime = currentFrame - m_camera.mLastFrame;
+	m_camera.mLastFrame = currentFrame;
 	//Читаем заданный массив их файла
 	const int lines = mazeSize;
 	const int columns = mazeSize;
@@ -87,7 +86,7 @@ void Window::Draw(GLFWwindow* window, Cube m_cube, int width, int height)
 	glColor3f(1, 1, 1);
 
 	SetupProjectionMatrix(width, height);
-	SetupCameraMatrix(m_camera.cameraPos, m_camera.cameraFront, m_camera.cameraUp);
+	SetupCameraMatrix(m_camera.mCameraPos, m_camera.mCameraFront, m_camera.mCameraUp);
 
 	glBegin(GL_QUADS);
 	{
