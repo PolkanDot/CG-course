@@ -65,22 +65,7 @@ void Window::OnRunStart()
 	//Читаем заданный массив их файла
 	m_maze.ReadMazeFromFile();
 
-	float fogDensity = 0.2f;
-	glFogf(GL_FOG_DENSITY, fogDensity);
-
-	float fogStart = 0.0f;
-	glFogf(GL_FOG_START, fogStart);
-
-	float fogEnd = 10;
-	glFogf(GL_FOG_END, fogEnd);
-
-	float fogColor[] = {0.0f, 0.0f, 1.0f, 1.0f};
-	glFogfv(GL_FOG_COLOR, fogColor);
-
-	glFogi(GL_FOG_MODE, GL_EXP2);
-
-	glEnable(GL_FOG);
-
+	m_maze.AddFog();
 }
 
 void Window::Draw(int width, int height)
