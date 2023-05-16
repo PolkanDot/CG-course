@@ -3,11 +3,9 @@
 #include "Window.h"
 #include "Constants.h"
 #include "Includes/stb_image.h"
-
 #include <chrono>
 #include <cmath>
-// Лабиринт в отдельный класс (считывание лабиринта каждый кадр)
-// Выделить размер лабиринта в константу
+// выделить отдельный метод загрузки текстур
 GLFWwindow* Window::MakeWindow(int w, int h, const char* title)
 {
 	glfwWindowHint(GLFW_DEPTH_BITS, 24);
@@ -66,6 +64,23 @@ void Window::OnRunStart()
 	glClearColor(1, 1, 1, 1);
 	//Читаем заданный массив их файла
 	m_maze.ReadMazeFromFile();
+
+	float fogDensity = 0.2f;
+	glFogf(GL_FOG_DENSITY, fogDensity);
+
+	float fogStart = 0.0f;
+	glFogf(GL_FOG_START, fogStart);
+
+	float fogEnd = 10;
+	glFogf(GL_FOG_END, fogEnd);
+
+	float fogColor[] = {0.0f, 0.0f, 1.0f, 1.0f};
+	glFogfv(GL_FOG_COLOR, fogColor);
+
+	glFogi(GL_FOG_MODE, GL_EXP2);
+
+	glEnable(GL_FOG);
+
 }
 
 void Window::Draw(int width, int height)
