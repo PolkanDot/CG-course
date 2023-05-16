@@ -1,5 +1,6 @@
 #pragma once
-#include "Includes.h"
+#include "glfw3.h"
+#include <stdexcept>
 
 class GLFWInitializer final
 {

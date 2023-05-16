@@ -1,6 +1,5 @@
 #pragma once
-#include "Includes.h"
-
+#include "glfw3.h"
 enum class CubeSide
 {
 	NEGATIVE_X,

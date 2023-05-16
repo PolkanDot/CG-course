@@ -1,5 +1,11 @@
 #include "Window.h"
+#define STB_IMAGE_IMPLEMENTATION
+#define _USE_MATH_DEFINES
 #include "Includes/stb_image.h"
+#include <iostream>
+#include <fstream>
+#include <chrono>
+#include <cmath>
 // Названия функций в одном стиле
 // Лабиринт в отдельный класс (считывание лабиринта каждый кадр)
 // Отдельные объекты на камеру 
@@ -67,21 +73,21 @@ void Window::OnRunStart()
 void Window::Draw(GLFWwindow* window, Cube m_cube, int width, int height)
 {
 	double currentFrame = static_cast<double>(glfwGetTime());
-	deltaTime = currentFrame - lastFrame;
-	lastFrame = currentFrame;
+	m_camera.deltaTime = currentFrame - m_camera.lastFrame;
+	m_camera.lastFrame = currentFrame;
 	//Читаем заданный массив их файла
 	const int lines = mazeSize;
 	const int columns = mazeSize;
 	int maze[lines][columns];
-	readMazeFromFile(maze);
+	ReadMazeFromFile(maze);
 
-	processInput(window, maze);
+	m_camera.ProcessInput(window, maze);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glColor3f(1, 1, 1);
 
 	SetupProjectionMatrix(width, height);
-	SetupCameraMatrix(cameraPos, cameraFront, cameraUp);
+	SetupCameraMatrix(m_camera.cameraPos, m_camera.cameraFront, m_camera.cameraUp);
 
 	glBegin(GL_QUADS);
 	{
@@ -144,114 +150,8 @@ void Window::SetupCameraMatrix(glm::dvec3 cameraPos, glm::dvec3 cameraFront, glm
 	const auto view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 	glLoadMatrixd(&view[0][0]);
 }
-// Определение обработки входящих "указаний"
-void Window::processInput(GLFWwindow* window, int(maze)[mazeSize][mazeSize])
-{
-	glm::dvec3 front;
-	glm::dvec3 futureCameraPos = cameraPos;
-	// Закрытие окна после нажатия Esc
-	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, true);
 
-	double cameraSpeed = static_cast<double>(2.5 * deltaTime);
-	// Вперед - W
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-	{
-		futureCameraPos += cameraSpeed * cameraFront;
-		if (!movementRestriction(futureCameraPos, maze))
-		{
-			cameraPos = futureCameraPos;
-		}
-	}
-	// Назад - S
-	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-	{
-		futureCameraPos -= cameraSpeed * cameraFront;
-		if (!movementRestriction(futureCameraPos, maze))
-		{
-			cameraPos = futureCameraPos;
-		}
-	}
-	// Налево - A
-	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-	{
-		futureCameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
-		if (!movementRestriction(futureCameraPos, maze))
-		{
-			cameraPos = futureCameraPos;
-		}
-	}
-	// Направо - D
-	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-	{
-		futureCameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
-		if (!movementRestriction(futureCameraPos, maze))
-		{
-			cameraPos = futureCameraPos;
-		}
-	}
-	// Вращение налево - F	
-	if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
-	{
-
-		yaw += 0.4;
-		front.x = cos(glm::radians(yaw));
-		front.y = sin(glm::radians(yaw));
-		front.z = 0.0f;
-		cameraFront = glm::normalize(front);
-		cameraFront = glm::normalize(front);
-	}
-	// Вращение направо - G
-	if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
-	{
-
-		yaw -= 0.4;
-		front.x = cos(glm::radians(yaw));
-		front.y = sin(glm::radians(yaw));
-		front.z = 0.0f;
-		cameraFront = glm::normalize(front);
-		cameraFront = glm::normalize(front);
-	}
-}
-
-bool Window::movementRestriction(glm::dvec3 futureCameraPos, int(maze)[mazeSize][mazeSize])
-{
-	bool result = false;
-	// Проверка на прохождение стен внутри лабиринта
-	if ((futureCameraPos.x < mazeSize) && (futureCameraPos.y < mazeSize)
-		&& (futureCameraPos.x > 0) && (futureCameraPos.y > 0))
-	{
-		if ((maze[(int)(futureCameraPos.x + 0.2)][(int)(futureCameraPos.y + 0.2)] == 0) || (maze[(int)(futureCameraPos.x + 0.2)][(int)(futureCameraPos.y - 0.2)] == 0)
-			|| (maze[(int)(futureCameraPos.x - 0.2)][(int)(futureCameraPos.y + 0.2)] == 0) || (maze[(int)(futureCameraPos.x - 0.2)][(int)(futureCameraPos.y - 0.2)] == 0))
-		{
-			result = true;
-		}
-	}
-	// Проверка на прохождение стен снаружи лабиринта
-	if ((futureCameraPos.x > -0.2) && (futureCameraPos.x < 0.5) && (futureCameraPos.y > 0) && (futureCameraPos.y < mazeSize)
-		&& (maze[(int)(futureCameraPos.x + 0.3)][(int)(futureCameraPos.y)] == 0))
-	{
-		result = true;
-	}
-	if ((futureCameraPos.x < mazeSize + 0.2) && (futureCameraPos.x > mazeSize - 0.5) && (futureCameraPos.y > 0) && (futureCameraPos.y < mazeSize)
-		&& (maze[(int)(futureCameraPos.x - 0.3)][(int)(futureCameraPos.y)] == 0))
-	{
-		result = true;
-	}
-	if ((futureCameraPos.y > -0.2) && (futureCameraPos.y < 0.5) && (futureCameraPos.x > 0) && (futureCameraPos.x < mazeSize)
-		&& (maze[(int)(futureCameraPos.x)][(int)(futureCameraPos.y + 0.3)] == 0))
-	{
-		result = true;
-	}
-	if ((futureCameraPos.y < mazeSize + 0.2) && (futureCameraPos.y > mazeSize - 0.5) && (futureCameraPos.x > 0) && (futureCameraPos.x < mazeSize)
-		&& (maze[(int)(futureCameraPos.x)][(int)(futureCameraPos.y - 0.3)] == 0))
-	{
-		result = true;
-	}
-	return result;
-}
-
-void Window::readMazeFromFile(int(&maze)[mazeSize][mazeSize])
+void Window::ReadMazeFromFile(int(&maze)[mazeSize][mazeSize])
 {
 	std::ifstream input("maze.txt");
 	if (input.is_open())

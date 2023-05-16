@@ -1,5 +1,4 @@
 #include "Cube.h"
-
 Cube::Cube()
 {
 	SetSideColor(CubeSide::NEGATIVE_X, 255, 255, 255);

@@ -1,12 +1,16 @@
 #pragma once
+#include <stdexcept>
 #include "Cube.h"
-
+#include "Camera.h"
+#include "Includes/glm/ext/matrix_clip_space.hpp"
+#include "Includes/glm/ext/matrix_transform.hpp"
 class Window
 {
 public:
 	Window(int w, int h, const char* title)
 		: m_window{ MakeWindow(w, h, title) }
 		, m_cube()
+		, m_camera(22.0f, 10.0f, 0.5f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f)
 	{
 		if (!m_window)
 		{
@@ -31,15 +35,7 @@ public:
 	void Run();
 
 private:
-	glm::dvec3 cameraPos = glm::vec3(22.0f, 10.0f, 0.5f);
-	glm::dvec3 cameraFront = glm::vec3(-1.0f, 0.0f, 0.0f);
-	glm::dvec3 cameraUp = glm::vec3(0.0f, 0.0f, 1.0f);
-
-	float yaw = -180.0f;
-
-	double deltaTime = 0.0f;
-	double lastFrame = 0.0f;
-
+	
 	const static int mazeSize = 20;
 
 	void OnRunStart();
@@ -50,14 +46,11 @@ private:
 
 	void SetupCameraMatrix(glm::dvec3 cameraPos, glm::dvec3 cameraFront, glm::dvec3 cameraUp);
 
-	void processInput(GLFWwindow* window, int(maze)[mazeSize][mazeSize]);
-
-	bool movementRestriction(glm::dvec3 futureCameraPos, int(maze)[mazeSize][mazeSize]);
-
-	void readMazeFromFile(int(&maze)[mazeSize][mazeSize]);
+	void ReadMazeFromFile(int(&maze)[mazeSize][mazeSize]);
 
 	static GLFWwindow* MakeWindow(int w, int h, const char* title);
 
 	GLFWwindow* m_window;
 	Cube m_cube;
+	Camera m_camera;
 };
