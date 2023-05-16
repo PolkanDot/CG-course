@@ -72,8 +72,8 @@ void Window::OnRunStart()
 void Window::Draw(GLFWwindow* window, Cube m_cube, int width, int height)
 {
 	double currentFrame = static_cast<double>(glfwGetTime());
-	m_camera.mDeltaTime = currentFrame - m_camera.mLastFrame;
-	m_camera.mLastFrame = currentFrame;
+	m_camera.m_deltaTime = currentFrame - m_camera.m_lastFrame;
+	m_camera.m_lastFrame = currentFrame;
 	//Читаем заданный массив их файла
 	const int lines = mazeSize;
 	const int columns = mazeSize;
@@ -86,7 +86,7 @@ void Window::Draw(GLFWwindow* window, Cube m_cube, int width, int height)
 	glColor3f(1, 1, 1);
 
 	SetupProjectionMatrix(width, height);
-	SetupCameraMatrix(m_camera.mCameraPos, m_camera.mCameraFront, m_camera.mCameraUp);
+	SetupCameraMatrix(m_camera.m_cameraPos, m_camera.m_cameraFront, m_camera.m_cameraUp);
 
 	glBegin(GL_QUADS);
 	{

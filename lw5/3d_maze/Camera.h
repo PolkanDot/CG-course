@@ -11,21 +11,21 @@ public:
 	Camera(const Camera&) = delete;
 	Camera& operator=(const Camera&) = delete;
 
-	const static int mMazeSize = 20;
+	const static int m_mazeSize = 20;
 
-	double mDeltaTime = 0.0f;
-	double mLastFrame = 0.0f;
+	double m_deltaTime = 0.0f;
+	double m_lastFrame = 0.0f;
 
-	glm::dvec3 mCameraPos;
-	glm::dvec3 mCameraFront;
-	glm::dvec3 mCameraUp;
+	glm::dvec3 m_cameraPos;
+	glm::dvec3 m_cameraFront;
+	glm::dvec3 m_cameraUp;
 
-	void ProcessInput(GLFWwindow* window, int(maze)[mMazeSize][mMazeSize]);
+	void ProcessInput(GLFWwindow* window, int(maze)[m_mazeSize][m_mazeSize]);
 
 private:
 	float yaw = -180.0f;
 	
 
 	
-	bool MovementRestriction(glm::dvec3 futureCameraPos, int(maze)[mMazeSize][mMazeSize]);
+	bool MovementRestriction(glm::dvec3 futureCameraPos, int(maze)[m_mazeSize][m_mazeSize]);
 };
