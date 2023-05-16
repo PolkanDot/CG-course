@@ -32,6 +32,7 @@ void Maze::Draw()
 	}
 	glEnd();
 
+	glBindTexture(GL_TEXTURE_2D, texture2);
 
 	glTranslatef(0, 0, 1);
 
