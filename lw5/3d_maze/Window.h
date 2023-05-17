@@ -20,12 +20,12 @@ public:
 			throw std::runtime_error("Failed to create window");
 		}
 
-		m_cube.SetSideColor(CubeSide::NEGATIVE_X, 255, 0, 0);
-		m_cube.SetSideColor(CubeSide::POSITIVE_X, 0, 255, 0);
-		m_cube.SetSideColor(CubeSide::NEGATIVE_Y, 0, 0, 255);
-		m_cube.SetSideColor(CubeSide::POSITIVE_Y, 255, 255, 0);
-		m_cube.SetSideColor(CubeSide::NEGATIVE_Z, 0, 255, 255);
-		m_cube.SetSideColor(CubeSide::POSITIVE_Z, 255, 0, 255);
+		//m_cube.SetSideColor(CubeSide::NEGATIVE_X, 255, 0, 0);
+		//m_cube.SetSideColor(CubeSide::POSITIVE_X, 0, 255, 0);
+		//m_cube.SetSideColor(CubeSide::NEGATIVE_Y, 0, 0, 255);
+		//m_cube.SetSideColor(CubeSide::POSITIVE_Y, 255, 255, 0);
+		//m_cube.SetSideColor(CubeSide::NEGATIVE_Z, 0, 255, 255);
+		//m_cube.SetSideColor(CubeSide::POSITIVE_Z, 255, 0, 255);
 	}
 	Window(const Window&) = delete;
 	Window& operator=(const Window&) = delete;
