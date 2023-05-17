@@ -38,13 +38,25 @@ void Window::OnRunStart()
 	// обход верших осуществляется против часовой стрелки
 	glFrontFace(GL_CCW);
 
-	unsigned int texture;
+	
 
 	int width, height, cnt;
 	unsigned char* data = stbi_load("01.png", &width, &height, &cnt, 0);
 
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
+	glGenTextures(1, &m_maze.texture1);
+	glBindTexture(GL_TEXTURE_2D, m_maze.texture1);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height,
+		0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	data = stbi_load("grass.png", &width, &height, &cnt, 0);
+
+	glGenTextures(1, &m_maze.texture2);
+	glBindTexture(GL_TEXTURE_2D, m_maze.texture2);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -54,7 +66,7 @@ void Window::OnRunStart()
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, texture);
+	glBindTexture(GL_TEXTURE_2D, m_maze.texture1);
 	stbi_image_free(data);
 	
 

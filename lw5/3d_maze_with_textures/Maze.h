@@ -9,4 +9,6 @@ public:
 	void AddFog();
 	void Draw();
 	int maze[mazeSize][mazeSize];
+	unsigned int texture1;
+	unsigned int texture2;
 };
