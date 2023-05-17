@@ -5,8 +5,7 @@
 //#include "Includes/stb_image.h"
 #include <chrono>
 #include <cmath>
-// закомментировать код
-// удалить лишние комментарии
+
 GLFWwindow* Window::MakeWindow(int w, int h, const char* title)
 {
 	glfwWindowHint(GLFW_DEPTH_BITS, 24);

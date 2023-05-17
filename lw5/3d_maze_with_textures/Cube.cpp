@@ -1,13 +1,4 @@
 #include "Cube.h"
-Cube::Cube()
-{
-	//SetSideColor(CubeSide::NEGATIVE_X, 255, 255, 255);
-	//SetSideColor(CubeSide::POSITIVE_X, 255, 255, 255);
-	//SetSideColor(CubeSide::NEGATIVE_Y, 255, 255, 255);
-	//SetSideColor(CubeSide::POSITIVE_Y, 255, 255, 255);
-	//SetSideColor(CubeSide::NEGATIVE_Z, 255, 255, 255);
-	//SetSideColor(CubeSide::POSITIVE_Z, 255, 255, 255);
-}
 
 void Cube::Draw(int x, int y) const
 {
@@ -51,8 +42,6 @@ void Cube::Draw(int x, int y) const
 		{ 5, 1, 2, 6 }, // грань x>0
 		{ 4, 0, 1, 5 }, // грань y<0
 		{ 7, 6, 2, 3 }, // грань y>0
-		//{ 0, 3, 2, 1 }, // грань z<0
-		//{ 4, 5, 6, 7 }, // грань z>0
 	};
 	static size_t const faceCount = sizeof(faces) / sizeof(*faces);
 

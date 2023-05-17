@@ -23,8 +23,5 @@ public:
 
 private:
 	float m_yaw = -180.0f;
-	
-
-	
 	bool MovementRestriction(glm::dvec3 futureCameraPos, int(maze)[mazeSize][mazeSize]);
 };

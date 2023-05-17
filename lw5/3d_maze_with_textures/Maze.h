@@ -16,12 +16,12 @@ public:
 	void AddFog();
 	void Draw();
 	int maze[mazeSize][mazeSize];
-	unsigned int skyTexture;
-	unsigned int bottomTexture;
-	unsigned int wallTexture1;
-	unsigned int wallTexture2;
-	unsigned int wallTexture3;
-	unsigned int wallTexture4;
+	unsigned int skyTexture = 0;
+	unsigned int bottomTexture = 0;
+	unsigned int wallTexture1 = 0;
+	unsigned int wallTexture2 = 0;
+	unsigned int wallTexture3 = 0;
+	unsigned int wallTexture4 = 0;
 private:
 	Cube m_cube;
 };
