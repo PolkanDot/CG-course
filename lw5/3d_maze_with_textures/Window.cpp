@@ -1,8 +1,6 @@
-// #define STB_IMAGE_IMPLEMENTATION
 #define _USE_MATH_DEFINES
 #include "Window.h"
 #include "Constants.h"
-//#include "Includes/stb_image.h"
 #include <chrono>
 #include <cmath>
 
