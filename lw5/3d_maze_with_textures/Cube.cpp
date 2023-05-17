@@ -79,16 +79,4 @@ void Cube::Draw(int x, int y) const
 		}
 		glEnd();
 	}
-
-	// Восстанавливаем матрицу моделирования вида из стека матриц
-	//glPopMatrix();
 }
-
-//void Cube::SetSideColor(CubeSide side, GLubyte r, GLubyte g, GLubyte b, GLubyte a)
-//{
-//	int index = static_cast<int>(side);
-//  m_sideColors[index][0] = r;
-//	m_sideColors[index][1] = g;
-//	m_sideColors[index][2] = b;
-//	m_sideColors[index][3] = a;
-//}

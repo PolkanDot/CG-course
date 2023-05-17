@@ -1,11 +1,13 @@
-#define STB_IMAGE_IMPLEMENTATION
+// #define STB_IMAGE_IMPLEMENTATION
 #define _USE_MATH_DEFINES
 #include "Window.h"
 #include "Constants.h"
-#include "Includes/stb_image.h"
+//#include "Includes/stb_image.h"
 #include <chrono>
 #include <cmath>
 // выделить отдельный метод загрузки текстур
+// закомментировать код
+// удалить лишние комментарии
 GLFWwindow* Window::MakeWindow(int w, int h, const char* title)
 {
 	glfwWindowHint(GLFW_DEPTH_BITS, 24);
@@ -38,9 +40,14 @@ void Window::OnRunStart()
 	// обход верших осуществляется против часовой стрелки
 	glFrontFace(GL_CCW);
 
-	
+	m_maze.LoadingTexture("textures/sky.png", m_maze.skyTexture);
+	m_maze.LoadingTexture("textures/grass.png", m_maze.bottomTexture);
+	m_maze.LoadingTexture("textures/1.png", m_maze.wallTexture1);
+	m_maze.LoadingTexture("textures/2.png", m_maze.wallTexture2);
+	m_maze.LoadingTexture("textures/3.png", m_maze.wallTexture3);
+	m_maze.LoadingTexture("textures/4.png", m_maze.wallTexture4);
 
-	int width, height, cnt;
+	/*int width, height, cnt;
 	unsigned char* data = stbi_load("textures/sky.png", &width, &height, &cnt, 0);
 
 	glGenTextures(1, &m_maze.skyTexture);
@@ -107,9 +114,10 @@ void Window::OnRunStart()
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height,
 		0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 
-	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, 0);
-	stbi_image_free(data);
+	stbi_image_free(data);*/
+
+	glEnable(GL_TEXTURE_2D);
 	
 
 	// Включаем тест глубины для удаления невидимых линий и поверхностей

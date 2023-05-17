@@ -1,11 +1,13 @@
 #pragma once 
 #include "glfw3.h"
 #include "Constants.h"
+#include <string>
 class Maze
 {
 public:
 	Maze& operator=(const Maze&) = delete;
 	void ReadMazeFromFile();
+	void LoadingTexture(const char* name, unsigned int& index);
 	void AddFog();
 	void Draw();
 	int maze[mazeSize][mazeSize];

@@ -17,8 +17,7 @@ public:
 	Cube();
 	// Рисуем куб
 	void Draw(int x, int y) const;
-	// Задаем цвет стороны куба
-	//void SetSideColor(CubeSide side, GLubyte r, GLubyte g, GLubyte b, GLubyte a = 255);
+
 
 private:
 	float m_size;

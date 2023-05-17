@@ -1,3 +1,5 @@
+#define STB_IMAGE_IMPLEMENTATION
+#include "Includes/stb_image.h"
 #include "Maze.h"
 #include <iostream>
 #include <fstream>
@@ -71,4 +73,22 @@ void Maze::AddFog()
 	glFogi(GL_FOG_MODE, GL_EXP2);
 
 	glEnable(GL_FOG);
+}
+
+void Maze::LoadingTexture(const char* name, unsigned int& index)
+{
+	int width, height, cnt;
+	unsigned char* data = stbi_load(name, &width, &height, &cnt, 0);
+
+	glGenTextures(1, &index);
+	glBindTexture(GL_TEXTURE_2D, index);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height,
+		0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+	stbi_image_free(data);
 }
