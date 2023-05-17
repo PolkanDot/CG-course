@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{2cfe8533-a17b-43c1-bc4d-e4849d72e385}</ProjectGuid>
+    <ProjectGuid>{4aa56acb-57bd-400e-ae0e-1eebc6ba4736}</ProjectGuid>
     <RootNamespace>My3dmazewithtextures</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
