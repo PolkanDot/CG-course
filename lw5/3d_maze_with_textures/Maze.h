@@ -9,6 +9,10 @@ public:
 	void AddFog();
 	void Draw();
 	int maze[mazeSize][mazeSize];
-	unsigned int texture1;
-	unsigned int texture2;
+	unsigned int skyTexture;
+	unsigned int bottomTexture;
+	unsigned int wallTexture1;
+	unsigned int wallTexture2;
+	unsigned int wallTexture3;
+	unsigned int wallTexture4;
 };

@@ -41,32 +41,74 @@ void Window::OnRunStart()
 	
 
 	int width, height, cnt;
-	unsigned char* data = stbi_load("01.png", &width, &height, &cnt, 0);
+	unsigned char* data = stbi_load("textures/sky.png", &width, &height, &cnt, 0);
 
-	glGenTextures(1, &m_maze.texture1);
-	glBindTexture(GL_TEXTURE_2D, m_maze.texture1);
+	glGenTextures(1, &m_maze.skyTexture);
+	glBindTexture(GL_TEXTURE_2D, m_maze.skyTexture);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height,
 		0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-	glBindTexture(GL_TEXTURE_2D, 0);
 
-	data = stbi_load("grass.png", &width, &height, &cnt, 0);
+	data = stbi_load("textures/grass.png", &width, &height, &cnt, 0);
 
-	glGenTextures(1, &m_maze.texture2);
-	glBindTexture(GL_TEXTURE_2D, m_maze.texture2);
+	glGenTextures(1, &m_maze.bottomTexture);
+	glBindTexture(GL_TEXTURE_2D, m_maze.bottomTexture);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height,
 		0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-	glBindTexture(GL_TEXTURE_2D, 0);
+
+	data = stbi_load("textures/1.png", &width, &height, &cnt, 0);
+
+	glGenTextures(1, &m_maze.wallTexture1);
+	glBindTexture(GL_TEXTURE_2D, m_maze.wallTexture1);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height,
+		0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+
+	data = stbi_load("textures/2.png", &width, &height, &cnt, 0);
+
+	glGenTextures(1, &m_maze.wallTexture2);
+	glBindTexture(GL_TEXTURE_2D, m_maze.wallTexture2);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height,
+		0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+
+	data = stbi_load("textures/3.png", &width, &height, &cnt, 0);
+
+	glGenTextures(1, &m_maze.wallTexture3);
+	glBindTexture(GL_TEXTURE_2D, m_maze.wallTexture3);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height,
+		0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+
+	data = stbi_load("textures/4.png", &width, &height, &cnt, 0);
+
+	glGenTextures(1, &m_maze.wallTexture4);
+	glBindTexture(GL_TEXTURE_2D, m_maze.wallTexture4);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height,
+		0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, m_maze.texture1);
+	glBindTexture(GL_TEXTURE_2D, 0);
 	stbi_image_free(data);
 	
 

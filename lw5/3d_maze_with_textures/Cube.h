@@ -18,11 +18,11 @@ public:
 	// Рисуем куб
 	void Draw(int x, int y) const;
 	// Задаем цвет стороны куба
-	void SetSideColor(CubeSide side, GLubyte r, GLubyte g, GLubyte b, GLubyte a = 255);
+	//void SetSideColor(CubeSide side, GLubyte r, GLubyte g, GLubyte b, GLubyte a = 255);
 
 private:
 	float m_size;
 
 	// Цвета сторон куба
-	GLubyte m_sideColors[6][4];
+	//GLubyte m_sideColors[6][4];
 };

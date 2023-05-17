@@ -19,7 +19,7 @@ void Maze::ReadMazeFromFile()
 
 void Maze::Draw()
 {	
-	glBindTexture(GL_TEXTURE_2D, texture1);
+	glBindTexture(GL_TEXTURE_2D, bottomTexture);
 
 	glBegin(GL_QUADS);
 	{
@@ -34,7 +34,7 @@ void Maze::Draw()
 	}
 	glEnd();
 
-	glBindTexture(GL_TEXTURE_2D, texture2);
+	glBindTexture(GL_TEXTURE_2D, skyTexture);
 	glTranslatef(0, 0, 1);
 
 	glBegin(GL_QUADS);
@@ -65,7 +65,7 @@ void Maze::AddFog()
 	float fogEnd = 10;
 	glFogf(GL_FOG_END, fogEnd);
 
-	float fogColor[] = { 0.0f, 0.0f, 1.0f, 1.0f };
+	float fogColor[] = { 0.77f, 0.77f, 0.77f, 1.0f };
 	glFogfv(GL_FOG_COLOR, fogColor);
 
 	glFogi(GL_FOG_MODE, GL_EXP2);
