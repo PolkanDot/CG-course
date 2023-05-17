@@ -21,13 +21,13 @@ void Maze::Draw()
 {	
 	glBegin(GL_QUADS);
 	{
-		//glTexCoord2f(0, 0);
+		glTexCoord2f(0, 0);
 		glVertex3f(0, 0, 0);
-		//glTexCoord2f(20, 0);
+		glTexCoord2f(20, 0);
 		glVertex3f(mazeSize, 0, 0);
-		//glTexCoord2f(20, 20);
+		glTexCoord2f(20, 20);
 		glVertex3f(mazeSize, mazeSize, 0);
-		//glTexCoord2f(0, 20);
+		glTexCoord2f(0, 20);
 		glVertex3f(0, mazeSize, 0);
 	}
 	glEnd();
@@ -37,13 +37,13 @@ void Maze::Draw()
 
 	glBegin(GL_QUADS);
 	{
-		//glTexCoord2f(0, 0);
+		glTexCoord2f(0, 0);
 		glVertex3f(0, 0, 0);
-		//glTexCoord2f(1, 0);
+		glTexCoord2f(1, 0);
 		glVertex3f(0, mazeSize, 0);
-		//glTexCoord2f(1, 1);
+		glTexCoord2f(1, 1);
 		glVertex3f(mazeSize, mazeSize, 0);
-		//glTexCoord2f(0, 1);
+		glTexCoord2f(0, 1);
 		glVertex3f(mazeSize, 0, 0);
 	}
 	glEnd();

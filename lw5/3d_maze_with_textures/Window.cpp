@@ -61,7 +61,7 @@ void Window::OnRunStart()
 	// Включаем тест глубины для удаления невидимых линий и поверхностей
 	glEnable(GL_DEPTH_TEST);
 	// Задаем цвет очистки буфера кадра
-	glClearColor(1, 0, 1, 1);
+	glClearColor(1, 1, 1, 1);
 	//Читаем заданный массив их файла
 	m_maze.ReadMazeFromFile();
 
@@ -77,42 +77,12 @@ void Window::Draw(int width, int height)
 	m_camera.ProcessInput(m_window, m_maze.maze);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glColor3f(0, 1, 1);
+	glColor3f(1, 1, 1);
 
 	SetupProjectionMatrix(width, height);
 	SetupCameraMatrix(m_camera.m_cameraPos, m_camera.m_cameraFront, m_camera.m_cameraUp);
 
-	//m_maze.Draw();
-	glBegin(GL_QUADS);
-	{
-		//glTexCoord2f(0, 0);
-		glVertex3f(0, 0, 0);
-		//glTexCoord2f(20, 0);
-		glVertex3f(mazeSize, 0, 0);
-		//glTexCoord2f(20, 20);
-		glVertex3f(mazeSize, mazeSize, 0);
-		//glTexCoord2f(0, 20);
-		glVertex3f(0, mazeSize, 0);
-	}
-	glEnd();
-
-
-	glTranslatef(0, 0, 1);
-
-	glBegin(GL_QUADS);
-	{
-		//glTexCoord2f(0, 0);
-		glVertex3f(0, 0, 0);
-		//glTexCoord2f(1, 0);
-		glVertex3f(0, mazeSize, 0);
-		//glTexCoord2f(1, 1);
-		glVertex3f(mazeSize, mazeSize, 0);
-		//glTexCoord2f(0, 1);
-		glVertex3f(mazeSize, 0, 0);
-	}
-	glEnd();
-
-	glTranslatef(0, 0, -1);
+	m_maze.Draw();
 
 	//римуем стены лабиринта
 
