@@ -54,6 +54,15 @@ void Maze::Draw()
 
 	glTranslatef(0, 0, -1);
 
+	//римуем стены лабиринта
+	for (int y = mazeSize - 1; y >= 0; y--)
+		for (int x = mazeSize - 1; x >= 0; x--)
+		{
+			if (maze[x][y] == 0)
+			{
+				m_cube.Draw(x, y);
+			}
+		}
 }
 
 void Maze::AddFog()

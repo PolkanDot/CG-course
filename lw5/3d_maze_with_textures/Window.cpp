@@ -5,7 +5,6 @@
 //#include "Includes/stb_image.h"
 #include <chrono>
 #include <cmath>
-// выделить отдельный метод загрузки текстур
 // закомментировать код
 // удалить лишние комментарии
 GLFWwindow* Window::MakeWindow(int w, int h, const char* title)
@@ -47,76 +46,6 @@ void Window::OnRunStart()
 	m_maze.LoadingTexture("textures/3.png", m_maze.wallTexture3);
 	m_maze.LoadingTexture("textures/4.png", m_maze.wallTexture4);
 
-	/*int width, height, cnt;
-	unsigned char* data = stbi_load("textures/sky.png", &width, &height, &cnt, 0);
-
-	glGenTextures(1, &m_maze.skyTexture);
-	glBindTexture(GL_TEXTURE_2D, m_maze.skyTexture);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height,
-		0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-
-	data = stbi_load("textures/grass.png", &width, &height, &cnt, 0);
-
-	glGenTextures(1, &m_maze.bottomTexture);
-	glBindTexture(GL_TEXTURE_2D, m_maze.bottomTexture);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height,
-		0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-
-	data = stbi_load("textures/1.png", &width, &height, &cnt, 0);
-
-	glGenTextures(1, &m_maze.wallTexture1);
-	glBindTexture(GL_TEXTURE_2D, m_maze.wallTexture1);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height,
-		0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-
-	data = stbi_load("textures/2.png", &width, &height, &cnt, 0);
-
-	glGenTextures(1, &m_maze.wallTexture2);
-	glBindTexture(GL_TEXTURE_2D, m_maze.wallTexture2);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height,
-		0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-
-	data = stbi_load("textures/3.png", &width, &height, &cnt, 0);
-
-	glGenTextures(1, &m_maze.wallTexture3);
-	glBindTexture(GL_TEXTURE_2D, m_maze.wallTexture3);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height,
-		0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-
-	data = stbi_load("textures/4.png", &width, &height, &cnt, 0);
-
-	glGenTextures(1, &m_maze.wallTexture4);
-	glBindTexture(GL_TEXTURE_2D, m_maze.wallTexture4);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height,
-		0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-
-	glBindTexture(GL_TEXTURE_2D, 0);
-	stbi_image_free(data);*/
-
 	glEnable(GL_TEXTURE_2D);
 	
 
@@ -145,17 +74,6 @@ void Window::Draw(int width, int height)
 	SetupCameraMatrix(m_camera.m_cameraPos, m_camera.m_cameraFront, m_camera.m_cameraUp);
 
 	m_maze.Draw();
-
-	//римуем стены лабиринта
-
-	for (int y = mazeSize - 1; y >= 0; y--)
-		for (int x = mazeSize - 1; x >= 0; x--)
-		{
-			if (m_maze.maze[x][y] == 0)
-			{
-				m_cube.Draw(x, y);
-			}
-		}
 }
 
 void Window::SetupProjectionMatrix(int width, int height)

@@ -1,10 +1,15 @@
 #pragma once 
 #include "glfw3.h"
 #include "Constants.h"
+#include "Cube.h"
 #include <string>
 class Maze
 {
 public:
+	Maze()
+		: m_cube()
+	{
+	}
 	Maze& operator=(const Maze&) = delete;
 	void ReadMazeFromFile();
 	void LoadingTexture(const char* name, unsigned int& index);
@@ -17,4 +22,6 @@ public:
 	unsigned int wallTexture2;
 	unsigned int wallTexture3;
 	unsigned int wallTexture4;
+private:
+	Cube m_cube;
 };
