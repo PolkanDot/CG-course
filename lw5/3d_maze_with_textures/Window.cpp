@@ -3,7 +3,8 @@
 #include "Constants.h"
 #include <chrono>
 #include <cmath>
-
+// устранить мельчешение текстур (фильтрация текстур)
+// проблема с архитектурой (все данные в классах публичные, хотябы ... или ... с митмапами) 
 GLFWwindow* Window::MakeWindow(int w, int h, const char* title)
 {
 	glfwWindowHint(GLFW_DEPTH_BITS, 24);
@@ -36,6 +37,7 @@ void Window::OnRunStart()
 	// обход верших осуществляется против часовой стрелки
 	glFrontFace(GL_CCW);
 
+	// Загружаем все текстуры
 	m_maze.LoadingTexture("textures/sky.png", m_maze.skyTexture);
 	m_maze.LoadingTexture("textures/grass.png", m_maze.bottomTexture);
 	m_maze.LoadingTexture("textures/1.png", m_maze.wallTexture1);

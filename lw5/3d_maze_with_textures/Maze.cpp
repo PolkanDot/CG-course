@@ -21,8 +21,9 @@ void Maze::ReadMazeFromFile()
 
 void Maze::Draw()
 {	
+	// Выбираем текстуру пола
 	glBindTexture(GL_TEXTURE_2D, bottomTexture);
-
+	// Рисуем пол
 	glBegin(GL_QUADS);
 	{
 		glTexCoord2f(0, 0);
@@ -35,10 +36,10 @@ void Maze::Draw()
 		glVertex3f(0, mazeSize, 0);
 	}
 	glEnd();
-
+	// Выбираем текстуру неба
 	glBindTexture(GL_TEXTURE_2D, skyTexture);
 	glTranslatef(0, 0, 1);
-
+	// Рисуем небо
 	glBegin(GL_QUADS);
 	{
 		glTexCoord2f(0, 0);
