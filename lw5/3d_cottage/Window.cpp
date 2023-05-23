@@ -40,14 +40,14 @@ void Window::OnRunStart()
 	//glFrontFace(GL_CCW);
 
 	// Загружаем все текстуры
-	/*m_maze.LoadingTexture("textures/sky.png", m_maze.skyTexture);
-	m_maze.LoadingTexture("textures/grass.png", m_maze.bottomTexture);
-	m_maze.LoadingTexture("textures/1.png", m_maze.wallTexture1);
-	m_maze.LoadingTexture("textures/2.png", m_maze.wallTexture2);
-	m_maze.LoadingTexture("textures/3.png", m_maze.wallTexture3);
-	m_maze.LoadingTexture("textures/4.png", m_maze.wallTexture4);*/
+	m_scene.LoadingTexture("textures/sky.png", m_scene.skyTexture);
+	m_scene.LoadingTexture("textures/grass.png", m_scene.bottomTexture);
+	m_scene.LoadingTexture("textures/1.png", m_scene.wallTexture1);
+	m_scene.LoadingTexture("textures/2.png", m_scene.wallTexture2);
+	m_scene.LoadingTexture("textures/3.png", m_scene.wallTexture3);
+	m_scene.LoadingTexture("textures/4.png", m_scene.wallTexture4);
 
-	//glEnable(GL_TEXTURE_2D);
+	glEnable(GL_TEXTURE_2D);
 	
 
 	// Включаем тест глубины для удаления невидимых линий и поверхностей
@@ -80,7 +80,7 @@ void Window::Draw(int width, int height)
 		// Перемещение источника света
 		glRotatef(theta, 0, 1, 0);
 		float position[] = { 0, 0, 5, 0};
-		theta += 0.01f;
+		theta += 0.1f;
 		glLightfv(GL_LIGHT0, GL_POSITION, position);
 		// Отрисовка источника света
 		glTranslatef(0, 0, 5);

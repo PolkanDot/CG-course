@@ -1,71 +1,93 @@
 #include "Cube.h"
-
-void Cube::Draw(int x, int y) const
+#include "glfw3.h"
+#include "Includes/glm/ext.hpp"
+Cube::Cube(float size)
+	: m_size(size)
 {
+}
 
-	/*
-	   Y
-	   |
-	   |
-	   |
-	   +---X
-	  /
-	 /
-	Z
-	   3----2
-	  /    /|
-	 /    / |
-	7----6  |
-	|  0 |  1
-	|    | /
-	|    |/
-	4----5
-	*/
-	// ћассив координат вершин
-	float vertices[8][3] = {
-		{ 0 + x, 0 + y, 0 }, // 0
-		{ 1 + x, 0 + y, 0 }, // 1
-		{ 1 + x, 1 + y, 0 }, // 2
-		{ 0 + x, 1 + y, 0 }, // 3
-		{ 0 + x, 0 + y, 1 }, // 4
-		{ 1 + x, 0 + y, 1 }, // 5
-		{ 1 + x, 1 + y, 1 }, // 6
-		{ 0 + x, 1 + y, 1 }, // 7
-	};
+void Cube::Draw() const
+{	
+	glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, glm::value_ptr(m_specularColor));
+	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, m_shininess);
 
-	// ћассив координат граней (в пор€дке, совпадающем с
-	// пор€дком объ€влени€ их в массиве цветов)
-	// индексы вершин граней перечисл€ютс€ в пор€дке их обхода
-	// против часовой стрелки (если смотреть на грань снаружи)
-	static constexpr unsigned char faces[4][4] = {
-		{ 4, 7, 3, 0 }, // грань x<0
-		{ 5, 1, 2, 6 }, // грань x>0
-		{ 4, 0, 1, 5 }, // грань y<0
-		{ 7, 6, 2, 3 }, // грань y>0
-	};
-	static size_t const faceCount = sizeof(faces) / sizeof(*faces);
-
-	float textVertices[4][2] =
+	glBegin(GL_QUADS);
 	{
-		{0.0f, 0.0f},		// 0
-		{1.0f, 0.0f},		// 1
-		{1.0f, 1.0f},		// 2
-		{0.0f, 1.0f},		// 3
-	};
+		glNormal3f(0.0f, 0.0f, 1.0f);
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(-0.5f * m_size, -0.5f * m_size, 0.5f * m_size);
+		glTexCoord2f(1.0f, 0.0f);
+		glVertex3f(0.5f * m_size, -0.5f * m_size, 0.5f * m_size);
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(0.5f * m_size, 0.5f * m_size, 0.5f * m_size);
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(-0.5f * m_size, 0.5f * m_size, 0.5f * m_size);
 
-	for (size_t face = 0; face < faceCount; ++face)
-	{
-		glBindTexture(GL_TEXTURE_2D, face + 3);
-		glBegin(GL_QUADS);
-		{
+		glNormal3f(0.0f, 0.0f, -1.0f);
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(0.5f * m_size, -0.5f * m_size, -0.5f * m_size);
+		glTexCoord2f(1.0f, 0.0f);
+		glVertex3f(-0.5f * m_size, -0.5f * m_size, -0.5f * m_size);
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(-0.5f * m_size, 0.5f * m_size, -0.5f * m_size);
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(0.5f * m_size, 0.5f * m_size, -0.5f * m_size);
 
-			for (size_t i = 0; i < 4; ++i)
-			{
-				glTexCoord2fv(textVertices[i]);
-				size_t vertexIndex = faces[face][i];
-				glVertex3fv(vertices[vertexIndex]);
-			}
-		}
-		glEnd();
+		glNormal3f(1.0f, 0.0f, 0.0f);
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(0.5f * m_size, -0.5f * m_size, 0.5f * m_size);
+		glTexCoord2f(1.0f, 0.0f);
+		glVertex3f(0.5f * m_size, -0.5f * m_size, -0.5f * m_size);
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(0.5f * m_size, 0.5f * m_size, -0.5f * m_size);
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(0.5f * m_size, 0.5f * m_size, 0.5f * m_size);
+
+		glNormal3f(-1.0f, 0.0f, 0.0f);
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(-0.5f * m_size, -0.5f * m_size, -0.5f * m_size);
+		glTexCoord2f(1.0f, 0.0f);
+		glVertex3f(-0.5f * m_size, -0.5f * m_size, 0.5f * m_size);
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(-0.5f * m_size, 0.5f * m_size, 0.5f * m_size);
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(-0.5f * m_size, 0.5f * m_size, -0.5f * m_size);
+
+		glNormal3f(0.0f, 1.0f, 0.0f);
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(-0.5f * m_size, 0.5f * m_size, 0.5f * m_size);
+		glTexCoord2f(1.0f, 0.0f);
+		glVertex3f(0.5f * m_size, 0.5f * m_size, 0.5f * m_size);
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(0.5f * m_size, 0.5f * m_size, -0.5f * m_size);
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(-0.5f * m_size, 0.5f * m_size, -0.5f * m_size);
+
+		glNormal3f(0.0f, -1.0f, 0.0f);
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(-0.5f * m_size, -0.5f * m_size, -0.5f * m_size);
+		glTexCoord2f(1.0f, 0.0f);
+		glVertex3f(0.5f * m_size, -0.5f * m_size, -0.5f * m_size);
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(0.5f * m_size, -0.5f * m_size, 0.5f * m_size);
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(-0.5f * m_size, -0.5f * m_size, 0.5f * m_size);
 	}
+	glEnd();
+}
+
+void Cube::SetSize(float size)
+{
+	m_size = size;
+}
+
+void Cube::SetSpecularColor(glm::vec4 color)
+{
+	m_specularColor = color;
+}
+
+void Cube::SetShininess(float shininess)
+{
+	m_shininess = shininess;
 }
