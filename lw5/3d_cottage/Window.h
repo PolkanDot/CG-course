@@ -12,7 +12,7 @@ public:
 	Window(int w, int h, const char* title)
 		: m_window{ MakeWindow(w, h, title) }
 		, m_scene(10.0f, 10.0f)
-		, m_camera(10.0f, 5.0f, 0.5f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f)
+		, m_camera(0.0f, 8.0f, 0.5f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f)
 	{
 		if (!m_window)
 		{

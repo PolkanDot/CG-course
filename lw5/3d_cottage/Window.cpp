@@ -84,19 +84,22 @@ void Window::Draw(int width, int height)
 	glPushMatrix();
 		// Перемещение источника света
 		glRotatef(theta, 0, 1, 0);
-		float position[] = { 0, 0, 1, 0 };
-		theta += 0.1f;
+		float position[] = { 0, 0, 5, 0};
+		theta += 0.01f;
 		glLightfv(GL_LIGHT0, GL_POSITION, position);
 		// Отрисовка источника света
-		glTranslatef(0, 0, 1);
-		glScalef(0.2, 0.2, 0.2);
+		glTranslatef(0, 0, 5);
+		glScalef(0.1, 0.1, 0.1);
 		glColor3f(1, 1, 1);
 		m_scene.Draw();
 	glPopMatrix();
 
 	// Рисуем верхний квадрат
+	glPushMatrix();
+	glTranslatef(-m_scene.GetWidth() / 2, -m_scene.GetLength() / 2, 0);
 	glColor3f(0.3, 0.3, 0.3);
 	m_scene.Draw();
+	glPopMatrix();
 
 }
 
