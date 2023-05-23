@@ -31,22 +31,22 @@ void Window::Run()
 void Window::OnRunStart()
 {
 	// Включаем режим отбраковки граней
-	glEnable(GL_CULL_FACE);
+	//glEnable(GL_CULL_FACE);
 	// Отбраковываться будут нелицевые стороны граней
-	glCullFace(GL_BACK);
+	//glCullFace(GL_BACK);
 	// Сторона примитива считается лицевой, если при ее рисовании
 	// обход верших осуществляется против часовой стрелки
-	glFrontFace(GL_CCW);
+	//glFrontFace(GL_CCW);
 
 	// Загружаем все текстуры
-	m_maze.LoadingTexture("textures/sky.png", m_maze.skyTexture);
+	/*m_maze.LoadingTexture("textures/sky.png", m_maze.skyTexture);
 	m_maze.LoadingTexture("textures/grass.png", m_maze.bottomTexture);
 	m_maze.LoadingTexture("textures/1.png", m_maze.wallTexture1);
 	m_maze.LoadingTexture("textures/2.png", m_maze.wallTexture2);
 	m_maze.LoadingTexture("textures/3.png", m_maze.wallTexture3);
-	m_maze.LoadingTexture("textures/4.png", m_maze.wallTexture4);
+	m_maze.LoadingTexture("textures/4.png", m_maze.wallTexture4);*/
 
-	glEnable(GL_TEXTURE_2D);
+	//glEnable(GL_TEXTURE_2D);
 	
 
 	// Включаем тест глубины для удаления невидимых линий и поверхностей
@@ -54,9 +54,9 @@ void Window::OnRunStart()
 	// Задаем цвет очистки буфера кадра
 	glClearColor(1, 1, 1, 1);
 	//Читаем заданный массив их файла
-	m_maze.ReadMazeFromFile();
+	//m_maze.ReadMazeFromFile();
 
-	m_maze.AddFog();
+	//m_maze.AddFog();
 }
 
 void Window::Draw(int width, int height)
@@ -65,7 +65,7 @@ void Window::Draw(int width, int height)
 	m_camera.m_deltaTime = currentFrame - m_camera.m_lastFrame;
 	m_camera.m_lastFrame = currentFrame;
 
-	m_camera.ProcessInput(m_window, m_maze.maze);
+	m_camera.ProcessInput(m_window);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glColor3f(1, 1, 1);
@@ -73,7 +73,15 @@ void Window::Draw(int width, int height)
 	SetupProjectionMatrix(width, height);
 	SetupCameraMatrix(m_camera.m_cameraPos, m_camera.m_cameraFront, m_camera.m_cameraUp);
 
-	m_maze.Draw();
+	// Рисуем верхний квадрат
+	m_scene.Draw();
+
+	glTranslatef(0, 0, 1);
+	// Рисуем нижний квадрат
+	
+	
+
+	glTranslatef(0, 0, -1);
 }
 
 void Window::SetupProjectionMatrix(int width, int height)
