@@ -12,15 +12,22 @@ public:
 	Camera(const Camera&) = delete;
 	Camera& operator=(const Camera&) = delete;
 
+	
+
+	void ProcessInput(GLFWwindow* window);
+
+	void CalculateDeltaTime();
+
+	glm::dvec3 GetPos();
+	glm::dvec3 GetFront();
+	glm::dvec3 GetUp();
+
+private:
+	float m_yaw = -180.0f;
 	double m_deltaTime = 0.0f;
 	double m_lastFrame = 0.0f;
 
 	glm::dvec3 m_cameraPos;
 	glm::dvec3 m_cameraFront;
 	glm::dvec3 m_cameraUp;
-
-	void ProcessInput(GLFWwindow* window);
-
-private:
-	float m_yaw = -180.0f;
 };

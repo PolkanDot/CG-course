@@ -8,6 +8,29 @@ Camera::Camera(float positionX, float positionY, float positionZ,
 	m_cameraFront = glm::vec3(frontX, frontY, frontZ);
 	m_cameraUp = glm::vec3(upX, upY, upZ);
 }
+
+glm::dvec3 Camera::GetPos() 
+{
+	return m_cameraPos;
+}
+
+glm::dvec3 Camera::GetFront()
+{
+	return m_cameraFront;
+}
+
+glm::dvec3 Camera::GetUp()
+{
+	return m_cameraUp;
+}
+
+// Делаем временной шаг
+void Camera::CalculateDeltaTime()
+{
+	double currentFrame = static_cast<double>(glfwGetTime());
+	m_deltaTime = currentFrame - m_lastFrame;
+	m_lastFrame = currentFrame;
+}
 // Определение обработки входящих "указаний"
 void Camera::ProcessInput(GLFWwindow* window)
 {

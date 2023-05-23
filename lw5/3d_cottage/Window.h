@@ -3,7 +3,6 @@
 #include "Constants.h"
 #include "Includes/glm/ext/matrix_clip_space.hpp"
 #include "Includes/glm/ext/matrix_transform.hpp"
-#include "Camera.h"
 #include "Scene.h"
 
 class Window
@@ -12,7 +11,6 @@ public:
 	Window(int w, int h, const char* title)
 		: m_window{ MakeWindow(w, h, title) }
 		, m_scene(10.0f, 10.0f)
-		, m_camera(0.0f, 8.0f, 0.5f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f)
 	{
 		if (!m_window)
 		{
@@ -42,7 +40,6 @@ private:
 	static GLFWwindow* MakeWindow(int w, int h, const char* title);
 
 	GLFWwindow* m_window;
-	Camera m_camera;
 	Scene m_scene;
 
 	float theta = 1.0f;

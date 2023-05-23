@@ -65,20 +65,15 @@ void Window::OnRunStart()
 
 void Window::Draw(int width, int height)
 {
-	double currentFrame = static_cast<double>(glfwGetTime());
-	m_camera.m_deltaTime = currentFrame - m_camera.m_lastFrame;
-	m_camera.m_lastFrame = currentFrame;
+	m_scene.HandlingMovement(m_window);
 
 	glNormal3f(0, 0, 1);
-	
-
-	m_camera.ProcessInput(m_window);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glColor3f(1, 1, 1);
 
 	SetupProjectionMatrix(width, height);
-	SetupCameraMatrix(m_camera.m_cameraPos, m_camera.m_cameraFront, m_camera.m_cameraUp);
+	SetupCameraMatrix(m_scene.GetCameraPos(), m_scene.GetCameraFront(), m_scene.GetCameraUp());
 
 
 	glPushMatrix();
