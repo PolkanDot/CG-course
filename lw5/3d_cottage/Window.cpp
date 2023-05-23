@@ -1,4 +1,5 @@
 #define _USE_MATH_DEFINES
+#include "glfw3.h"
 #include "Window.h"
 #include "Constants.h"
 #include <chrono>
@@ -52,11 +53,14 @@ void Window::OnRunStart()
 	// Включаем тест глубины для удаления невидимых линий и поверхностей
 	glEnable(GL_DEPTH_TEST);
 	// Задаем цвет очистки буфера кадра
-	glClearColor(1, 1, 1, 1);
+	glClearColor(0, 0, 0, 1);
 	//Читаем заданный массив их файла
 	//m_maze.ReadMazeFromFile();
 
 	//m_maze.AddFog();
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	glEnable(GL_COLOR_MATERIAL);
 }
 
 void Window::Draw(int width, int height)
@@ -64,6 +68,9 @@ void Window::Draw(int width, int height)
 	double currentFrame = static_cast<double>(glfwGetTime());
 	m_camera.m_deltaTime = currentFrame - m_camera.m_lastFrame;
 	m_camera.m_lastFrame = currentFrame;
+
+	glNormal3f(0, 0, 1);
+	
 
 	m_camera.ProcessInput(m_window);
 
@@ -73,15 +80,24 @@ void Window::Draw(int width, int height)
 	SetupProjectionMatrix(width, height);
 	SetupCameraMatrix(m_camera.m_cameraPos, m_camera.m_cameraFront, m_camera.m_cameraUp);
 
+
+	glPushMatrix();
+		// Перемещение источника света
+		glRotatef(theta, 0, 1, 0);
+		float position[] = { 0, 0, 1, 0 };
+		theta += 0.1f;
+		glLightfv(GL_LIGHT0, GL_POSITION, position);
+		// Отрисовка источника света
+		glTranslatef(0, 0, 1);
+		glScalef(0.2, 0.2, 0.2);
+		glColor3f(1, 1, 1);
+		m_scene.Draw();
+	glPopMatrix();
+
 	// Рисуем верхний квадрат
+	glColor3f(0.3, 0.3, 0.3);
 	m_scene.Draw();
 
-	glTranslatef(0, 0, 1);
-	// Рисуем нижний квадрат
-	
-	
-
-	glTranslatef(0, 0, -1);
 }
 
 void Window::SetupProjectionMatrix(int width, int height)
