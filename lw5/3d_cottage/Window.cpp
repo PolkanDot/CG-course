@@ -4,9 +4,7 @@
 #include "Constants.h"
 #include <chrono>
 #include <cmath>
-// устранить мельчешение текстур (фильтрация текстур)
-// проблема с архитектурой (все данные в классах публичные, хотябы ... или ... с митмапами) 
-// учитывать время между кадрами при поворотах и передвижении, иначе будет ускорятся и замедляться
+
 GLFWwindow* Window::MakeWindow(int w, int h, const char* title)
 {
 	glfwWindowHint(GLFW_DEPTH_BITS, 24);
@@ -46,28 +44,23 @@ void Window::OnRunStart()
 	m_scene.LoadingTexture("textures/2.png", m_scene.wallTexture2);
 	m_scene.LoadingTexture("textures/3.png", m_scene.wallTexture3);
 	m_scene.LoadingTexture("textures/4.png", m_scene.wallTexture4);
-
-	glEnable(GL_TEXTURE_2D);
-	
-
 	// Включаем тест глубины для удаления невидимых линий и поверхностей
 	glEnable(GL_DEPTH_TEST);
 	// Задаем цвет очистки буфера кадра
-	glClearColor(0, 0, 0, 1);
-	//Читаем заданный массив их файла
-	//m_maze.ReadMazeFromFile();
-
-	//m_maze.AddFog();
+	glClearColor(1, 1, 1, 1);
+	// Включаем освещение
 	glEnable(GL_LIGHTING);
+	// Выбираем нулевой источник света
 	glEnable(GL_LIGHT0);
+	// Включаем передачу цвета при освещении
 	glEnable(GL_COLOR_MATERIAL);
+	// Включаем автоматическую нормализацию векторов нормали
+	glEnable(GL_NORMALIZE);
 }
 
 void Window::Draw(int width, int height)
 {
 	m_scene.HandlingMovement(m_window);
-
-	glNormal3f(0, 0, 1);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glColor3f(1, 1, 1);
@@ -78,15 +71,18 @@ void Window::Draw(int width, int height)
 
 	glPushMatrix();
 		// Перемещение источника света
+		glRotatef(30, 0, 0, 1);
 		glRotatef(theta, 0, 1, 0);
 		float position[] = { 0, 0, 5, 0};
+		float backgroundLighting[] = { 1, 1, 1, 0.5 };
 		theta += 0.1f;
 		glLightfv(GL_LIGHT0, GL_POSITION, position);
+		glLightfv(GL_LIGHT0, GL_AMBIENT, backgroundLighting);
 		// Отрисовка источника света
 		glTranslatef(0, 0, 5);
 		glScalef(0.1, 0.1, 0.1);
 		glColor3f(1, 1, 1);
-		m_scene.Draw();
+		glRectf(0, 0, 1, 1);
 	glPopMatrix();
 
 	// Рисуем верхний квадрат

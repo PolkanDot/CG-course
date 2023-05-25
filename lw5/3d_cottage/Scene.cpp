@@ -56,22 +56,18 @@ void Scene::HandlingMovement(GLFWwindow* window)
 
 void Scene::Draw()
 {
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, bottomTexture);
+	glNormal3f(0, 0, 1);
 	glRectf(0, 0, m_width, m_length);
 
-	/*glBindTexture(GL_TEXTURE_2D, wallTexture1);
+	glBindTexture(GL_TEXTURE_2D, wallTexture1);
 	glPushMatrix();
 	{
-		glScalef(1.0f, 1.0f, 0.7f);
-		glTranslatef(1.0f, 1.0f, 1.0f);
+		//glScalef(2.0f, 1.0f, 2.0f);
+		//glTranslatef(1.0f, 1.0f, 1.0f);
 		m_cube.Draw();
 	}
-	glPopMatrix();
-	glPushMatrix();
-	{
-		glScalef(1.0f, 1.0f, 0.7f);
-		glTranslatef(-2.0f, 1.0f, 1.0f);
-		m_cube.Draw();
-	}
-	glPopMatrix();*/
-	
+	glPopMatrix();	
+	glDisable(GL_TEXTURE_2D);
 }
