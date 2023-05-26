@@ -10,7 +10,7 @@ class Window
 public:
 	Window(int w, int h, const char* title)
 		: m_window{ MakeWindow(w, h, title) }
-		, m_scene(10.0f, 10.0f)
+		, m_scene(10.0f)
 	{
 		if (!m_window)
 		{

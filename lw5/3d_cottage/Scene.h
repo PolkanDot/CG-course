@@ -5,12 +5,11 @@
 class Scene
 {
 public:
-	Scene(float w, float l)
+	Scene(float s)
 		: m_camera(10.0f, 5.0f, 0.5f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f)
 		, m_cube()
 	{
-		m_width = w;
-		m_length = l;
+		m_size = s;
 	}
 	Scene(const Scene&) = delete;
 	Scene& operator=(const Scene&) = delete;
@@ -22,13 +21,12 @@ public:
 
 	void Draw();
 
-	float GetWidth();
-	float GetLength();
+	float GetSize();
 
 	glm::dvec3 GetCameraPos();
 	glm::dvec3 GetCameraFront();
 	glm::dvec3 GetCameraUp();
-	// ïëîõî
+	// плохо
 	unsigned int skyTexture = 0;
 	unsigned int bottomTexture = 0;
 	unsigned int wallTexture1 = 0;
@@ -37,10 +35,7 @@ public:
 	unsigned int wallTexture4 = 0;
 
 private:
-	float m_width;
-	float m_length;
-
-
+	float m_size;
 
 	Camera m_camera;
 	Cube m_cube;

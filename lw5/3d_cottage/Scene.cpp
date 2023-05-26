@@ -21,14 +21,9 @@ glm::dvec3 Scene::GetCameraUp()
 	return m_camera.GetUp();
 }
 
-float Scene::GetWidth()
+float Scene::GetSize()
 {
-	return m_width;
-}
-
-float Scene::GetLength()
-{
-	return m_length;
+	return m_size;
 }
 
 void Scene::LoadingTexture(const char* name, unsigned int& index)
@@ -64,12 +59,12 @@ void Scene::Draw()
 		glNormal3f(0.0f, 0.0f, 1.0f);
 		glTexCoord2f(0.0f, 0.0f);
 		glVertex3f(0, 0, 0);
-		glTexCoord2f(1.0f * m_width, 0.0f);
-		glVertex3f(0, m_width, 0);
-		glTexCoord2f(1.0f * m_width, 1.0f * m_width);
-		glVertex3f(m_width, m_width, 0);
-		glTexCoord2f(0.0f, 1.0f * m_width);
-		glVertex3f(m_width, 0, 0);
+		glTexCoord2f(1.0f * m_size, 0.0f);
+		glVertex3f(0, m_size, 0);
+		glTexCoord2f(1.0f * m_size, 1.0f * m_size);
+		glVertex3f(m_size, m_size, 0);
+		glTexCoord2f(0.0f, 1.0f * m_size);
+		glVertex3f(m_size, 0, 0);
 	}
 	glEnd();
 
