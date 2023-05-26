@@ -50,9 +50,8 @@ void Scene::HandlingMovement(GLFWwindow* window)
 	m_camera.ProcessInput(window);
 }
 
-void Scene::Draw()
+void Scene::DrawSun()
 {
-	// Источник света
 	glPushMatrix();
 		// Перемещение источника света
 		glTranslatef(5, 5, 0);
@@ -68,8 +67,10 @@ void Scene::Draw()
 			glRectf(0, 0, 1, 1);
 		glPopMatrix();
 	glPopMatrix();
+}
 
-	// Отрисовка участка
+void Scene::DrawLand()
+{
 	glEnable(GL_TEXTURE_2D);
 	glColor3f(0.5, 0.5, 0.5);
 	glBindTexture(GL_TEXTURE_2D, bottomTexture);
@@ -86,8 +87,10 @@ void Scene::Draw()
 		glVertex3f(m_size, 0, 0);
 	}
 	glEnd();
+}
 
-	// Отрисовка дома
+void Scene::DrawCottage()
+{
 	glBindTexture(GL_TEXTURE_2D, wallTexture1);
 	glPushMatrix();
 	{
@@ -97,4 +100,12 @@ void Scene::Draw()
 	}
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
+}
+
+void Scene::Draw()
+{
+	DrawSun();
+	DrawLand();
+	DrawCottage();
+	
 }
