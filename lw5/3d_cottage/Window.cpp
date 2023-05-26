@@ -56,6 +56,9 @@ void Window::OnRunStart()
 	glEnable(GL_COLOR_MATERIAL);
 	// 
 	glEnable(GL_NORMALIZE);
+	//
+	float backgroundLighting[] = { 1, 1, 1, 0.01 };
+	glLightfv(GL_LIGHT0, GL_AMBIENT, backgroundLighting);
 }
 
 void Window::Draw(int width, int height)
@@ -68,29 +71,11 @@ void Window::Draw(int width, int height)
 	SetupProjectionMatrix(width, height);
 	SetupCameraMatrix(m_scene.GetCameraPos(), m_scene.GetCameraFront(), m_scene.GetCameraUp());
 
-
-	glPushMatrix();
-	// 
-	glRotatef(30, 0, 0, 1);
-	glRotatef(theta, 0, 1, 0);
-	float position[] = { 0, 0, 5, 0 };
-	float backgroundLighting[] = { 1, 1, 1, 0.5 };
-	theta += 0.1f;
-	glLightfv(GL_LIGHT0, GL_POSITION, position);
-	glLightfv(GL_LIGHT0, GL_AMBIENT, backgroundLighting);
-	// 
-	glTranslatef(0, 0, 5);
-	glScalef(0.1, 0.1, 0.1);
-	glColor3f(0, 0, 0);
-	glRectf(0, 0, 1, 1);
-	glPopMatrix();
+	
 
 	// 
-	glPushMatrix();
-	glTranslatef(-m_scene.GetSize() / 2, -m_scene.GetSize() / 2, 0);
-	glColor3f(0.3, 0.3, 0.3);
+	
 	m_scene.Draw();
-	glPopMatrix();
 
 }
 

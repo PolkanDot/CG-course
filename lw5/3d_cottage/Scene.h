@@ -36,7 +36,7 @@ public:
 
 private:
 	float m_size;
-
+	float theta = 0.0f;
 	Camera m_camera;
 	Cube m_cube;
 };

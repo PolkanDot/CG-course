@@ -41,6 +41,4 @@ private:
 
 	GLFWwindow* m_window;
 	Scene m_scene;
-
-	float theta = 1.0f;
 };

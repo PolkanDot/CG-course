@@ -52,7 +52,25 @@ void Scene::HandlingMovement(GLFWwindow* window)
 
 void Scene::Draw()
 {
+	// Источник света
+	glPushMatrix();
+		// Перемещение источника света
+		glTranslatef(5, 5, 0);
+		theta += 0.05f;
+		glRotatef(45, 0, 0, 1);
+		glRotatef(theta, 0, 1, 0);
+		float position[] = { 0, 0, 7, 0 };	
+		glLightfv(GL_LIGHT0, GL_POSITION, position);
+		// Отрисовка источника света
+		glPushMatrix();
+			glTranslatef(0, 0, 7);
+			glColor3f(0.5, 0.5, 0.0);
+			glRectf(0, 0, 1, 1);
+		glPopMatrix();
+	glPopMatrix();
+
 	glEnable(GL_TEXTURE_2D);
+	glColor3f(0.5, 0.5, 0.5);
 	glBindTexture(GL_TEXTURE_2D, bottomTexture);
 	glBegin(GL_QUADS);
 	{
