@@ -45,6 +45,12 @@ void Camera::ProcessInput(GLFWwindow* window)
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 	{
 		futureCameraPos += cameraSpeed * m_cameraFront;
+
+		if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+		{
+			futureCameraPos += cameraSpeed * m_cameraFront * 2.0;
+		}
+		
 		m_cameraPos = futureCameraPos;
 	}
 	// Назад - S
