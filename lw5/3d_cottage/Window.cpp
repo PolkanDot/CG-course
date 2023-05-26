@@ -63,18 +63,16 @@ void Window::OnRunStart()
 
 void Window::Draw(int width, int height)
 {
+	// Обработка нажатий клавишь
 	m_scene.HandlingMovement(m_window);
-
+	// Предварительная очиствка кадра
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glColor3f(1, 1, 1);
-
+	// Переопределение матрицы проецирования
 	SetupProjectionMatrix(width, height);
+	// Переопределение видовой матрицы
 	SetupCameraMatrix(m_scene.GetCameraPos(), m_scene.GetCameraFront(), m_scene.GetCameraUp());
 
-	
-
-	// 
-	
+	// Отрисовка сцены
 	m_scene.Draw();
 
 }

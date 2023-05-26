@@ -69,6 +69,7 @@ void Scene::Draw()
 		glPopMatrix();
 	glPopMatrix();
 
+	// Отрисовка участка
 	glEnable(GL_TEXTURE_2D);
 	glColor3f(0.5, 0.5, 0.5);
 	glBindTexture(GL_TEXTURE_2D, bottomTexture);
@@ -86,7 +87,7 @@ void Scene::Draw()
 	}
 	glEnd();
 
-
+	// Отрисовка дома
 	glBindTexture(GL_TEXTURE_2D, wallTexture1);
 	glPushMatrix();
 	{
