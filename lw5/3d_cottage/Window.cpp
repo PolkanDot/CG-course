@@ -81,11 +81,11 @@ void Window::Draw(int width, int height)
 		// Отрисовка источника света
 		glTranslatef(0, 0, 5);
 		glScalef(0.1, 0.1, 0.1);
-		glColor3f(1, 1, 1);
+		glColor3f(0, 0, 0);
 		glRectf(0, 0, 1, 1);
 	glPopMatrix();
 
-	// Рисуем верхний квадрат
+	// Рисуем сцену
 	glPushMatrix();
 	glTranslatef(-m_scene.GetWidth() / 2, -m_scene.GetLength() / 2, 0);
 	glColor3f(0.3, 0.3, 0.3);

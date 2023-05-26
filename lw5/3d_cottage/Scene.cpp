@@ -1,4 +1,5 @@
 #include "Scene.h"
+#include "Constants.h"
 #include "glfw3.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "Includes/stb_image.h"
@@ -58,8 +59,20 @@ void Scene::Draw()
 {
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, bottomTexture);
-	glNormal3f(0, 0, 1);
-	glRectf(0, 0, m_width, m_length);
+	glBegin(GL_QUADS);
+	{
+		glNormal3f(0.0f, 0.0f, 1.0f);
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(0, 0, 0);
+		glTexCoord2f(1.0f * m_width, 0.0f);
+		glVertex3f(0, m_width, 0);
+		glTexCoord2f(1.0f * m_width, 1.0f * m_width);
+		glVertex3f(m_width, m_width, 0);
+		glTexCoord2f(0.0f, 1.0f * m_width);
+		glVertex3f(m_width, 0, 0);
+	}
+	glEnd();
+	
 
 	glBindTexture(GL_TEXTURE_2D, wallTexture1);
 	glPushMatrix();
