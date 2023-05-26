@@ -72,7 +72,7 @@ void Scene::Draw()
 		glVertex3f(m_width, 0, 0);
 	}
 	glEnd();
-	
+
 
 	glBindTexture(GL_TEXTURE_2D, wallTexture1);
 	glPushMatrix();
@@ -81,6 +81,6 @@ void Scene::Draw()
 		//glTranslatef(1.0f, 1.0f, 1.0f);
 		m_cube.Draw();
 	}
-	glPopMatrix();	
+	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
 }

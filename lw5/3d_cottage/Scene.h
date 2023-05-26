@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include "Camera.h"
 #include "Cube.h"
 
@@ -6,7 +6,7 @@ class Scene
 {
 public:
 	Scene(float w, float l)
-		: m_camera(0.0f, 8.0f, 0.5f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f)
+		: m_camera(10.0f, 5.0f, 0.5f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f)
 		, m_cube()
 	{
 		m_width = w;
@@ -28,7 +28,7 @@ public:
 	glm::dvec3 GetCameraPos();
 	glm::dvec3 GetCameraFront();
 	glm::dvec3 GetCameraUp();
-	// плохо
+	// ГЇГ«Г®ГµГ®
 	unsigned int skyTexture = 0;
 	unsigned int bottomTexture = 0;
 	unsigned int wallTexture1 = 0;
@@ -40,7 +40,7 @@ private:
 	float m_width;
 	float m_length;
 
-	
+
 
 	Camera m_camera;
 	Cube m_cube;
