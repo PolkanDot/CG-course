@@ -14,26 +14,6 @@ void Cube::Draw() const
 
 	glBegin(GL_QUADS);
 	{
-		/*glNormal3f(0.0f, 0.0f, 1.0f);
-		glTexCoord2f(0.0f, 0.0f);
-		glVertex3f(-0.5f * m_size, -0.5f * m_size, 0.5f * m_size);
-		glTexCoord2f(1.0f, 0.0f);
-		glVertex3f(0.5f * m_size, -0.5f * m_size, 0.5f * m_size);
-		glTexCoord2f(1.0f, 1.0f);
-		glVertex3f(0.5f * m_size, 0.5f * m_size, 0.5f * m_size);
-		glTexCoord2f(0.0f, 1.0f);
-		glVertex3f(-0.5f * m_size, 0.5f * m_size, 0.5f * m_size);*/
-
-		/*glNormal3f(0.0f, 0.0f, -1.0f);
-		glTexCoord2f(0.0f, 0.0f);
-		glVertex3f(0.5f * m_size, -0.5f * m_size, -0.5f * m_size);
-		glTexCoord2f(1.0f, 0.0f);
-		glVertex3f(-0.5f * m_size, -0.5f * m_size, -0.5f * m_size);
-		glTexCoord2f(1.0f, 1.0f);
-		glVertex3f(-0.5f * m_size, 0.5f * m_size, -0.5f * m_size);
-		glTexCoord2f(0.0f, 1.0f);
-		glVertex3f(0.5f * m_size, 0.5f * m_size, -0.5f * m_size);*/
-
 		//x+
 		glNormal3f(1.0f, 0.0f, 0.0f);
 		glTexCoord2f(1.0f, 0.0f);
