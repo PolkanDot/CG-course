@@ -19,9 +19,11 @@ public:
 	void LoadingTexture(const char* name, unsigned int& index);
 	void HandlingMovement(GLFWwindow* window);
 
-	void DrawCottage();
 	void DrawSun();
 	void DrawLand();
+	void DrawGarage(float coordX, float coordY, float height);
+	void DrawCottage(float coordX, float coordY, float height);
+	
 
 	void Draw();
 

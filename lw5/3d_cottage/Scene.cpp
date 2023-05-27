@@ -54,15 +54,15 @@ void Scene::DrawSun()
 {
 	glPushMatrix();
 		// Перемещение источника света
-		glTranslatef(5, 5, 0);
+		glTranslatef(m_size / 2, m_size / 2, 0);
 		theta += 0.05f;
 		glRotatef(45, 0, 0, 1);
 		glRotatef(theta, 0, 1, 0);
-		float position[] = { 0, 0, 7, 0 };	
+		float position[] = { 0, 0, m_size * 0.7, 0 };
 		glLightfv(GL_LIGHT0, GL_POSITION, position);
 		// Отрисовка источника света
 		glPushMatrix();
-			glTranslatef(0, 0, 7);
+			glTranslatef(0, 0, m_size * 0.7);
 			glColor3f(0.5, 0.5, 0.0);
 			glRectf(0, 0, 1, 1);
 		glPopMatrix();
@@ -72,6 +72,7 @@ void Scene::DrawSun()
 void Scene::DrawLand()
 {
 	glEnable(GL_TEXTURE_2D);
+	// Выбираем серый цвет, чтобы был виден эффект освещения
 	glColor3f(0.5, 0.5, 0.5);
 	glBindTexture(GL_TEXTURE_2D, bottomTexture);
 	glBegin(GL_QUADS);
@@ -89,23 +90,29 @@ void Scene::DrawLand()
 	glEnd();
 }
 
-void Scene::DrawCottage()
+void Scene::DrawGarage(float coordX, float coordY, float height)
 {
 	glBindTexture(GL_TEXTURE_2D, wallTexture1);
 	glPushMatrix();
 	{
-		//glScalef(2.0f, 1.0f, 2.0f);
-		//glTranslatef(1.0f, 1.0f, 1.0f);
+		m_cube.SetSize(height);
+		glTranslatef(coordX, coordY, 1.0f);
+		glScalef(2.0f, 1.0f, 1.0f);
 		m_cube.Draw();
 	}
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
 }
 
+void Scene::DrawCottage(float coordX, float coordY, float height)
+{
+	DrawGarage(coordX, coordY, height / 2);
+}
+
 void Scene::Draw()
 {
 	DrawSun();
 	DrawLand();
-	DrawCottage();
+	DrawCottage(0, 0, 5);
 	
 }
