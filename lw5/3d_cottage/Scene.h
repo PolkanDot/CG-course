@@ -33,7 +33,7 @@ public:
 	glm::dvec3 GetCameraFront();
 	glm::dvec3 GetCameraUp();
 	// плохо
-	unsigned int skyTexture = 0;
+	unsigned int cottageBottomTexture = 0;
 	unsigned int bottomTexture = 0;
 	unsigned int wallTexture1 = 0;
 	unsigned int wallTexture2 = 0;

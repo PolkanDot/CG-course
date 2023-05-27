@@ -80,11 +80,11 @@ void Scene::DrawLand()
 		glNormal3f(0.0f, 0.0f, 1.0f);
 		glTexCoord2f(0.0f, 0.0f);
 		glVertex3f(0, 0, 0);
-		glTexCoord2f(1.0f * m_size, 0.0f);
+		glTexCoord2f(m_size, 0.0f);
 		glVertex3f(0, m_size, 0);
-		glTexCoord2f(1.0f * m_size, 1.0f * m_size);
+		glTexCoord2f(m_size, m_size);
 		glVertex3f(m_size, m_size, 0);
-		glTexCoord2f(0.0f, 1.0f * m_size);
+		glTexCoord2f(0.0f, m_size);
 		glVertex3f(m_size, 0, 0);
 	}
 	glEnd();
@@ -92,13 +92,13 @@ void Scene::DrawLand()
 
 void Scene::DrawGarage(float coordX, float coordY, float height)
 {
-	glBindTexture(GL_TEXTURE_2D, wallTexture1);
+	glBindTexture(GL_TEXTURE_2D, cottageBottomTexture);
 	glPushMatrix();
 	{
 		m_cube.SetSize(height);
-		glTranslatef(coordX, coordY, 1.0f);
-		glScalef(2.0f, 1.0f, 1.0f);
-		m_cube.Draw();
+		//glTranslatef(coordX, coordY, 0.0f);
+		//glScalef(2.0f, 1.0f, 1.0f);
+		m_cube.Draw(0, 0);
 	}
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);

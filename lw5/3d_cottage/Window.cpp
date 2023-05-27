@@ -38,12 +38,12 @@ void Window::OnRunStart()
 	//glFrontFace(GL_CCW);
 
 	//
-	m_scene.LoadingTexture("textures/sky.png", m_scene.skyTexture);
+	m_scene.LoadingTexture("textures/bottomLevel.png", m_scene.cottageBottomTexture);
 	m_scene.LoadingTexture("textures/grass.png", m_scene.bottomTexture);
-	m_scene.LoadingTexture("textures/1.png", m_scene.wallTexture1);
-	m_scene.LoadingTexture("textures/2.png", m_scene.wallTexture2);
-	m_scene.LoadingTexture("textures/3.png", m_scene.wallTexture3);
-	m_scene.LoadingTexture("textures/4.png", m_scene.wallTexture4);
+	//m_scene.LoadingTexture("textures/1.png", m_scene.wallTexture1);
+	//m_scene.LoadingTexture("textures/2.png", m_scene.wallTexture2);
+	//m_scene.LoadingTexture("textures/3.png", m_scene.wallTexture3);
+	//m_scene.LoadingTexture("textures/4.png", m_scene.wallTexture4);
 	// 
 	glEnable(GL_DEPTH_TEST);
 	// 
