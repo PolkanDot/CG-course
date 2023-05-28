@@ -71,6 +71,18 @@ void Camera::ProcessInput(GLFWwindow* window)
 		futureCameraPos += glm::normalize(glm::cross(m_cameraFront, m_cameraUp)) * cameraSpeed;
 		m_cameraPos = futureCameraPos;
 	}
+	// Вверх - Т
+	if (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS)
+	{
+		futureCameraPos.z += 0.005;
+		m_cameraPos = futureCameraPos;
+	}
+	// Вниз - G
+	if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
+	{
+		futureCameraPos.z -= 0.005;
+		m_cameraPos = futureCameraPos;
+	}
 	// Сделать, чтобы камера вращалась с одинаковой скоростью при любой ширине экрана
 	// Вращение налево - F	
 	if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
@@ -83,8 +95,8 @@ void Camera::ProcessInput(GLFWwindow* window)
 		m_cameraFront = glm::normalize(front);
 		m_cameraFront = glm::normalize(front);
 	}
-	// Вращение направо - G
-	if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
+	// Вращение направо - H
+	if (glfwGetKey(window, GLFW_KEY_H) == GLFW_PRESS)
 	{
 
 		m_yaw -= 0.4;
