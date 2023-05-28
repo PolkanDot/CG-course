@@ -21,7 +21,8 @@ public:
 
 	void DrawSun();
 	void DrawLand();
-	void DrawGarage(float coordX, float coordY, float height);
+	void DrawRoof(float coordX, float coordY, float coordZ, float length, float width);
+	void DrawGarage(float coordX, float coordY, float length, float width, float height);
 	void DrawCottage(float coordX, float coordY, float height);
 	
 
@@ -36,7 +37,7 @@ public:
 	unsigned int cottageBottomTexture = 0;
 	unsigned int bottomTexture = 0;
 	unsigned int cottageMidleTexture = 0;
-	unsigned int wallTexture2 = 0;
+	unsigned int roofTop = 0;
 	unsigned int wallTexture3 = 0;
 	unsigned int wallTexture4 = 0;
 

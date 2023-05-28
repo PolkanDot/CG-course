@@ -1,7 +1,8 @@
+#define STB_IMAGE_IMPLEMENTATION
+#define _USE_MATH_DEFINES
 #include "Scene.h"
 #include "Constants.h"
 #include "glfw3.h"
-#define STB_IMAGE_IMPLEMENTATION
 #include "Includes/stb_image.h"
 #include <iostream>
 #include <fstream>
@@ -90,15 +91,63 @@ void Scene::DrawLand()
 	glEnd();
 }
 
-void Scene::DrawGarage(float coordX, float coordY, float height)
+void Scene::DrawRoof(float coordX, float coordY, float coordZ, float length, float width)
 {
 	glEnable(GL_TEXTURE_2D);
-	m_cube.SetSize(height);
+	glBindTexture(GL_TEXTURE_2D, roofTop);
+	glPushMatrix();
+	{	
+		glTranslatef(coordX, coordY, coordZ);
+		glRotatef(45.0f, 1.0f, 0.0f, 0.0f);
+		glNormal3f(0.0f, -1.0f, 1.0f);
+		glBegin(GL_QUADS);
+		{
+			glTexCoord2f(1.0f, 1.0f);
+			glVertex3f(0.0f, 0.0f, 0.0f);
+			glTexCoord2f(0.0f, 1.0f);
+			glVertex3f(length, 0.0f, 0.0f);
+			glTexCoord2f(0.0f, 0.0f);
+			glVertex3f(length, (width / 2) / sin(M_PI / 4), 0.0f);
+			glTexCoord2f(1.0f, 0.0f);
+			glVertex3f(0, (width / 2) / sin(M_PI / 4), 0.0f);
+		}
+		glEnd();		
+	}
+	glPopMatrix();
+
+	glPushMatrix();
+	{
+		glTranslatef(coordX, coordY + width, coordZ);
+		glRotatef(135.0f, 1.0f, 0.0f, 0.0f);
+		glNormal3f(0.0f, -1.0f, 1.0f);
+		glBegin(GL_QUADS);
+		{
+			glTexCoord2f(1.0f, 1.0f);
+			glVertex3f(0.0f, 0.0f, 0.0f);
+			glTexCoord2f(0.0f, 1.0f);
+			glVertex3f(length, 0.0f, 0.0f);
+			glTexCoord2f(0.0f, 0.0f);
+			glVertex3f(length, (width / 2) / sin(M_PI / 4), 0.0f);
+			glTexCoord2f(1.0f, 0.0f);
+			glVertex3f(0, (width / 2) / sin(M_PI / 4), 0.0f);
+		}
+		glEnd();
+	}
+	glPopMatrix();
+	glDisable(GL_TEXTURE_2D);
+}
+
+void Scene::DrawGarage(float coordX, float coordY, float length, float width, float height)
+{
+	glEnable(GL_TEXTURE_2D);
+	float wallHeight = height / 1.5;
+	m_cube.SetSize(wallHeight);
+
 	glPushMatrix();
 	{
 		glBindTexture(GL_TEXTURE_2D, cottageBottomTexture);		
 		glTranslatef(coordX, coordY, 0);
-		glScalef(2.0f, 1.0f, 0.2f);
+		glScalef(length / wallHeight, width / wallHeight, 0.2f);
 		m_cube.Draw();
 	}
 	glPopMatrix();
@@ -106,17 +155,19 @@ void Scene::DrawGarage(float coordX, float coordY, float height)
 	glPushMatrix();
 	{
 		glBindTexture(GL_TEXTURE_2D, cottageMidleTexture);
-		glTranslatef(coordX, coordY, height * 0.2);
-		glScalef(2.0f, 1.0f, 0.5f);
+		glTranslatef(coordX, coordY, wallHeight * 0.2);
+		glScalef(length / wallHeight, width / wallHeight, 0.8f);
 		m_cube.Draw();
 	}
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
+
+	DrawRoof(coordX, coordY, wallHeight, length, width);
 }
 
 void Scene::DrawCottage(float coordX, float coordY, float height)
 {
-	DrawGarage(coordX, coordY, height / 3);
+	DrawGarage(coordX, coordY, height, height / 2, height / 1.5);
 }
 
 void Scene::Draw()
