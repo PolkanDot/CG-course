@@ -40,7 +40,7 @@ void Window::OnRunStart()
 	//
 	m_scene.LoadingTexture("textures/bottomLevel.png", m_scene.cottageBottomTexture);
 	m_scene.LoadingTexture("textures/grass.png", m_scene.bottomTexture);
-	//m_scene.LoadingTexture("textures/1.png", m_scene.wallTexture1);
+	m_scene.LoadingTexture("textures/midleLevel.png", m_scene.cottageMidleTexture);
 	//m_scene.LoadingTexture("textures/2.png", m_scene.wallTexture2);
 	//m_scene.LoadingTexture("textures/3.png", m_scene.wallTexture3);
 	//m_scene.LoadingTexture("textures/4.png", m_scene.wallTexture4);

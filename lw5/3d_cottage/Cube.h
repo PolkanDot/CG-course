@@ -5,7 +5,7 @@ class Cube
 {
 public:
 	explicit Cube(float size = 1);
-	void Draw(int x, int y) const;
+	void Draw() const;
 
 	void SetSize(float size);
 	void SetSpecularColor(glm::vec4 color);

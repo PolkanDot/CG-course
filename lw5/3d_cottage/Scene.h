@@ -35,7 +35,7 @@ public:
 	// плохо
 	unsigned int cottageBottomTexture = 0;
 	unsigned int bottomTexture = 0;
-	unsigned int wallTexture1 = 0;
+	unsigned int cottageMidleTexture = 0;
 	unsigned int wallTexture2 = 0;
 	unsigned int wallTexture3 = 0;
 	unsigned int wallTexture4 = 0;

@@ -6,7 +6,7 @@ Cube::Cube(float size)
 {
 }
 
-void Cube::Draw(int x, int y) const
+void Cube::Draw() const
 {
 
 	/*
@@ -29,14 +29,14 @@ void Cube::Draw(int x, int y) const
 	*/
 	// ћассив координат вершин
 	float vertices[8][3] = {
-		{ 0 + x, 0 + y, 0 }, // 0
-		{ m_size + x, 0 + y, 0 }, // 1
-		{ m_size + x, m_size + y, 0 }, // 2
-		{ 0 + x, m_size + y, 0 }, // 3
-		{ 0 + x, 0 + y, m_size }, // 4
-		{ m_size + x, 0 + y, m_size }, // 5
-		{ m_size + x, m_size + y, m_size }, // 6
-		{ 0 + x, m_size + y, m_size }, // 7
+		{ 0, 0, 0 }, // 0
+		{ m_size, 0, 0 }, // 1
+		{ m_size, m_size, 0 }, // 2
+		{ 0, m_size, 0 }, // 3
+		{ 0, 0, m_size }, // 4
+		{ m_size, 0, m_size }, // 5
+		{ m_size, m_size, m_size }, // 6
+		{ 0, m_size, m_size }, // 7
 	};
 
 	// ћассив координат граней (в пор€дке, совпадающем с

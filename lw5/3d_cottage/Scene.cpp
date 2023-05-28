@@ -92,13 +92,23 @@ void Scene::DrawLand()
 
 void Scene::DrawGarage(float coordX, float coordY, float height)
 {
-	glBindTexture(GL_TEXTURE_2D, cottageBottomTexture);
+	glEnable(GL_TEXTURE_2D);
+	m_cube.SetSize(height);
 	glPushMatrix();
 	{
-		m_cube.SetSize(height);
-		//glTranslatef(coordX, coordY, 0.0f);
-		//glScalef(2.0f, 1.0f, 1.0f);
-		m_cube.Draw(0, 0);
+		glBindTexture(GL_TEXTURE_2D, cottageBottomTexture);		
+		glTranslatef(coordX, coordY, 0);
+		glScalef(2.0f, 1.0f, 0.2f);
+		m_cube.Draw();
+	}
+	glPopMatrix();
+
+	glPushMatrix();
+	{
+		glBindTexture(GL_TEXTURE_2D, cottageMidleTexture);
+		glTranslatef(coordX, coordY, height * 0.2);
+		glScalef(2.0f, 1.0f, 0.5f);
+		m_cube.Draw();
 	}
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
@@ -106,13 +116,13 @@ void Scene::DrawGarage(float coordX, float coordY, float height)
 
 void Scene::DrawCottage(float coordX, float coordY, float height)
 {
-	DrawGarage(coordX, coordY, height / 2);
+	DrawGarage(coordX, coordY, height / 3);
 }
 
 void Scene::Draw()
 {
 	DrawSun();
 	DrawLand();
-	DrawCottage(0, 0, 5);
+	DrawCottage(m_size / 2, m_size / 2, 4);
 	
 }
