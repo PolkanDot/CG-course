@@ -137,6 +137,31 @@ void Scene::DrawRoof(float coordX, float coordY, float coordZ, float length, flo
 	glDisable(GL_TEXTURE_2D);
 }
 
+void Scene::DrawMainHouse(float coordX, float coordY, float length, float width, float height)
+{
+	glEnable(GL_TEXTURE_2D);
+	float wallHeight = height * 0.7;
+	m_cube.SetSize(wallHeight);
+
+	glPushMatrix();
+	{
+		glBindTexture(GL_TEXTURE_2D, mainHouseBottom);
+		glTranslatef(coordX, coordY, 0);
+		glScalef(width / wallHeight, length / wallHeight, 0.7f);
+		m_cube.Draw();
+	}
+	glPopMatrix();
+	glPushMatrix();
+	{
+		glBindTexture(GL_TEXTURE_2D, cottageMidleTexture);
+		glTranslatef(coordX, coordY, wallHeight * 0.7f);
+		glScalef(width / wallHeight, length / wallHeight, 0.3f);
+		m_cube.Draw();
+	}
+	glPopMatrix();
+	glDisable(GL_TEXTURE_2D);
+}
+
 void Scene::DrawGarageDoor(float coordX, float coordY, float width, float height)
 {
 	glEnable(GL_TEXTURE_2D);
@@ -147,7 +172,7 @@ void Scene::DrawGarageDoor(float coordX, float coordY, float width, float height
 		glTranslatef(coordX, coordY - (width / 2), 0);
 		glBegin(GL_QUADS);
 		{
-			glNormal3f(-1.0f, 0.0f, 0.0f);
+			glNormal3f(1.0f, 0.0f, 0.0f);
 			glTexCoord2f(0.0f, 0.0f);
 			glVertex3f(0.0f, 0.0f, height);
 			glTexCoord2f(0.0f, 1.0f);
@@ -199,6 +224,17 @@ void Scene::DrawGarageRoof(float coordX, float coordY, float coordZ, float lengt
 		}
 		glEnd();
 		glBindTexture(GL_TEXTURE_2D, garageRoofBottom);
+		glBegin(GL_TRIANGLES);
+		{
+			glNormal3f(0.0f, -1.0f, 0.0f);
+			glTexCoord2f(0.0f, 0.0f);
+			glVertex3f(length / 2, 0.0f, height);
+			glTexCoord2f(0.0f, 1.0f);
+			glVertex3f(0.0f, 0.0f, 0.0f);
+			glTexCoord2f(1.0f, 1.0f);
+			glVertex3f(length, 0.0f, 0.0f);
+		}
+		glEnd();
 		glBegin(GL_QUADS);
 		{		
 			glNormal3f(0.0f, 0.0f, -1.0f);
@@ -231,7 +267,7 @@ void Scene::DrawGarage(float coordX, float coordY, float length, float width, fl
 		m_cube.Draw();
 	}
 	glPopMatrix();
-
+	
 	glPushMatrix();
 	{
 		glBindTexture(GL_TEXTURE_2D, cottageMidleTexture);
@@ -242,19 +278,20 @@ void Scene::DrawGarage(float coordX, float coordY, float length, float width, fl
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
 
-	DrawGarageRoof(coordX * 0.95, coordY * 0.95, wallHeight, length * 1.1, width * 1.2, height - wallHeight);
+	DrawGarageRoof(coordX - (width * 0.1), coordY - (width * 0.1), wallHeight, length * 1.1, width * 1.2, height - wallHeight);
 	DrawGarageDoor(coordX + length + 0.0001, coordY + width / 2, width / 1.5, wallHeight * 0.8);
 }
 
 void Scene::DrawCottage(float coordX, float coordY, float height)
 {
-	DrawGarage(coordX, coordY, height, height / 1.5, height / 1.5);
+	DrawMainHouse(coordX, coordY, height, height * 0.8, height);
+	DrawGarage(coordX, coordY + height, height, height / 1.5, height * 0.7);
 }
 
 void Scene::Draw()
 {
 	DrawSun();
 	DrawLand();
-	DrawCottage(m_size / 2, m_size / 2, 4);
+	DrawCottage(m_size / 8, m_size / 8, 4);
 	
 }

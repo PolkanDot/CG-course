@@ -22,6 +22,7 @@ public:
 	void DrawSun();
 	void DrawLand();
 	void DrawRoof(float coordX, float coordY, float coordZ, float length, float width);
+	void DrawMainHouse(float coordX, float coordY, float length, float width, float height);
 	void DrawGarageDoor(float coordX, float coordY, float width, float height);
 	void DrawGarageRoof(float coordX, float coordY, float coordZ, float length, float width, float height);
 	void DrawGarage(float coordX, float coordY, float length, float width, float height);
@@ -42,6 +43,8 @@ public:
 	unsigned int roofTop = 0;
 	unsigned int garageRoofBottom = 0;
 	unsigned int garageDoor = 0;
+	unsigned int mainHouseBottom = 0;
+	unsigned int m = 0;
 
 private:
 	float m_size;

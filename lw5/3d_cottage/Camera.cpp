@@ -93,7 +93,6 @@ void Camera::ProcessInput(GLFWwindow* window)
 		front.y = sin(glm::radians(m_yaw));
 		front.z = 0.0f;
 		m_cameraFront = glm::normalize(front);
-		m_cameraFront = glm::normalize(front);
 	}
 	// Вращение направо - H
 	if (glfwGetKey(window, GLFW_KEY_H) == GLFW_PRESS)
@@ -103,7 +102,6 @@ void Camera::ProcessInput(GLFWwindow* window)
 		front.x = cos(glm::radians(m_yaw));
 		front.y = sin(glm::radians(m_yaw));
 		front.z = 0.0f;
-		m_cameraFront = glm::normalize(front);
 		m_cameraFront = glm::normalize(front);
 	}
 

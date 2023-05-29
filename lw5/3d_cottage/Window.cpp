@@ -44,6 +44,7 @@ void Window::OnRunStart()
 	m_scene.LoadingTexture("textures/roofTop.png", m_scene.roofTop);
 	m_scene.LoadingTexture("textures/garageRoofBottom.png", m_scene.garageRoofBottom);
 	m_scene.LoadingTexture("textures/garageDoor.png", m_scene.garageDoor);
+	m_scene.LoadingTexture("textures/mainHouseBottom.png", m_scene.mainHouseBottom);
 	// 
 	glEnable(GL_DEPTH_TEST);
 	// 
