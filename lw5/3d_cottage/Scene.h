@@ -21,7 +21,7 @@ public:
 
 	void DrawSun();
 	void DrawLand();
-	void DrawRoof(float coordX, float coordY, float coordZ, float length, float width);
+	void DrawRoof(float length, float width);
 	void DrawMainHouse(float coordX, float coordY, float length, float width, float height);
 	void DrawGarageDoor(float coordX, float coordY, float width, float height);
 	void DrawGarageRoof(float coordX, float coordY, float coordZ, float length, float width, float height);
