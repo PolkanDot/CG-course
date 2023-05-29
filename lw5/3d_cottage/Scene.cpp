@@ -147,7 +147,7 @@ void Scene::DrawGarageRoof(float coordX, float coordY, float coordZ, float lengt
 		glTranslatef(coordX, coordY, coordZ);
 		glBegin(GL_TRIANGLES);
 		{
-			//glNormal3f(0.0f, -1.0f, 1.0f);
+			glNormal3f(0.5f, 0.0f, 1.0f);
 			glTexCoord2f(0.0f, 0.0f);
 			glVertex3f(length / 2, 0, height);
 			glTexCoord2f(0.0f, 1.0f);
@@ -155,7 +155,7 @@ void Scene::DrawGarageRoof(float coordX, float coordY, float coordZ, float lengt
 			glTexCoord2f(1.0f, 1.0f);
 			glVertex3f(length, width, 0.0f);
 
-			//glNormal3f(0.0f, -1.0f, 1.0f);
+			glNormal3f(0.0f, 1.0f, 1.0f);
 			glTexCoord2f(1.0f, 0.0f);
 			glVertex3f(length / 2, 0, height);
 			glTexCoord2f(0.0f, 1.0f);
@@ -163,7 +163,7 @@ void Scene::DrawGarageRoof(float coordX, float coordY, float coordZ, float lengt
 			glTexCoord2f(2.0f, 1.0f);
 			glVertex3f(0, width, 0.0f);
 
-			//glNormal3f(0.0f, -1.0f, 1.0f);
+			glNormal3f(-0.5f, 0.0f, 1.0f);
 			glTexCoord2f(1.0f, 0.0f);
 			glVertex3f(length / 2, 0, height);
 			glTexCoord2f(0.0f, 1.0f);
