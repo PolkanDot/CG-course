@@ -137,6 +137,32 @@ void Scene::DrawRoof(float coordX, float coordY, float coordZ, float length, flo
 	glDisable(GL_TEXTURE_2D);
 }
 
+void Scene::DrawGarageDoor(float coordX, float coordY, float width, float height)
+{
+	glEnable(GL_TEXTURE_2D);
+
+	glPushMatrix();
+	{
+		glBindTexture(GL_TEXTURE_2D, garageDoor);
+		glTranslatef(coordX, coordY - (width / 2), 0);
+		glBegin(GL_QUADS);
+		{
+			glNormal3f(-1.0f, 0.0f, 0.0f);
+			glTexCoord2f(0.0f, 0.0f);
+			glVertex3f(0.0f, 0.0f, height);
+			glTexCoord2f(0.0f, 1.0f);
+			glVertex3f(0, 0.0f, 0.0f);
+			glTexCoord2f(1.0f, 1.0f);
+			glVertex3f(0, width, 0.0f);
+			glTexCoord2f(1.0f, 0.0f);
+			glVertex3f(0, width, height);
+		}
+		glEnd();
+	}
+	glPopMatrix();
+	glDisable(GL_TEXTURE_2D);
+}
+
 void Scene::DrawGarageRoof(float coordX, float coordY, float coordZ, float length, float width, float height)
 {
 	glEnable(GL_TEXTURE_2D);
@@ -194,14 +220,14 @@ void Scene::DrawGarageRoof(float coordX, float coordY, float coordZ, float lengt
 void Scene::DrawGarage(float coordX, float coordY, float length, float width, float height)
 {
 	glEnable(GL_TEXTURE_2D);
-	float wallHeight = height / 1.5;
+	float wallHeight = height * 0.7;
 	m_cube.SetSize(wallHeight);
 
 	glPushMatrix();
 	{
 		glBindTexture(GL_TEXTURE_2D, cottageBottomTexture);		
 		glTranslatef(coordX, coordY, 0);
-		glScalef(length / wallHeight, width / wallHeight, 0.2f);
+		glScalef(length / wallHeight, width / wallHeight, 0.3f);
 		m_cube.Draw();
 	}
 	glPopMatrix();
@@ -209,20 +235,20 @@ void Scene::DrawGarage(float coordX, float coordY, float length, float width, fl
 	glPushMatrix();
 	{
 		glBindTexture(GL_TEXTURE_2D, cottageMidleTexture);
-		glTranslatef(coordX, coordY, wallHeight * 0.2);
-		glScalef(length / wallHeight, width / wallHeight, 0.8f);
+		glTranslatef(coordX, coordY, wallHeight * 0.3);
+		glScalef(length / wallHeight, width / wallHeight, 0.7f);
 		m_cube.Draw();
 	}
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
 
 	DrawGarageRoof(coordX * 0.95, coordY * 0.95, wallHeight, length * 1.1, width * 1.2, height - wallHeight);
-	//DrawRoof(coordX, coordY, wallHeight, length, width);
+	DrawGarageDoor(coordX + length + 0.0001, coordY + width / 2, width / 1.5, wallHeight * 0.8);
 }
 
 void Scene::DrawCottage(float coordX, float coordY, float height)
 {
-	DrawGarage(coordX, coordY, height, height / 2, height / 1.5);
+	DrawGarage(coordX, coordY, height, height / 1.5, height / 1.5);
 }
 
 void Scene::Draw()
