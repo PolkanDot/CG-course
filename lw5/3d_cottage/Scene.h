@@ -39,7 +39,7 @@ public:
 	unsigned int bottomTexture = 0;
 	unsigned int cottageMidleTexture = 0;
 	unsigned int roofTop = 0;
-	unsigned int wallTexture3 = 0;
+	unsigned int garageRoofBottom = 0;
 	unsigned int wallTexture4 = 0;
 
 private:

@@ -140,21 +140,50 @@ void Scene::DrawRoof(float coordX, float coordY, float coordZ, float length, flo
 void Scene::DrawGarageRoof(float coordX, float coordY, float coordZ, float length, float width, float height)
 {
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, roofTop);
+	
 	glPushMatrix();
 	{
+		glBindTexture(GL_TEXTURE_2D, roofTop);
 		glTranslatef(coordX, coordY, coordZ);
-		glBegin(GL_TRIANGLE_FAN);
+		glBegin(GL_TRIANGLES);
 		{
 			//glNormal3f(0.0f, -1.0f, 1.0f);
-			glTexCoord2f(0.5f, 0.0f);
-			glVertex3f(length / 2, width / 2, height);
+			glTexCoord2f(0.0f, 0.0f);
+			glVertex3f(length / 2, 0, height);
 			glTexCoord2f(0.0f, 1.0f);
 			glVertex3f(length, 0.0f, 0.0f);
 			glTexCoord2f(1.0f, 1.0f);
 			glVertex3f(length, width, 0.0f);
-			//glTexCoord2f(1.0f, 0.0f);
-			//glVertex3f(0, (width / 2) / sin(M_PI / 4), 0.0f);
+
+			//glNormal3f(0.0f, -1.0f, 1.0f);
+			glTexCoord2f(1.0f, 0.0f);
+			glVertex3f(length / 2, 0, height);
+			glTexCoord2f(0.0f, 1.0f);
+			glVertex3f(length, width, 0.0f);
+			glTexCoord2f(2.0f, 1.0f);
+			glVertex3f(0, width, 0.0f);
+
+			//glNormal3f(0.0f, -1.0f, 1.0f);
+			glTexCoord2f(1.0f, 0.0f);
+			glVertex3f(length / 2, 0, height);
+			glTexCoord2f(0.0f, 1.0f);
+			glVertex3f(0, width, 0.0f);
+			glTexCoord2f(1.0f, 1.0f);
+			glVertex3f(0, 0, 0.0f);
+		}
+		glEnd();
+		glBindTexture(GL_TEXTURE_2D, garageRoofBottom);
+		glBegin(GL_QUADS);
+		{		
+			glNormal3f(0.0f, 0.0f, -1.0f);
+			glTexCoord2f(1.0f, 1.0f);
+			glVertex3f(0.0f, 0.0f, 0.0f);
+			glTexCoord2f(0.0f, 1.0f);
+			glVertex3f(length, 0.0f, 0.0f);
+			glTexCoord2f(0.0f, 0.0f);
+			glVertex3f(length, width, 0.0f);
+			glTexCoord2f(1.0f, 0.0f);
+			glVertex3f(0, width, 0.0f);
 		}
 		glEnd();
 	}
@@ -187,7 +216,7 @@ void Scene::DrawGarage(float coordX, float coordY, float length, float width, fl
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
 
-	DrawGarageRoof(coordX, coordY, wallHeight, length, width, height - wallHeight);
+	DrawGarageRoof(coordX * 0.95, coordY * 0.95, wallHeight, length * 1.1, width * 1.2, height - wallHeight);
 	//DrawRoof(coordX, coordY, wallHeight, length, width);
 }
 
