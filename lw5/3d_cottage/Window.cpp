@@ -37,14 +37,14 @@ void Window::OnRunStart()
 	// 
 	//glFrontFace(GL_CCW);
 
-	//
-	m_scene.LoadingTexture("textures/bottomLevel.png", m_scene.cottageBottomTexture);
-	m_scene.LoadingTexture("textures/grass.png", m_scene.bottomTexture);
-	m_scene.LoadingTexture("textures/midleLevel.png", m_scene.cottageMidleTexture);
-	m_scene.LoadingTexture("textures/roofTop.png", m_scene.roofTop);
-	m_scene.LoadingTexture("textures/garageRoofBottom.png", m_scene.garageRoofBottom);
-	m_scene.LoadingTexture("textures/garageDoor.png", m_scene.garageDoor);
-	m_scene.LoadingTexture("textures/mainHouseBottom.png", m_scene.mainHouseBottom);
+	// 
+	m_scene.LoadingTexture("textures/bottomLevel.png", m_scene.GetCottage()->cottageBottomTexture);
+	m_scene.LoadingTexture("textures/grass.png", m_scene.GetCottage()->bottomTexture);
+	m_scene.LoadingTexture("textures/midleLevel.png", m_scene.GetCottage()->cottageMidleTexture);
+	m_scene.LoadingTexture("textures/roofTop.png", m_scene.GetCottage()->roofTop);
+	m_scene.LoadingTexture("textures/garageRoofBottom.png", m_scene.GetCottage()->garageRoofBottom);
+	m_scene.LoadingTexture("textures/garageDoor.png", m_scene.GetCottage()->garageDoor);
+	m_scene.LoadingTexture("textures/mainHouseBottom.png", m_scene.GetCottage()->mainHouseBottom);
 	// 
 	glEnable(GL_DEPTH_TEST);
 	// 
