@@ -138,6 +138,7 @@
     <ClInclude Include="Cube.h" />
     <ClInclude Include="GLFWInitializer.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="Sun.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
@@ -145,6 +146,7 @@
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="Sun.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

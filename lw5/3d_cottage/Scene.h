@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "Camera.h"
 #include "Cube.h"
+#include "Sun.h"
 
 class Scene
 {
@@ -8,6 +9,7 @@ public:
 	Scene(float s)
 		: m_camera(10.0f, 5.0f, 0.5f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f)
 		, m_cube()
+		, m_sun(s / 2, s / 2, s * 0.7, 0.5f, 0.992f, 0.866f, 0.376f)
 	{
 		m_size = s;
 	}
@@ -52,4 +54,5 @@ private:
 	float theta = 0.0f;
 	Camera m_camera;
 	Cube m_cube;
+	Sun m_sun;
 };

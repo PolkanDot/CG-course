@@ -81,8 +81,6 @@ void Scene::DrawSun()
 			DrawCircle(0.5, 0.5, 0.5, 40);
 		glPopMatrix();
 	glPopMatrix();
-
-
 }
 
 void Scene::DrawLand()
@@ -338,7 +336,7 @@ void Scene::DrawCottage(float coordX, float coordY, float height)
 
 void Scene::Draw()
 {
-	DrawSun();
+	m_sun.DrawSun();
 	DrawLand();
 	DrawCottage(m_size / 8, m_size / 8, 4);
 	
