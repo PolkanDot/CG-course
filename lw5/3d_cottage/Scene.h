@@ -19,6 +19,7 @@ public:
 	void LoadingTexture(const char* name, unsigned int& index);
 	void HandlingMovement(GLFWwindow* window);
 
+	void DrawCircle(float cx, float cy, float r, int num_segments);
 	void DrawSun();
 	void DrawLand();
 	void DrawRoof(float length, float width);

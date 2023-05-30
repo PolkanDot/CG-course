@@ -51,6 +51,19 @@ void Scene::HandlingMovement(GLFWwindow* window)
 	m_camera.ProcessInput(window);
 }
 
+void Scene::DrawCircle(float cx, float cy, float r, int num_segments)
+{
+	glBegin(GL_TRIANGLE_FAN);
+	glVertex2f(cx, cy);
+	for (int ii = 0; ii <= num_segments; ii++) {
+		float theta = 2.0f * M_PI * float(ii) / float(num_segments);
+		float x = r * cosf(theta);
+		float y = r * sinf(theta);
+		glVertex2f(x + cx, y + cy);
+	}
+	glEnd();
+}
+
 void Scene::DrawSun()
 {
 	glPushMatrix();
@@ -64,10 +77,12 @@ void Scene::DrawSun()
 		// Отрисовка источника света
 		glPushMatrix();
 			glTranslatef(0, 0, m_size * 0.7);
-			glColor3f(0.5, 0.5, 0.0);
-			glRectf(0, 0, 1, 1);
+			glColor3f(0.992f, 0.866f, 0.376f);
+			DrawCircle(0.5, 0.5, 0.5, 40);
 		glPopMatrix();
 	glPopMatrix();
+
+
 }
 
 void Scene::DrawLand()
