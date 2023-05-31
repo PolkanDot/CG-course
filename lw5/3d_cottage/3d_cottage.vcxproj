@@ -137,6 +137,7 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Cottage.h" />
     <ClInclude Include="Cube.h" />
+    <ClInclude Include="Garage.h" />
     <ClInclude Include="GLFWInitializer.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Sun.h" />
@@ -146,6 +147,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Cottage.cpp" />
     <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="Garage.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Sun.cpp" />

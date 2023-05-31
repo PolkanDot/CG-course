@@ -81,6 +81,6 @@ void Scene::Draw()
 {
 	m_sun.DrawSun();
 	DrawLand();
-	m_cottage.DrawCottage(m_size / 8, m_size / 8, 4);
+	m_cottage.DrawCottage();
 	
 }

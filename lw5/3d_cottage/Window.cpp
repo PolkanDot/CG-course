@@ -29,14 +29,6 @@ void Window::Run()
 
 void Window::OnRunStart()
 {
-	//
-	//glEnable(GL_CULL_FACE);
-	// 
-	//glCullFace(GL_BACK);
-	// 
-	// 
-	//glFrontFace(GL_CCW);
-
 	// 
 	m_scene.LoadingTexture("textures/bottomLevel.png", m_scene.GetCottage()->cottageBottomTexture);
 	m_scene.LoadingTexture("textures/grass.png", m_scene.bottomTexture);
@@ -45,6 +37,9 @@ void Window::OnRunStart()
 	m_scene.LoadingTexture("textures/garageRoofBottom.png", m_scene.GetCottage()->garageRoofBottomTexture);
 	m_scene.LoadingTexture("textures/garageDoor.png", m_scene.GetCottage()->garageDoorTexture);
 	m_scene.LoadingTexture("textures/mainHouseBottom.png", m_scene.GetCottage()->mainHouseBottomTexture);
+
+	m_scene.GetCottage()->GetGarage()->SetTextures(m_scene.GetCottage()->cottageBottomTexture, m_scene.GetCottage()->cottageMidleTexture,
+		m_scene.GetCottage()->roofTopTexture, m_scene.GetCottage()->garageRoofBottomTexture, m_scene.GetCottage()->garageDoorTexture);
 	// 
 	glEnable(GL_DEPTH_TEST);
 	// 
