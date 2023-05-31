@@ -38,6 +38,7 @@ void Window::OnRunStart()
 	m_scene.LoadingTexture("textures/garageDoor.png", m_scene.GetCottage()->garageDoorTexture);
 	m_scene.LoadingTexture("textures/mainHouseBottom.png", m_scene.GetCottage()->mainHouseBottomTexture);
 	m_scene.LoadingTexture("textures/windowTexture.png", m_scene.GetCottage()->windowTexture);
+	m_scene.LoadingTexture("textures/fence.png", m_scene.fenceTexture);
 
 	m_scene.GetCottage()->GetGarage()->SetTextures(m_scene.GetCottage()->cottageBottomTexture, m_scene.GetCottage()->cottageMidleTexture,
 		m_scene.GetCottage()->roofTopTexture, m_scene.GetCottage()->garageRoofBottomTexture, m_scene.GetCottage()->garageDoorTexture, m_scene.GetCottage()->windowTexture);

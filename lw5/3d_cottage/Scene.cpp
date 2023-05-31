@@ -82,5 +82,21 @@ void Scene::Draw()
 	m_sun.DrawSun();
 	DrawLand();
 	m_cottage.DrawCottage();
+	m_fence.SetPosition(0.0f, 0.0f);
+	m_fence.SetSize(m_size, 2.0f);
+	glPushMatrix();
+	{
+		m_fence.DrawFence(fenceTexture);
+		glTranslatef(m_size, 0, 0);
+		glRotatef(90, 0, 0, 1);
+		m_fence.DrawFence(fenceTexture);
+		glTranslatef(m_size, 0, 0);
+		glRotatef(90, 0, 0, 1);
+		m_fence.DrawFence(fenceTexture);
+		glTranslatef(m_size, 0, 0);
+		glRotatef(90, 0, 0, 1);
+		m_fence.DrawFence(fenceTexture);
+	}
+	glPopMatrix();
 	
 }
