@@ -4,6 +4,7 @@
 
 Garage::Garage(float coordX, float coordY, float coordZ, float length, float width, float height)
 	: m_cube()
+	, m_glass(0, 0, 0, 1, 0, 0, 1, 0)
 	, m_coordX(coordX)
 	, m_coordY(coordY)
 	, m_coordZ(coordZ)
@@ -17,13 +18,15 @@ Garage::Garage(float coordX, float coordY, float coordZ, float length, float wid
 	}
 }
 
-void Garage::SetTextures(unsigned int cottageBottomTexture, unsigned int cottageMidleTexture, unsigned int roofTopTexture, unsigned int garageRoofBottomTexture, unsigned int garageDoorTexture)
+void Garage::SetTextures(unsigned int cottageBottomTexture, unsigned int cottageMidleTexture, unsigned int roofTopTexture,
+	unsigned int garageRoofBottomTexture, unsigned int garageDoorTexture, unsigned int windowTexture)
 {
 	m_cottageBottomTexture = cottageBottomTexture;
 	m_cottageMidleTexture = cottageMidleTexture;
 	m_roofTopTexture = roofTopTexture;
 	m_garageRoofBottomTexture = garageRoofBottomTexture;
 	m_garageDoorTexture = garageDoorTexture;
+	m_windowTexture = windowTexture;
 }
 
 void Garage::DrawGarageDoor(float coordX, float coordY, float width, float height)
@@ -142,6 +145,10 @@ void Garage::DrawGarage()
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
 
+	m_glass.SetPlace(m_coordX + m_length * 0.3, m_coordY + m_width, m_coordZ + (m_height / 3));
+	m_glass.SetSize(0.5, 0.7);
+	m_glass.SetDirection(0.0f, 1.0f, 0.0f);
+	m_glass.DrawGlass(m_windowTexture);
 	DrawGarageRoof(m_coordX - (m_width * 0.1), m_coordY - (m_width * 0.1), wallHeight, m_length * 1.1, m_width * 1.2, m_height - wallHeight);
 	DrawGarageDoor(m_coordX + m_length + 0.0001, m_coordY + m_width / 2, m_width / 1.5, wallHeight * 0.8);
 }

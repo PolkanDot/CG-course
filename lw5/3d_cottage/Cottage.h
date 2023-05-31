@@ -18,7 +18,7 @@ public:
 	unsigned int garageRoofBottomTexture = 0;
 	unsigned int garageDoorTexture = 0;
 	unsigned int mainHouseBottomTexture = 0;
-	unsigned int m = 0;	
+	unsigned int windowTexture = 0;	
 
 private:
 	float m_coordX = 0;
