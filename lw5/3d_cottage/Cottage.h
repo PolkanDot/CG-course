@@ -2,6 +2,7 @@
 #include "Cube.h"
 #include "Garage.h"
 #include "Roof.h"
+#include "Porch.h";
 
 class Cottage
 {
@@ -29,4 +30,5 @@ private:
 	Garage m_garage;
 	Roof m_roof;
 	Glass m_glass;
+	Porch m_porch;
 };

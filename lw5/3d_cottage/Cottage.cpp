@@ -9,6 +9,7 @@ Cottage::Cottage(float coordX, float coordY, float coordZ, float height)
 	, m_garage(coordX, coordY + height, coordZ, height, height / 1.5, height * 0.7)
 	, m_roof(coordX, coordY, coordZ, height * 1.1, height * 0.96)
 	, m_glass(0, 0, 0, 1, 0, 0, 1, 0)
+	, m_porch(0, 0, 0, 2, 2)
 	, m_height(height)
 	, m_coordX(coordX)
 	, m_coordY(coordY)
@@ -101,7 +102,9 @@ void Cottage::DrawMainHouse(float length, float width)
 	m_glass.SetDirection(-1.0f, 0.0f, 0.0f);
 	m_glass.DrawGlass(windowTexture);
 
-	glPopMatrix();
+	m_porch.SetPosition(m_coordX + (m_height * 0.8) + 0.0001, m_coordY + (m_height / 1.5), m_coordZ);
+	m_porch.SetSize(m_height * 0.3, m_height * 0.2);
+	m_porch.Draw(roofTopTexture, cottageBottomTexture, garageDoorTexture);
 
 	glDisable(GL_TEXTURE_2D);
 }

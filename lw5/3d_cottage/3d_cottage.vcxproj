@@ -140,6 +140,7 @@
     <ClInclude Include="Garage.h" />
     <ClInclude Include="Glass.h" />
     <ClInclude Include="GLFWInitializer.h" />
+    <ClInclude Include="Porch.h" />
     <ClInclude Include="Roof.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Sun.h" />
@@ -152,6 +153,7 @@
     <ClCompile Include="Garage.cpp" />
     <ClCompile Include="Glass.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Porch.cpp" />
     <ClCompile Include="Roof.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Sun.cpp" />
