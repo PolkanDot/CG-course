@@ -30,7 +30,7 @@ void Cottage::DrawRoof(float length, float width)
 	glPushMatrix();
 	{
 		glRotatef(45.0f, 1.0f, 0.0f, 0.0f);
-		glNormal3f(0.0f, -1.0f, 1.0f);
+		glNormal3f(0.0f, 0.0f, 1.0f);
 		glBegin(GL_QUADS);
 		{
 			glTexCoord2f(1.0f, 1.0f);
@@ -50,7 +50,7 @@ void Cottage::DrawRoof(float length, float width)
 	{
 		glTranslatef(0, width, 0);
 		glRotatef(135.0f, 1.0f, 0.0f, 0.0f);
-		glNormal3f(0.0f, -1.0f, 1.0f);
+		glNormal3f(0.0f, 0.0f, -1.0f);
 		glBegin(GL_QUADS);
 		{
 			glTexCoord2f(1.0f, 1.0f);
@@ -68,16 +68,16 @@ void Cottage::DrawRoof(float length, float width)
 	glDisable(GL_TEXTURE_2D);
 }
 
-void Cottage::DrawMainHouse(float coordX, float coordY, float length, float width, float height)
+void Cottage::DrawMainHouse(float length, float width)
 {
 	glEnable(GL_TEXTURE_2D);
-	float wallHeight = height * 0.7;
+	float wallHeight = m_height * 0.7;
 	m_cube.SetSize(wallHeight);
 
 	glPushMatrix();
 	{
 		glBindTexture(GL_TEXTURE_2D, mainHouseBottomTexture);
-		glTranslatef(coordX, coordY, 0);
+		glTranslatef(m_coordX, m_coordY, 0);
 		glScalef(width / wallHeight, length / wallHeight, 0.7f);
 		m_cube.Draw();
 	}
@@ -85,7 +85,7 @@ void Cottage::DrawMainHouse(float coordX, float coordY, float length, float widt
 	glPushMatrix();
 	{
 		glBindTexture(GL_TEXTURE_2D, cottageMidleTexture);
-		glTranslatef(coordX, coordY, wallHeight * 0.7f);
+		glTranslatef(m_coordX, m_coordY, wallHeight * 0.7f);
 		glScalef(width / wallHeight, length / wallHeight, 0.3f);
 		m_cube.Draw();
 	}
@@ -94,12 +94,12 @@ void Cottage::DrawMainHouse(float coordX, float coordY, float length, float widt
 	{
 
 		glBindTexture(GL_TEXTURE_2D, cottageMidleTexture);
-		glTranslatef(coordX, coordY, wallHeight);
+		glTranslatef(m_coordX, m_coordY, wallHeight);
 		glBegin(GL_TRIANGLES);
 		{
 			glNormal3f(0.0f, -1.0f, 0.0f);
 			glTexCoord2f(0.0f, 0.0f);
-			glVertex3f(width / 2, 0, height * 0.4);
+			glVertex3f(width / 2, 0, m_height * 0.4);
 			glTexCoord2f(0.0f, 1.0f);
 			glVertex3f(0, 0.0f, 0.0f);
 			glTexCoord2f(1.0f, 1.0f);
@@ -107,7 +107,7 @@ void Cottage::DrawMainHouse(float coordX, float coordY, float length, float widt
 
 			glNormal3f(0.0f, 1.0f, 0.0f);
 			glTexCoord2f(0.0f, 0.0f);
-			glVertex3f(width / 2, length, height * 0.4);
+			glVertex3f(width / 2, length, m_height * 0.4);
 			glTexCoord2f(0.0f, 1.0f);
 			glVertex3f(0, length, 0.0f);
 			glTexCoord2f(1.0f, 1.0f);
@@ -118,7 +118,7 @@ void Cottage::DrawMainHouse(float coordX, float coordY, float length, float widt
 	glPopMatrix();
 	glPushMatrix();
 	{
-		glTranslatef(coordX + (width * 1.1), coordY - (width * 0.07), wallHeight * 0.89);
+		glTranslatef(m_coordX + (width * 1.1), m_coordY - (width * 0.07), wallHeight * 0.89);
 		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
 		DrawRoof(length * 1.1, width * 1.2);
 	}
@@ -131,6 +131,6 @@ void Cottage::DrawMainHouse(float coordX, float coordY, float length, float widt
 
 void Cottage::DrawCottage()
 {
-	DrawMainHouse(m_coordX, m_coordY, m_height, m_height * 0.8, m_height);
+	DrawMainHouse(m_height, m_height * 0.8);
 	m_garage.DrawGarage();
 }

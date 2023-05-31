@@ -8,7 +8,7 @@ public:
 	Cottage(float coordX, float coordY, float coordZ, float height);
 	Garage* GetGarage();
 	void DrawRoof(float length, float width);
-	void DrawMainHouse(float coordX, float coordY, float length, float width, float height);
+	void DrawMainHouse(float length, float width);
 	
 	void DrawCottage();
 	// плохо
