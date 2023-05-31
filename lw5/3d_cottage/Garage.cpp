@@ -1,4 +1,3 @@
-#define _USE_MATH_DEFINES
 #include "Garage.h";
 #include <stdexcept>
 #include "glfw3.h"

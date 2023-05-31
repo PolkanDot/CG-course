@@ -1,13 +1,13 @@
 #pragma once
 #include "Cube.h"
 #include "Garage.h"
+#include "Roof.h"
 
 class Cottage
 {
 public:
 	Cottage(float coordX, float coordY, float coordZ, float height);
 	Garage* GetGarage();
-	void DrawRoof(float length, float width);
 	void DrawMainHouse(float length, float width);
 	
 	void DrawCottage();
@@ -27,4 +27,5 @@ private:
 	float m_height = 0;
 	Cube m_cube;
 	Garage m_garage;
+	Roof m_roof;
 };
