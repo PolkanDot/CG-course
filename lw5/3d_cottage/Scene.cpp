@@ -61,7 +61,7 @@ void Scene::DrawLand()
 	glEnable(GL_TEXTURE_2D);
 	// Выбираем серый цвет, чтобы был виден эффект освещения
 	glColor3f(0.5, 0.5, 0.5);
-	glBindTexture(GL_TEXTURE_2D, GetCottage()->bottomTexture);
+	glBindTexture(GL_TEXTURE_2D, bottomTexture);
 	glBegin(GL_QUADS);
 	{
 		glNormal3f(0.0f, 0.0f, 1.0f);

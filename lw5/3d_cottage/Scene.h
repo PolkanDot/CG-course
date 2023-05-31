@@ -31,6 +31,8 @@ public:
 	glm::dvec3 GetCameraFront();
 	glm::dvec3 GetCameraUp();
 
+	unsigned int bottomTexture = 0;
+
 private:
 	float m_size;
 	float theta = 0.0f;
