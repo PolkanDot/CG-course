@@ -50,14 +50,43 @@ void Glass::DrawGlass(unsigned int windowTexture)
 		{
 			// доработать правильную отрисовку
 			glNormal3f(m_directionX, m_directionY, m_directionZ);
-			glTexCoord2f(0.0f, 0.0f);
-			glVertex3f(0.0f, 0.0f, m_height);
-			glTexCoord2f(0.0f, 1.0f);
-			glVertex3f(0, 0.0f, 0.0f);
-			glTexCoord2f(1.0f, 1.0f);
-			glVertex3f(0, m_width, 0.0f);
-			glTexCoord2f(1.0f, 0.0f);
-			glVertex3f(0, m_width, m_height);
+			if ((m_directionX == 1.0) || (m_directionX == -1.0))
+			{
+				float vertices[4][3] =
+				{
+					{0.0f, 0.0f, m_height},
+					{0.0f, 0.0f, 0.0f},
+					{0, m_width, 0.0f},
+					{0, m_width, m_height}
+				};
+				glTexCoord2f(0.0f, 0.0f);
+				glVertex3fv(vertices[0]);
+				glTexCoord2f(0.0f, 1.0f);
+				glVertex3fv(vertices[1]);
+				glTexCoord2f(1.0f, 1.0f);
+				glVertex3fv(vertices[2]);
+				glTexCoord2f(1.0f, 0.0f);
+				glVertex3fv(vertices[3]);
+			}
+			if ((m_directionY == 1.0) || (m_directionY == -1.0))
+			{
+				float vertices[4][3] =
+				{
+					{0.0f, 0.0f, m_height},
+					{0.0f, 0.0f, 0.0f},
+					{m_width, 0.0f, 0.0f},
+					{m_width, 0.0f, m_height}
+				};
+				glTexCoord2f(0.0f, 0.0f);
+				glVertex3fv(vertices[0]);
+				glTexCoord2f(0.0f, 1.0f);
+				glVertex3fv(vertices[1]);
+				glTexCoord2f(1.0f, 1.0f);
+				glVertex3fv(vertices[2]);
+				glTexCoord2f(1.0f, 0.0f);
+				glVertex3fv(vertices[3]);
+			}
+			
 		}
 		glEnd();
 	}

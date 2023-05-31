@@ -28,4 +28,5 @@ private:
 	Cube m_cube;
 	Garage m_garage;
 	Roof m_roof;
+	Glass m_glass;
 };

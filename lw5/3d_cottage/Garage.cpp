@@ -145,10 +145,18 @@ void Garage::DrawGarage()
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
 
-	m_glass.SetPlace(m_coordX + m_length * 0.3, m_coordY + m_width, m_coordZ + (m_height / 3));
+	m_glass.SetPlace(m_coordX + m_length * 0.2, m_coordY + m_width + 0.0001, m_coordZ + (m_height / 3));
 	m_glass.SetSize(0.5, 0.7);
 	m_glass.SetDirection(0.0f, 1.0f, 0.0f);
 	m_glass.DrawGlass(m_windowTexture);
+
+	m_glass.SetPlace(m_coordX + m_length * 0.6, m_coordY + m_width + 0.0001, m_coordZ + (m_height / 3));
+	m_glass.SetSize(0.5, 0.7);
+	m_glass.SetDirection(0.0f, 1.0f, 0.0f);
+	m_glass.DrawGlass(m_windowTexture);
+
+	
+
 	DrawGarageRoof(m_coordX - (m_width * 0.1), m_coordY - (m_width * 0.1), wallHeight, m_length * 1.1, m_width * 1.2, m_height - wallHeight);
 	DrawGarageDoor(m_coordX + m_length + 0.0001, m_coordY + m_width / 2, m_width / 1.5, wallHeight * 0.8);
 }

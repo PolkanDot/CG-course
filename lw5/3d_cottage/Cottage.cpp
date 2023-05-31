@@ -8,6 +8,7 @@ Cottage::Cottage(float coordX, float coordY, float coordZ, float height)
 	: m_cube()
 	, m_garage(coordX, coordY + height, coordZ, height, height / 1.5, height * 0.7)
 	, m_roof(coordX, coordY, coordZ, height * 1.1, height * 0.96)
+	, m_glass(0, 0, 0, 1, 0, 0, 1, 0)
 	, m_height(height)
 	, m_coordX(coordX)
 	, m_coordY(coordY)
@@ -78,6 +79,28 @@ void Cottage::DrawMainHouse(float length, float width)
 		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
 		m_roof.DrawRoof(roofTopTexture);
 	}
+	glPopMatrix();
+
+	m_glass.SetPlace(m_coordX + (m_height * 0.8) + 0.0001, m_coordY + (m_height / 6), m_coordZ + (m_height / 5));
+	m_glass.SetSize(0.7f, 1.0f);
+	m_glass.SetDirection(1.0f, 0.0f, 0.0f);
+	m_glass.DrawGlass(windowTexture);
+
+	m_glass.SetPlace(m_coordX + (m_height * 0.22) + 0.0001, m_coordY - 0.0001, m_coordZ + (m_height / 5));
+	m_glass.SetSize(1.0f, 1.4f);
+	m_glass.SetDirection(0.0f, -1.0f, 0.0f);
+	m_glass.DrawGlass(windowTexture);
+
+	m_glass.SetPlace(m_coordX - 0.0001, m_coordY + (m_height / 6), m_coordZ + (m_height / 5));
+	m_glass.SetSize(0.7f, 1.0f);
+	m_glass.SetDirection(-1.0f, 0.0f, 0.0f);
+	m_glass.DrawGlass(windowTexture);
+
+	m_glass.SetPlace(m_coordX - 0.0001, m_coordY + (m_height / 1.5), m_coordZ + (m_height / 5));
+	m_glass.SetSize(0.7f, 1.0f);
+	m_glass.SetDirection(-1.0f, 0.0f, 0.0f);
+	m_glass.DrawGlass(windowTexture);
+
 	glPopMatrix();
 
 	glDisable(GL_TEXTURE_2D);
