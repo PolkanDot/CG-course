@@ -4,7 +4,9 @@
 #include "Constants.h"
 #include <chrono>
 #include <cmath>
-
+// настроить фильтрацию текстур
+// подумать над архитектурой
+// сделать методы константными
 GLFWwindow* Window::MakeWindow(int w, int h, const char* title)
 {
 	glfwWindowHint(GLFW_DEPTH_BITS, 24);
