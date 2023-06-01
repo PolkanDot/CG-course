@@ -49,7 +49,7 @@ void Scene::LoadingTexture(const char* name, unsigned int& index)
 	glBindTexture(GL_TEXTURE_2D, 0);
 	stbi_image_free(data);
 }
-
+// Обработка нажатия клавишь перемещения
 void Scene::HandlingMovement(GLFWwindow* window)
 {
 	m_camera.CalculateDeltaTime();
@@ -82,6 +82,7 @@ void Scene::Draw()
 	m_sun.DrawSun();
 	DrawLand();
 	m_cottage.DrawCottage();
+	// Рисуем забор по периметру
 	m_fence.SetPosition(0.0f, 0.0f);
 	m_fence.SetSize(m_size, 2.0f);
 	glPushMatrix();

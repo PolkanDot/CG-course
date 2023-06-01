@@ -75,7 +75,7 @@ void Porch::DrawRoof(unsigned int roofTopTexture, unsigned int cottageBottomText
 			glVertex3f(0.0f, m_width, 0.0f);
 		}
 		glEnd();
-		glTranslatef(0, 0, -0.00001f);
+		glTranslatef(0, 0, -0.0001f);
 		glNormal3f(0.0f, 0.0f, -1.0f);
 		glBindTexture(GL_TEXTURE_2D, cottageBottomTexture);
 		glBegin(GL_QUADS);

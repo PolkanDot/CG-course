@@ -17,7 +17,7 @@ Garage::Garage(float coordX, float coordY, float coordZ, float length, float wid
 		std::runtime_error("Size of garage can't be less than zero");
 	}
 }
-
+// Загружаем текстуры в объект Garage
 void Garage::SetTextures(unsigned int cottageBottomTexture, unsigned int cottageMidleTexture, unsigned int roofTopTexture,
 	unsigned int garageRoofBottomTexture, unsigned int garageDoorTexture, unsigned int windowTexture)
 {
@@ -28,7 +28,7 @@ void Garage::SetTextures(unsigned int cottageBottomTexture, unsigned int cottage
 	m_garageDoorTexture = garageDoorTexture;
 	m_windowTexture = windowTexture;
 }
-
+// Рисуем дверь
 void Garage::DrawGarageDoor(float coordX, float coordY, float width, float height)
 {
 	glEnable(GL_TEXTURE_2D);
@@ -54,13 +54,14 @@ void Garage::DrawGarageDoor(float coordX, float coordY, float width, float heigh
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
 }
-
+// Рисуем крышу гаража
 void Garage::DrawGarageRoof(float coordX, float coordY, float coordZ, float length, float width, float height)
 {
 	glEnable(GL_TEXTURE_2D);
 
 	glPushMatrix();
 	{
+		//Рисуем верхнюю часть из треугольников 
 		glBindTexture(GL_TEXTURE_2D, m_roofTopTexture);
 		glTranslatef(coordX, coordY, coordZ);
 		glBegin(GL_TRIANGLES);
@@ -90,6 +91,7 @@ void Garage::DrawGarageRoof(float coordX, float coordY, float coordZ, float leng
 			glVertex3f(0, 0, 0.0f);
 		}
 		glEnd();
+		// Рисуем нижнюю часть крыши гаража
 		glBindTexture(GL_TEXTURE_2D, m_garageRoofBottomTexture);
 		glBegin(GL_TRIANGLES);
 		{
@@ -125,7 +127,7 @@ void Garage::DrawGarage()
 	glEnable(GL_TEXTURE_2D);
 	float wallHeight = m_height * 0.7;
 	m_cube.SetSize(wallHeight);
-
+	// Рисуем нижнюю часть гаража
 	glPushMatrix();
 	{
 		glBindTexture(GL_TEXTURE_2D, m_cottageBottomTexture);
@@ -134,7 +136,7 @@ void Garage::DrawGarage()
 		m_cube.Draw();
 	}
 	glPopMatrix();
-
+	// Рисуем верхнюю часть стен гаража
 	glPushMatrix();
 	{
 		glBindTexture(GL_TEXTURE_2D, m_cottageMidleTexture);
@@ -145,6 +147,7 @@ void Garage::DrawGarage()
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
 
+	// Рисуем окна
 	m_glass.SetPlace(m_coordX + m_length * 0.2, m_coordY + m_width + 0.0001, m_coordZ + (m_height / 3));
 	m_glass.SetSize(0.5, 0.7);
 	m_glass.SetDirection(0.0f, 1.0f, 0.0f);
@@ -156,7 +159,7 @@ void Garage::DrawGarage()
 	m_glass.DrawGlass(m_windowTexture);
 
 	
-
+	
 	DrawGarageRoof(m_coordX - (m_width * 0.1), m_coordY - (m_width * 0.1), wallHeight, m_length * 1.1, m_width * 1.2, m_height - wallHeight);
 	DrawGarageDoor(m_coordX + m_length + 0.0001, m_coordY + m_width / 2, m_width / 1.5, wallHeight * 0.8);
 }

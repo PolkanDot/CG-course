@@ -15,9 +15,6 @@ public:
 	{
 		m_size = s;
 	}
-	Scene(const Scene&) = delete;
-	Scene& operator=(const Scene&) = delete;
-
 	~Scene() = default;
 
 	void LoadingTexture(const char* name, unsigned int& index);

@@ -31,6 +31,7 @@ void Fence::DrawFence(unsigned int fenceTexture) const
 		glTranslatef(m_coordX, m_coordY, 0);
 		glBegin(GL_QUADS);
 		{
+			// Рисуем одну сторону забора в виде прямоугольника
 			glNormal3f(-1.0f, 0.0f, 0.0f);
 			glTexCoord2f(0.0f, 0.0f);
 			glVertex3f(0.0f, 0, m_height);

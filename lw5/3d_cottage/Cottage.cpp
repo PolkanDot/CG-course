@@ -31,7 +31,7 @@ void Cottage::DrawMainHouse(float length, float width)
 	glEnable(GL_TEXTURE_2D);
 	float wallHeight = m_height * 0.7;
 	m_cube.SetSize(wallHeight);
-
+	// Рисуем нижнюю часть стен дома
 	glPushMatrix();
 	{
 		glBindTexture(GL_TEXTURE_2D, mainHouseBottomTexture);
@@ -40,6 +40,7 @@ void Cottage::DrawMainHouse(float length, float width)
 		m_cube.Draw();
 	}
 	glPopMatrix();
+	// Рисуем среднюю часть стен дома
 	glPushMatrix();
 	{
 		glBindTexture(GL_TEXTURE_2D, cottageMidleTexture);
@@ -48,6 +49,7 @@ void Cottage::DrawMainHouse(float length, float width)
 		m_cube.Draw();
 	}
 	glPopMatrix();
+	// Рисуем верхнюю часть стен дома
 	glPushMatrix();
 	{
 
@@ -74,6 +76,7 @@ void Cottage::DrawMainHouse(float length, float width)
 		glEnd();
 	}
 	glPopMatrix();
+	//Рисуем крышу
 	glPushMatrix();
 	{
 		glTranslatef(m_coordX + (width * 1.1), m_coordY - (width * 0.07), wallHeight * 0.89);
@@ -81,7 +84,7 @@ void Cottage::DrawMainHouse(float length, float width)
 		m_roof.DrawRoof(roofTopTexture);
 	}
 	glPopMatrix();
-
+	// Рисуем окна
 	m_glass.SetPlace(m_coordX + (m_height * 0.8) + 0.0001, m_coordY + (m_height / 6), m_coordZ + (m_height / 5));
 	m_glass.SetSize(0.7f, 1.0f);
 	m_glass.SetDirection(1.0f, 0.0f, 0.0f);
@@ -101,7 +104,7 @@ void Cottage::DrawMainHouse(float length, float width)
 	m_glass.SetSize(0.7f, 1.0f);
 	m_glass.SetDirection(-1.0f, 0.0f, 0.0f);
 	m_glass.DrawGlass(windowTexture);
-
+	// Рисуем крыльцо
 	m_porch.SetPosition(m_coordX + (m_height * 0.8) + 0.0001, m_coordY + (m_height / 1.5), m_coordZ);
 	m_porch.SetSize(m_height * 0.3, m_height * 0.2);
 	m_porch.Draw(roofTopTexture, cottageBottomTexture, garageDoorTexture);

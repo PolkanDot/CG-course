@@ -17,8 +17,6 @@ public:
 			throw std::runtime_error("Failed to create window");
 		}
 	}
-	Window(const Window&) = delete;
-	Window& operator=(const Window&) = delete;
 
 	virtual ~Window()
 	{
