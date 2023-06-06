@@ -26,6 +26,7 @@ public:
 private:
 
 	void OnRunStart();
+	void InitShaders();
 
 	void Draw(int width, int height);
 
@@ -35,4 +36,5 @@ private:
 
 	GLFWwindow* m_window;
 	Flag m_flag;
+	GLuint m_program;
 };

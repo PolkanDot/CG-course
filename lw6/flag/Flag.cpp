@@ -3,15 +3,16 @@
 
 void Flag::Draw()
 {
-	glColor3f(0.5, 0.5, 0.5);
-	glBegin(GL_TRIANGLES);
+	glColor3f(1, 1, 1);
+	glBegin(GL_QUADS);
 	{
-		glVertex2f(0.0f, 0.0f);
-		glColor3f(1.0, 0.5, 0.5);
-		glVertex2f(0.0f, 1.0f);
-		glColor3f(0.5, 1.0, 0.5);
-		glVertex2f(1.0f, 1.0f);
-		//glVertex2f(1.0f, 0.0f);
+		glBegin(GL_QUADS);
+		{
+			glVertex2f(-0.8, -0.8);
+			glVertex2f(0.8, -0.8);
+			glVertex2f(0.8, 0.8);
+			glVertex2f(-0.8, 0.8);
+		}
 	}
 	glEnd();
 }

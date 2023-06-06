@@ -6,6 +6,8 @@
 #include <chrono>
 #include <cmath>
 
+
+
 GLFWwindow* Window::MakeWindow(int w, int h, const char* title)
 {
 	glfwWindowHint(GLFW_DEPTH_BITS, 24);
@@ -42,7 +44,7 @@ void Window::OnRunStart()
 	// Включаем тест глубины
 	glEnable(GL_DEPTH_TEST);
 	// Задаем цвет заливки фона
-	glClearColor(1, 1, 1, 1);
+	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 }
 
 void Window::Draw(int width, int height)
@@ -60,19 +62,14 @@ void Window::Draw(int width, int height)
 
 void Window::SetupProjectionMatrix(int width, int height)
 {
+	glViewport(0, 0, width, height);
+
+	// Вычисляем соотношение сторон клиентской области окна
+	double aspect = double(width) / double(height);
+
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	const double aspectRatio = double(width) / double(height);
-	double viewWidth = 2.0;
-	double viewHeight = viewWidth;
-	if (aspectRatio > 1.0)
-	{
-		viewWidth = viewHeight * aspectRatio;
-	}
-	else
-	{
-		viewHeight = viewWidth / aspectRatio;
-	}
-	glOrtho(-viewWidth * 0.5, viewWidth * 0.5, -viewHeight * 0.5, viewHeight * 0.5, -1.0, 1.0);
+	glOrtho(-aspect, +aspect, -1, 1, 0, 10);
+	glMatrixMode(GL_MODELVIEW);
 }
 
