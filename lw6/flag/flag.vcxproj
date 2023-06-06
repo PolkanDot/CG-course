@@ -134,7 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Flag.h" />
-    <ClInclude Include="GLFWInitializer.h" />
+    <ClInclude Include="LibsInitializer.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>

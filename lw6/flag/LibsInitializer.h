@@ -1,22 +1,23 @@
 #pragma once
 #include "glfw3.h"
+
 #include <stdexcept>
 
-class GLFWInitializer final
+class LibsInitializer final
 {
 public:
-	GLFWInitializer()
+	LibsInitializer()
 	{
 		if (!glfwInit())
 		{
 			throw std::runtime_error("Failed to initialize GLFW");
-		}
+		}	
 	}
 
-	GLFWInitializer(const GLFWInitializer&) = delete;
-	GLFWInitializer& operator=(const GLFWInitializer&) = delete;
+	LibsInitializer(const LibsInitializer&) = delete;
+	LibsInitializer& operator=(const LibsInitializer&) = delete;
 
-	~GLFWInitializer()
+	~LibsInitializer()
 	{
 		glfwTerminate();
 	}

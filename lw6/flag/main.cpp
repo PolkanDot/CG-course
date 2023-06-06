@@ -1,9 +1,9 @@
-﻿#include "GLFWInitializer.h"
+﻿#include "LibsInitializer.h"
 #include "Window.h"
 
 int main()
 {
-	GLFWInitializer initGLFW;
+	LibsInitializer initLibs;
 	Window window{ 1000, 800, "Flag" };
 	window.Run();
 }

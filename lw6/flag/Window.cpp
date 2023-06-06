@@ -1,4 +1,6 @@
 #define _USE_MATH_DEFINES
+#define GLEW_STATIC
+#include "glew.h"
 #include "glfw3.h"
 #include "Window.h"
 #include <chrono>
@@ -12,7 +14,16 @@ GLFWwindow* Window::MakeWindow(int w, int h, const char* title)
 
 void Window::Run()
 {
+	
 	glfwMakeContextCurrent(m_window);
+	if (glewInit() != GLEW_OK)
+	{
+		throw std::runtime_error("Failed to initialize GLEW");
+	}
+	if (!GLEW_ARB_shader_objects)
+	{
+		throw std::runtime_error("Failed to initialize GLEW_ARB_shader_objects");
+	}
 	OnRunStart();
 
 	while (!glfwWindowShouldClose(m_window))
