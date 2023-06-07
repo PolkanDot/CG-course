@@ -1,6 +1,6 @@
 #pragma once
 
-class Flag
+class CFlag
 {
 public:
 	void Draw();

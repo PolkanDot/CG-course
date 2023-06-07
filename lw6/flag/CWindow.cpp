@@ -1,6 +1,6 @@
 #define _USE_MATH_DEFINES
 
-#include "Window.h"
+#include "CWindow.h"
 #include "CShaderLoader.h"
 #include "CShaderCompiler.h"
 #include "CProgramLinker.h"
@@ -9,7 +9,7 @@
 #include <chrono>
 #include <cmath>
 
-void Window::InitShaders()
+void CWindow::InitShaders()
 {
 	// Создаем загрузчик шейдеров
 	CShaderLoader loader;
@@ -49,13 +49,13 @@ void Window::InitShaders()
 
 }
 
-GLFWwindow* Window::MakeWindow(int w, int h, const char* title)
+GLFWwindow* CWindow::MakeWindow(int w, int h, const char* title)
 {
 	glfwWindowHint(GLFW_DEPTH_BITS, 24);
 	return glfwCreateWindow(w, h, title, nullptr, nullptr);
 }
 
-void Window::Run()
+void CWindow::Run()
 {
 	
 	glfwMakeContextCurrent(m_window);
@@ -80,7 +80,7 @@ void Window::Run()
 	}
 }
 
-void Window::OnRunStart()
+void CWindow::OnRunStart()
 {
 	// Включаем тест глубины
 	glEnable(GL_DEPTH_TEST);
@@ -89,7 +89,7 @@ void Window::OnRunStart()
 	InitShaders();
 }
 
-void Window::Draw(int width, int height)
+void CWindow::Draw(int width, int height)
 {
 	// Предварительная очиствка кадра
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -102,7 +102,7 @@ void Window::Draw(int width, int height)
 	glUseProgram(0);
 }
 
-void Window::SetupProjectionMatrix(int width, int height)
+void CWindow::SetupProjectionMatrix(int width, int height)
 {
 	glViewport(0, 0, width, height);
 

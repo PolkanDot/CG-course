@@ -5,22 +5,22 @@
 #define GLEW_STATIC
 #include "glew.h"
 #include "glfw3.h"
-#include "Flag.h"
+#include "CFlag.h"
 #include "CProgram.cpp"
 
-class Window
+class CWindow
 {
 public:
-	Window(int w, int h, const char* title)
+	CWindow(int w, int h, const char* title)
 		: m_window{ MakeWindow(w, h, title) }
 	{
 		if (!m_window)
 		{
-			throw std::runtime_error("Failed to create window");
+			throw std::runtime_error("Failed to create CWindow");
 		}
 	}
 
-	virtual ~Window()
+	virtual ~CWindow()
 	{
 		glfwDestroyWindow(m_window);
 	}
@@ -39,6 +39,6 @@ private:
 	static GLFWwindow* MakeWindow(int w, int h, const char* title);
 
 	GLFWwindow* m_window;
-	Flag m_flag;
+	CFlag m_flag;
 	CProgram m_program;
 };

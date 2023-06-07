@@ -136,9 +136,9 @@
     <ClInclude Include="CProgramLinker.h" />
     <ClInclude Include="CShaderCompiler.h" />
     <ClInclude Include="CShaderLoader.h" />
-    <ClInclude Include="Flag.h" />
-    <ClInclude Include="LibsInitializer.h" />
-    <ClInclude Include="Window.h" />
+    <ClInclude Include="CFlag.h" />
+    <ClInclude Include="CLibsInitializer.h" />
+    <ClInclude Include="CWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CProgram.cpp" />
@@ -146,9 +146,9 @@
     <ClCompile Include="CShader.cpp" />
     <ClCompile Include="CShaderCompiler.cpp" />
     <ClCompile Include="CShaderLoader.cpp" />
-    <ClCompile Include="Flag.cpp" />
+    <ClCompile Include="CFlag.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Window.cpp" />
+    <ClCompile Include="CWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\fragment_shader.frag" />

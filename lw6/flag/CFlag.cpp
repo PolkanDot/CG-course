@@ -1,7 +1,7 @@
-#include "Flag.h"
+#include "CFlag.h"
 #include "glfw3.h"
 
-void Flag::Draw()
+void CFlag::Draw()
 {
 	glColor3f(1, 1, 1);
 	glBegin(GL_QUADS);
