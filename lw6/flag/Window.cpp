@@ -1,12 +1,53 @@
 #define _USE_MATH_DEFINES
-#define GLEW_STATIC
-#include "glew.h"
-#include "glfw3.h"
+
 #include "Window.h"
+#include "CShaderLoader.h"
+#include "CShaderCompiler.h"
+#include "CProgramLinker.h"
+//айайай разрелить файлы шейдер и программ на сипипи и аш
+#include "CShader.cpp"
 #include <chrono>
 #include <cmath>
 
+void Window::InitShaders()
+{
+	// Создаем загрузчик шейдеров
+	CShaderLoader loader;
+	// И загружаем с его помощью вершинный и фрагментный шейдеры
+	CShader vertexShader =
+		loader.LoadShader(GL_VERTEX_SHADER, "shaders/vertex_shader.vert");
+	CShader fragmentShader =
+		loader.LoadShader(GL_FRAGMENT_SHADER, "shaders/fragment_shader.frag");
 
+	// Создаем компилятор
+	CShaderCompiler compiler;
+	// и запускаем компиляцию шейдеров
+	compiler.CompileShader(vertexShader);
+	compiler.CompileShader(fragmentShader);
+
+	// Создаем программу и присоединяем к ней шейдеры
+	m_program.Create();
+	m_program.AttachShader(vertexShader);
+	m_program.AttachShader(fragmentShader);
+
+	// Проверяем состояние скомпилированности шейдеров.
+	// Если хотя бы один из шейдеров скомпилировался с ошибкой
+	// будет выброшено исключение
+	compiler.CheckStatus();
+	// Все нормально, шейдеры скомпилировались без проблем
+
+	// Создаем компоновщик,
+	CProgramLinker linker;
+	// компонуем программу с его помощью
+	linker.LinkProgram(m_program);
+
+	// Проверяем состояние скомпонованности программ
+	// Если при компоновке возникла ошибка, то
+	// будет выброшено исключение
+	linker.CheckStatus();
+	// Все нормально
+
+}
 
 GLFWwindow* Window::MakeWindow(int w, int h, const char* title)
 {
@@ -45,6 +86,7 @@ void Window::OnRunStart()
 	glEnable(GL_DEPTH_TEST);
 	// Задаем цвет заливки фона
 	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+	InitShaders();
 }
 
 void Window::Draw(int width, int height)
@@ -53,11 +95,11 @@ void Window::Draw(int width, int height)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	// Переопределение матрицы проецирования
 	SetupProjectionMatrix(width, height);
-
+	glUseProgram(m_program);
 
 	// Отрисовка флага
 	m_flag.Draw();
-
+	glUseProgram(0);
 }
 
 void Window::SetupProjectionMatrix(int width, int height)

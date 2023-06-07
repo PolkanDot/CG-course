@@ -2,7 +2,11 @@
 #include <stdexcept>
 #include "Includes/glm/ext/matrix_clip_space.hpp"
 #include "Includes/glm/ext/matrix_transform.hpp"
+#define GLEW_STATIC
+#include "glew.h"
+#include "glfw3.h"
 #include "Flag.h"
+#include "CProgram.cpp"
 
 class Window
 {
@@ -36,5 +40,5 @@ private:
 
 	GLFWwindow* m_window;
 	Flag m_flag;
-	GLuint m_program;
+	CProgram m_program;
 };
