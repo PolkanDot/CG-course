@@ -45,105 +45,13 @@ bool LocatedInStar(vec2 centerCoord, float smallCircleRadius, float bigCircleRad
 	return isLocated;
 }
 
-bool LocatedInHammer(vec2 startCoord, vec2 point)
-{
-	vec2 hammerVertexes[8];
 
-	// bottom of the hammer base
-	hammerVertexes[0] = vec2(startCoord.x, startCoord.y);
-	// the subsequent ones are ccw
-	hammerVertexes[1] = vec2(startCoord.x - 0.05, startCoord.y - 0.04);
-	hammerVertexes[2] = vec2(startCoord.x - 0.1, startCoord.y + 0.02);
-	hammerVertexes[3] = vec2(startCoord.x + 0.02, startCoord.y + 0.11);
-	hammerVertexes[4] = vec2(startCoord.x + 0.1, startCoord.y + 0.07);
-	hammerVertexes[5] = vec2(startCoord.x + 0.03, startCoord.y + 0.02);
-	hammerVertexes[6] = vec2(startCoord.x + 0.33, startCoord.y - 0.26);
-	hammerVertexes[7] = vec2(startCoord.x + 0.3, startCoord.y - 0.29);
 
-	int size = 8;
-	bool isLocated = false;
-	int j = size - 1;
-	for (int i = 0; i < size; i++) {
-		if ((hammerVertexes[i].y < point.y && hammerVertexes[j].y >= point.y || hammerVertexes[j].y < point.y && hammerVertexes[i].y >= point.y) && 
-		(hammerVertexes[i].x + (point.y - hammerVertexes[i].y) / (hammerVertexes[j].y - hammerVertexes[i].y) * (hammerVertexes[j].x - hammerVertexes[i].x) < point.x))
-		{
-			isLocated = !isLocated;
-		}
-		j = i;
-	}
-	return isLocated;
-}
 
-bool LocatedInSickle(vec2 centerCoords, float angle, vec2 point, float a, float b)
-{
-	#define M_PI 3.1415926535897932384626433832795
 
-	angle = angle * M_PI / 180;
 
-    float p = (pow(cos(angle)*(point.x - centerCoords.x) + sin(angle)*(point.y - centerCoords.y), 2) / pow(a, 2))
-            + (pow(sin(angle)*(point.x - centerCoords.x) - cos(angle)*(point.y - centerCoords.y), 2) / pow(b, 2));
- 
-    return p <= 1;
-}
 
-bool LocatedOutsideHandle(vec2 centerCoords, vec2 point, float a, float b)
-{
-    const int size = 5;
-	vec2 rectVertexes[size];
-	// down left
-	rectVertexes[0] = vec2(centerCoords.x - b, centerCoords.y - b);
-	// the subsequent ones are ccw
-	rectVertexes[1] = vec2(centerCoords.x - 0.74*b, centerCoords.y - 0.95*b);
-	rectVertexes[2] = vec2(centerCoords.x - 0.57*b, centerCoords.y - 0.7*b);
-	rectVertexes[3] = vec2(centerCoords.x - 0.33*b, centerCoords.y + 0.4*a);
-	rectVertexes[4] = vec2(centerCoords.x - 2*b, centerCoords.y + 0.4*a);
 
-	bool isLocated = false;
-	int j = size - 1;
-
-	for (int i = 0; i < size; i++) {
-		if ((rectVertexes[i].y < point.y && rectVertexes[j].y >= point.y || rectVertexes[j].y < point.y && rectVertexes[i].y >= point.y) && 
-		(rectVertexes[i].x + (point.y - rectVertexes[i].y) / (rectVertexes[j].y - rectVertexes[i].y) * 
-		(rectVertexes[j].x - rectVertexes[i].x) < point.x))
-		{
-			isLocated = !isLocated;
-		}
-		j = i;
-	}
-	return isLocated;
-}
-
-bool LocatedInSickleHandle(vec2 centerCoords, vec2 point, float a, float b)
-{
-    const int size = 6;
-	vec2 rectVertexes[size];
-	rectVertexes[0] = vec2(centerCoords.x - b*0.80, centerCoords.y - 0.6*b);
-	rectVertexes[1] = vec2(centerCoords.x - b*0.76, centerCoords.y - 0.54*b);
-	rectVertexes[2] = vec2(centerCoords.x - b*0.64, centerCoords.y - 0.8*b);
-	rectVertexes[3] = vec2(centerCoords.x - b*0.68, centerCoords.y - 0.84*b);
-	rectVertexes[4] = vec2(centerCoords.x - b*1.15, centerCoords.y - b*1.25);
-	rectVertexes[5] = vec2(centerCoords.x - b*1.32, centerCoords.y - b*1.22);
-
-	bool isLocated = false;
-	int j = size - 1;
-
-	for (int i = 0; i < size; i++) {
-		if ((rectVertexes[i].y < point.y && rectVertexes[j].y >= point.y || rectVertexes[j].y < point.y && rectVertexes[i].y >= point.y) && 
-		(rectVertexes[i].x + (point.y - rectVertexes[i].y) / (rectVertexes[j].y - rectVertexes[i].y) * (rectVertexes[j].x - rectVertexes[i].x) < point.x))
-		{
-			isLocated = !isLocated;
-		}
-		j = i;
-	}
-
-	//vec2 ellipseCenter = vec2(centerCoords.x - b*1.32, centerCoords.y - b*1.22);
-	vec2 ellipseCenter = vec2(centerCoords.x - 0.22, centerCoords.y - 0.22);
-	float aSmall = 0.06;
-	float bSmall = 0.03;
-	float angle = 228.0;
-
-	return (isLocated || LocatedInSickle(ellipseCenter, angle, point, aSmall, bSmall));
-}
 
 void FillPoint(vec2 point, vec2 rectVertexes[4], vec2 starCenterCoord, float smallCircleRadius, float bigCircleRadius, 
 			   vec2 hammerStartCoord, vec2 biggerEllipseCenter, float biggerEllipseRotateAngle, float biggerLargeSemiaxis, 
@@ -160,30 +68,7 @@ void FillPoint(vec2 point, vec2 rectVertexes[4], vec2 starCenterCoord, float sma
 		{
 			// yellow color
 			gl_FragColor = vec4(1.0, 1.0, 0.0, 1.0);
-			if (LocatedInStar(starCenterCoord, smallCircleRadius-0.022, bigCircleRadius-0.022, point))
-			{
-				// red color of internal star
-				gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-			}
-		}
-		else if (LocatedInSickle(biggerEllipseCenter, biggerEllipseRotateAngle, point, biggerLargeSemiaxis, biggerSmallSemiaxis) ||
-				 LocatedInSickleHandle(biggerEllipseCenter, point, biggerLargeSemiaxis, biggerSmallSemiaxis))
-		{
-			// yellow color of external sickle
-			gl_FragColor = vec4(1.0, 1.0, 0.0, 1.0);
-			if (LocatedInSickle(smallerEllipseCenter, smallerEllipseRotateAngle, point, smallerElargeSemiaxis, smallerSmallSemiaxis) ||
-				LocatedOutsideHandle(smallerEllipseCenter, point, smallerElargeSemiaxis, smallerSmallSemiaxis))
-			{
-				// red color of internal sickle
-				gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-			}
-
 			
-		}
-		if (LocatedInHammer(hammerStartCoord, point))
-		{
-			// yellow color of hammer
-			gl_FragColor = vec4(1.0, 1.0, 0.0, 1.0);
 		}
 	}
 	else

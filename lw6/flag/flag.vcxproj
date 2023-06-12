@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CProgram.h" />
     <ClInclude Include="CProgramLinker.h" />
     <ClInclude Include="CShaderCompiler.h" />
     <ClInclude Include="CShaderLoader.h" />
