@@ -14,34 +14,38 @@ bool LocatedInCanvas(vec2 point, vec2 rectVertexes[4])
 	return isLocated;
 }
 
-bool LocatedInStar(vec2 centerCoord, float smallCircleRadius, float bigCircleRadius, vec2 point)
+bool LocatedInStar(vec2 centerCoord, float smallCircleRadius, float bigCircleRadius,float rotateAngle, vec2 point)
 {
 	#define M_PI 3.1415926535897932384626433832795
 	vec2 starVertexes[10];
+			bool isLocated = false;
+	
+    for (int i = 0; i < 10; i++) {
+        starVertexes[i] = vec2(centerCoord.x + bigCircleRadius * cos(2*M_PI*i/5 + rotateAngle*M_PI/180), centerCoord.y + bigCircleRadius * sin(2*M_PI*i/5 + rotateAngle*M_PI/180));
+		i++;
+		starVertexes[i] = vec2(centerCoord.x + smallCircleRadius * cos(2*M_PI*(i+0.5)/5 + rotateAngle*M_PI/180), centerCoord.y + smallCircleRadius * sin(2*M_PI*(i+0.5)/5 + rotateAngle*M_PI/180));
+    }
 
-	// up vertex
-	starVertexes[0] = vec2(centerCoord.x, centerCoord.y + bigCircleRadius);
-	// the subsequent ones are ccw
-	starVertexes[1] = vec2(centerCoord.x + smallCircleRadius * cos(126*M_PI/180), centerCoord.y + smallCircleRadius * sin(126*M_PI/180));
-	starVertexes[2] = vec2(centerCoord.x + bigCircleRadius * cos(162*M_PI/180), centerCoord.y + bigCircleRadius * sin(162*M_PI/180));
-	starVertexes[3] = vec2(centerCoord.x + smallCircleRadius * cos(198*M_PI/180), centerCoord.y + smallCircleRadius * sin(198*M_PI/180));
-	starVertexes[4] = vec2(centerCoord.x + bigCircleRadius * cos(234*M_PI/180), centerCoord.y + bigCircleRadius * sin(234*M_PI/180));
-	starVertexes[5] = vec2(centerCoord.x, centerCoord.y - smallCircleRadius);
-	starVertexes[6] = vec2(centerCoord.x + bigCircleRadius * cos(306*M_PI/180), centerCoord.y + bigCircleRadius * sin(306*M_PI/180));
-	starVertexes[7] = vec2(centerCoord.x + smallCircleRadius * cos(342*M_PI/180), centerCoord.y + smallCircleRadius * sin(342*M_PI/180));
-	starVertexes[8] = vec2(centerCoord.x + bigCircleRadius * cos(18*M_PI/180), centerCoord.y + bigCircleRadius * sin(18*M_PI/180));
-	starVertexes[9] = vec2(centerCoord.x + smallCircleRadius * cos(54*M_PI/180), centerCoord.y + smallCircleRadius * sin(54*M_PI/180));
-	int size = 10;
-	bool isLocated = false;
-	int j = size - 1;
-	for (int i = 0; i < size; i++) {
-		if ((starVertexes[i].y < point.y && starVertexes[j].y >= point.y || starVertexes[j].y < point.y && starVertexes[i].y >= point.y) && 
-		(starVertexes[i].x + (point.y - starVertexes[i].y) / (starVertexes[j].y - starVertexes[i].y) * (starVertexes[j].x - starVertexes[i].x) < point.x))
-		{
-			isLocated = !isLocated;
-		}
-		j = i;
+	if ((abs(point.x - centerCoord.x)*abs(point.x - centerCoord.x))+(abs(point.y - centerCoord.y)*abs(point.y - centerCoord.y)) <= (smallCircleRadius*smallCircleRadius))
+	{
+		isLocated = !isLocated;
 	}
+	else
+	{
+		int size = 10;
+		int j = size - 1;
+		for (int i = 0; i < size; i++) 
+		{
+			if ((starVertexes[i].y < point.y && starVertexes[j].y >= point.y || starVertexes[j].y < point.y && starVertexes[i].y >= point.y) && 
+			(starVertexes[i].x + (point.y - starVertexes[i].y) / (starVertexes[j].y - starVertexes[i].y) * (starVertexes[j].x - starVertexes[i].x) < point.x))
+			{
+				isLocated = !isLocated;
+			}
+			j = i;
+		}
+	}
+	
+	
 	return isLocated;
 }
 
@@ -53,21 +57,24 @@ bool LocatedInStar(vec2 centerCoord, float smallCircleRadius, float bigCircleRad
 
 
 
-void FillPoint(vec2 point, vec2 rectVertexes[4], vec2 starCenterCoord, float smallCircleRadius, float bigCircleRadius, 
-			   vec2 hammerStartCoord, vec2 biggerEllipseCenter, float biggerEllipseRotateAngle, float biggerLargeSemiaxis, 
-			   float biggerSmallSemiaxis, vec2 smallerEllipseCenter, float smallerEllipseRotateAngle, float smallerElargeSemiaxis, 
-			   float smallerSmallSemiaxis)
+void FillPoint(vec2 point, vec2 rectVertexes[4], vec2 starCenterCoord1, float smallCircleRadius1, float bigCircleRadius1, float rotateAngle1, 
+				vec2 starCenterCoord2, float smallCircleRadius2, float bigCircleRadius2, float rotateAngle2,
+				vec2 starCenterCoord3, float rotateAngle3, vec2 starCenterCoord4, float rotateAngle4, vec2 starCenterCoord5, float rotateAngle5)
 {
 	// flag canvas
 	if (LocatedInCanvas(point, rectVertexes))
 	{
 		// red color
-		gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+		gl_FragColor = vec4(0.87, 0.16, 0.0627451, 1.0);
 		// flag star
-		if (LocatedInStar(starCenterCoord, smallCircleRadius, bigCircleRadius, point))
+		if (LocatedInStar(starCenterCoord1, smallCircleRadius1, bigCircleRadius1, rotateAngle1, point) ||
+			LocatedInStar(starCenterCoord2, smallCircleRadius2, bigCircleRadius2, rotateAngle2, point) ||
+			LocatedInStar(starCenterCoord3, smallCircleRadius2, bigCircleRadius2, rotateAngle3, point) ||
+			LocatedInStar(starCenterCoord4, smallCircleRadius2, bigCircleRadius2, rotateAngle4, point) ||
+			LocatedInStar(starCenterCoord5, smallCircleRadius2, bigCircleRadius2, rotateAngle5, point))
 		{
 			// yellow color
-			gl_FragColor = vec4(1.0, 1.0, 0.0, 1.0);
+			gl_FragColor = vec4(1.0, 0.87, 0.0, 1.0);
 			
 		}
 	}
@@ -88,24 +95,25 @@ void main()
 	canvasVertexes[2] = vec2(3.8, 3.0);
 	canvasVertexes[3] = vec2(0.2, 3.0);
 
-	// info about star
-	float smallCircleRadius = 0.05;
-	float bigCircleRadius = 0.14;
-	vec2 starCenterCoord = vec2(1.7, 2.64);
+	// info about big star
+	float smallCircleRadius1 = 0.1;
+	float bigCircleRadius1 = 0.28;
+	vec2 starCenterCoord1 = vec2(0.7, 2.5);
+	float rotateAngle1 = 18;
 
-	// info about hammer
-	vec2 hammerStartCoord = vec2(0.62, 2.3);
+	// info about small stars
+	float smallCircleRadius2 = 0.03;
+	float bigCircleRadius2 = 0.093;
+	vec2 starCenterCoord2 = vec2(1.15, 2.8);
+	float rotateAngle2 = -5;
+	vec2 starCenterCoord3 = vec2(1.3, 2.6);
+	float rotateAngle3 = 180;
+	vec2 starCenterCoord4 = vec2(1.3, 2.33);
+	float rotateAngle4 = 18;
+	vec2 starCenterCoord5 = vec2(1.17, 2.1);
+	float rotateAngle5 = -5;
 
-	// info about bigger ellipse
-	//float biggerLargeSemiaxis = 0.24, biggerSmallSemiaxis = 0.18, biggerllipseRotateAngle = 128.0;
-	float biggerLargeSemiaxis = 0.26, biggerSmallSemiaxis = 0.20, biggerllipseRotateAngle = 128.0;
-	vec2 biggerEllipseCenter = vec2(0.7, 2.25);
-
-	// info about smaller ellipse
-	float smallerLargeSemiaxis = 0.24, smallerSmallSemiaxis = 0.17, smallerllipseRotateAngle = 125.0;
-	vec2 smallerEllipseCenter = vec2(0.67, 2.27);
-
-	FillPoint(pos, canvasVertexes, starCenterCoord, smallCircleRadius, bigCircleRadius, hammerStartCoord, 
-			  biggerEllipseCenter, biggerllipseRotateAngle, biggerLargeSemiaxis, biggerSmallSemiaxis, smallerEllipseCenter, 
-			  smallerllipseRotateAngle, smallerLargeSemiaxis, smallerSmallSemiaxis );
+	FillPoint(pos, canvasVertexes, starCenterCoord1, smallCircleRadius1, bigCircleRadius1, rotateAngle1,
+									starCenterCoord2, smallCircleRadius2, bigCircleRadius2, rotateAngle2,
+									starCenterCoord3, rotateAngle3, starCenterCoord4, rotateAngle4, starCenterCoord5, rotateAngle5);
 }
