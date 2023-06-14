@@ -5,7 +5,7 @@
 #include "CShaderCompiler.h"
 #include "CProgramLinker.h"
 //айайай разрелить файлы шейдер и программ на сипипи и аш
-#include "CShader.cpp"
+#include "CShader.h"
 #include <chrono>
 #include <cmath>
 

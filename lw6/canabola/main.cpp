@@ -4,6 +4,6 @@
 int main()
 {
 	CLibsInitializer initLibs;
-	CWindow window{ 1000, 800, "Flag" };
+	CWindow window{ 1000, 800, "Canabola" };
 	window.Run();
 }
