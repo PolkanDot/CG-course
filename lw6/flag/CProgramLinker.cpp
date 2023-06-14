@@ -1,4 +1,4 @@
-#include "CProgram.cpp"
+#include "CProgram.h"
 #include "CProgramLinker.h"
 #include <vector>
 #include <sstream>

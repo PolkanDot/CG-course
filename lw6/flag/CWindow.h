@@ -6,7 +6,7 @@
 #include "glew.h"
 #include "glfw3.h"
 #include "CFlag.h"
-#include "CProgram.cpp"
+#include "CProgram.h"
 
 class CWindow
 {
